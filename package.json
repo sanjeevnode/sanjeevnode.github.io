@@ -9,17 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "debug": "^4.4.1",
+    "lucide-react": "^0.511.0",
+    "mailtrap": "^4.1.0",
+    "next": "13.5.11",
     "react": "^18",
     "react-dom": "^18",
-    "next": "13.5.11"
+    "react-google-recaptcha": "^3.1.0",
+    "react-hot-toast": "^2.5.2"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-google-recaptcha": "^2.1.9",
     "autoprefixer": "^10",
     "postcss": "^8",
-    "tailwindcss": "^3"
+    "tailwindcss": "^3",
+    "typescript": "^5"
   }
 }
