@@ -67,68 +67,6 @@ const Contact: React.FC = () => {
         </div>
 
         <div className="grid md:grid-cols-5 gap-10 max-w-4xl mx-auto">
-          {/* Contact Information */}
-          <div className="md:col-span-2 space-y-6">
-            <div>
-              <h3 className="text-xl font-bold mb-4 text-black dark:text-white">Contact Information</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
-                I'm currently available for freelance work or full-time positions.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex items-start gap-4">
-                <div className="mt-1 text-gray-700 dark:text-gray-300">
-                  <Mail size={18} />
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900 dark:text-gray-100">Email</h4>
-                  <a href="mailto:hello@example.com" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-                    me.sanjeevks@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="mt-1 text-gray-700 dark:text-gray-300">
-                  <Phone size={18} />
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900 dark:text-gray-100">Phone</h4>
-                  <a href="tel:+1234567890" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-                    +91 7482912775
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="mt-1 text-gray-700 dark:text-gray-300">
-                  <MapPin size={18} />
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900 dark:text-gray-100">Location</h4>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Bhopal, India
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-8">
-              <h3 className="text-xl font-bold mb-4 text-black dark:text-white">Connect</h3>
-              <div className="flex gap-5">
-                <a href="https://github.com/sanjeevnode" target='_blank' className="text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="GitHub">
-                  <Github size={22} />
-                </a>
-                <a href="https://www.linkedin.com/in/sanjeevnode" target='_blank' className="text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="LinkedIn">
-                  <Linkedin size={22} />
-                </a>
-                <a href="mailto:me.sanjeevks@gmail.com" className="text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="Email">
-                  <Mail size={22} />
-                </a>
-              </div>
-            </div>
-          </div>
 
           {/* Contact Form */}
           <div className="md:col-span-3">
@@ -207,6 +145,69 @@ const Contact: React.FC = () => {
                 {loading ? 'Sending...' : 'Send Message'}
               </button>
             </form>
+          </div>
+
+          {/* Contact Information */}
+          <div className="md:col-span-2 space-y-6">
+            <div>
+              <h3 className="text-xl font-bold mb-4 text-black dark:text-white">Contact Information</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                I'm currently available for freelance work or full-time positions.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
+                <div className="mt-1 text-gray-700 dark:text-gray-300">
+                  <Mail size={18} />
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-gray-100">Email</h4>
+                  <a href="mailto:hello@example.com" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                    me.sanjeevks@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="mt-1 text-gray-700 dark:text-gray-300">
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-gray-100">Phone</h4>
+                  <a href="tel:+1234567890" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                    +91 7482912775
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="mt-1 text-gray-700 dark:text-gray-300">
+                  <MapPin size={18} />
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-gray-100">Location</h4>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Bhopal, India
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-8">
+              <h3 className="text-xl font-bold mb-4 text-black dark:text-white">Connect</h3>
+              <div className="flex gap-5">
+                <a href="https://github.com/sanjeevnode" target='_blank' className="text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="GitHub">
+                  <Github size={22} />
+                </a>
+                <a href="https://www.linkedin.com/in/sanjeevnode" target='_blank' className="text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="LinkedIn">
+                  <Linkedin size={22} />
+                </a>
+                <a href="mailto:me.sanjeevks@gmail.com" className="text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="Email">
+                  <Mail size={22} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

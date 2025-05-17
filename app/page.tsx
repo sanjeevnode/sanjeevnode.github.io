@@ -1,5 +1,6 @@
 import Contact from '@/components/Contact'
 import Education from '@/components/Education'
+import Empty from '@/components/Empty'
 import Experience from '@/components/Experience'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
@@ -17,9 +18,12 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Experience />
-        <Projects />
-        <Education />
+        <Empty title='experience' />
+        <Empty title='projects' />
+        <Empty title='education' />
+        {/* <Experience /> */}
+        {/* <Projects /> */}
+        {/* <Education /> */}
         <Contact />
       </main>
       <Footer />

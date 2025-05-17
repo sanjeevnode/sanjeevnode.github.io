@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, use } from 'react';
 import { Menu, X, ArrowUpCircle, Sun, Moon } from 'lucide-react';
+import { NavItems } from '@/app/types/navItems';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -113,7 +114,7 @@ const Header: React.FC = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white dark:bg-gray-900 absolute top-full left-0 w-full shadow-md dark:shadow-gray-800">
           <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
-            {['about', 'experience', 'projects', 'education'].map((item) => (
+            {Object.values(NavItems).map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
