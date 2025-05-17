@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
+import AuthContext from "./context/AuthContext";
 
-const raleway = Raleway({
-  variable: "--font-raleway",
+const raleway = Nunito({
+  variable: "--font-custom",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${raleway.variable} antialiased font-sans`}>
-        {children}
+        <AuthContext>
+          {children}
+        </AuthContext>
       </body>
     </html>
   );
