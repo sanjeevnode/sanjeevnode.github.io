@@ -1,11 +1,12 @@
 'use client';
 
+import Loading from '@/components/Loading';
 import { useSession, signOut } from 'next-auth/react';
 
 export default function CMSPage() {
     const { data: session } = useSession();
 
-    if (!session) return <p>Loading...</p>;
+    if (!session) return <Loading />;
 
     return (
         <div className="p-4">

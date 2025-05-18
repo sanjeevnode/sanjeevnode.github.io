@@ -22,7 +22,7 @@ export default function AdminLogin() {
     useEffect(() => {
         if (session?.status === "authenticated") {
             console.log("authenticated")
-            router.push("/admin/cms");
+            router.push("/admin/dashboard");
         }
     }, [session?.status, router])
 
