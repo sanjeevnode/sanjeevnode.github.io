@@ -4,6 +4,7 @@ import { Mail, MapPin, Phone, Github, Linkedin } from 'lucide-react';
 import toast from 'react-hot-toast';
 import ReCAPTCHA from "react-google-recaptcha";
 import { sendMailAction } from '@/app/actions/sendMail';
+import { NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY } from '@/constants/Constants';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const captchaRef = React.useRef<ReCAPTCHA>(null);
 
-  const PUBLIC_KEY: string = process.env.NEXT_PUBLIC_PUBLIC_KEY ?? "";
+  const PUBLIC_KEY: string = NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY;
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

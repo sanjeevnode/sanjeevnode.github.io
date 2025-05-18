@@ -1,5 +1,10 @@
 "use server";
 
+import {
+  MAILTRAP_TOKEN,
+  RECIVER_EMAIL,
+  SENDER_EMAIL,
+} from "@/constants/Constants";
 import { MailtrapClient } from "mailtrap";
 
 export async function sendMailAction(formData: {
@@ -34,15 +39,15 @@ export async function sendMailAction(formData: {
     <p><strong>Message:</strong><br>${message.replace(/\n/g, "<br>")}</p>
   `;
 
-  const mailtrap = new MailtrapClient({ token: process.env.MAILTRAP_TOKEN! });
+  const mailtrap = new MailtrapClient({ token: MAILTRAP_TOKEN });
 
   const mailData = {
     from: {
       name: "Contact Form",
-      email: process.env.SENDER_EMAIL!,
+      email: SENDER_EMAIL,
     },
-    to: [{ email: process.env.RECIVER_EMAIL! }],
-    subject: "New Contact Form Submission",
+    to: [{ email: RECIVER_EMAIL }],
+    subject: "Contact Form Submission",
     text: `${name} (${email}, ${phone}): ${message}`,
     html: htmlMessage,
   };
