@@ -1,18 +1,25 @@
 'use client';
 
 import Loading from '@/components/Loading';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { Suspense } from 'react';
 
 export default function CMSPage() {
     const { data: session } = useSession();
 
-    if (!session) return <Loading />;
 
     return (
-        <div className="p-4">
-            <h1 className="text-2xl">Welcome to CMS</h1>
-            <p>Logged in as {session.user?.email}</p>
-            <button onClick={() => signOut()}>Sign out</button>
-        </div>
+        <Suspense fallback={<Loading />}>
+            <div className='flex flex-col  pt-4 px-4'>
+                <div className='flex flex-col items-center justify-center gap-4'>
+                    <h1 className='text-2xl font-bold'>Welcome to the Admin Dashboard</h1>
+                    <p className='text-lg'>You are logged in as {session?.user?.name}</p>
+                </div>
+                <div className='flex flex-col items-center justify-center gap-4 mt-4'>
+                    <p className='text-lg'>This is a placeholder for your admin dashboard content.</p>
+                </div>
+            </div>
+        </Suspense>
+
     );
 }
