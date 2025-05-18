@@ -21,3 +21,5 @@ export const NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY =
   process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY || "";
 
 export const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET;
+
+export const MONGO_URI = process.env.MONGO_URI || "";

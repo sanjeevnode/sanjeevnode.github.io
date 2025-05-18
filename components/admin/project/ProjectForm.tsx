@@ -7,9 +7,11 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { X, Plus } from "lucide-react"
 import Image from "next/image"
-import { ProjectItem } from "@/app/types/project"
+import { ProjectData } from "@/app/types/project"
+import { createProject, updateProject } from "@/app/actions/project.action"
+import toast from "react-hot-toast"
 
-export default function ProjectForm({ projectItem, isEdit }: { projectItem?: ProjectItem, isEdit?: boolean }) {
+export default function ProjectForm({ projectItem, isEdit }: { projectItem?: ProjectData, isEdit?: boolean }) {
     const [title, setTitle] = useState("")
     const [descriptions, setDescriptions] = useState<string[]>([])
     const [newDescription, setNewDescription] = useState("")
@@ -23,16 +25,24 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
     const [link, setLink] = useState("")
     const [github, setGithub] = useState("")
 
+
     // If projectItem is provided, populate the form with its data
     useEffect(() => {
         if (projectItem) {
-            setTitle(projectItem.title)
-            setDescriptions(projectItem.description)
-            setTags(projectItem.tags)
-            setLink(projectItem.link || "")
-            setGithub(projectItem.github || "")
+            setTitle(projectItem.title);
+            setDescriptions(projectItem.description);
+            setTags(projectItem.tags);
+            setLink(projectItem.link || "");
+            setGithub(projectItem.github || "");
+
+            if (projectItem.image?.data && projectItem.image?.contentType) {
+                // Create base64 preview URL
+                const base64Image = `data:${projectItem.image.contentType};base64,${projectItem.image.data}`;
+                setImagePreview(base64Image);
+            }
         }
-    }, [projectItem])
+    }, [projectItem]);
+
 
     const handleAddDescription = () => {
         if (newDescription.trim()) {
@@ -64,22 +74,38 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
         }
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        try {
 
-        const formData = {
-            title,
-            descriptions,
-            imageFile,
-            imagePreview,
-            link,
-            github,
-            tags,
+            const formData = new FormData();
+            formData.append("title", title)
+            formData.append("description", JSON.stringify(descriptions))
+            formData.append("tags", JSON.stringify(tags))
+            formData.append("link", link)
+            formData.append("github", github)
+            if (imageFile) {
+                formData.append("image", imageFile)
+            }
+
+            if (isEdit && projectItem) {
+                formData.append("id", projectItem._id)
+                await updateProject(projectItem._id, formData);
+            }
+            else {
+                await createProject(formData);
+            }
+            setTitle("")
+            setDescriptions([])
+            setTags([])
+            setLink("")
+            setGithub("")
+            setImageFile(null)
+            setImagePreview(null)
+        } catch (error: unknown) {
+            console.error("Error creating project:", error)
+            toast.error("Error creating project")
         }
-
-        console.log("Submitted Project:", formData)
-
-        // You can handle uploading the image to a server or cloud storage here
     }
 
 
@@ -103,7 +129,7 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
                         value={newDescription}
                         onChange={(e) => setNewDescription(e.target.value)}
                         placeholder="Add a description line..."
-                        required
+
                     />
                     <Button type="button" onClick={handleAddDescription}>
                         <Plus className="w-4 h-4" />
@@ -150,27 +176,35 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
 
             <div>
                 <Label>Image Upload</Label>
-                <Input type="file" accept="image/*" onChange={handleImageChange} />
-                {imagePreview && (
-                    <div className="flex items-center mt-2">
-                        <Image
-                            src={imagePreview}
-                            alt="Image Preview"
-                            width={200}
-                            height={200}
-                            className="mt-2 rounded-md"
-                            style={{ objectFit: "cover" }}
-                        />
-                        <X
-                            className="ml-2 h-4 w-4 cursor-pointer"
-                            onClick={() => {
-                                setImagePreview(null)
-                                setImageFile(null)
-                            }}
-                        />
+
+                {/* Show preview if exists */}
+                {imagePreview ? (
+                    <div className="flex flex-col gap-2 mt-2">
+                        <div className="relative w-48 h-48 border rounded-md overflow-hidden">
+                            <Image
+                                src={imagePreview}
+                                alt="Image Preview"
+                                fill
+                                className="object-cover"
+                            />
+                            <button
+                                type="button"
+                                className="absolute top-1 right-1 bg-white p-1 rounded-full shadow"
+                                onClick={() => {
+                                    setImagePreview(null);
+                                    setImageFile(null);
+                                }}
+                            >
+                                <X className="h-4 w-4 text-red-500" />
+                            </button>
+                        </div>
+                        <p className="text-sm text-gray-500">Current image preview. Upload a new image to replace it.</p>
                     </div>
+                ) : (
+                    <Input type="file" accept="image/*" onChange={handleImageChange} />
                 )}
             </div>
+
 
             <div>
                 <Label>GitHub Link</Label>

@@ -3,6 +3,7 @@ import Empty from '@/components/Empty'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
+import Projects from '@/components/Projects'
 
 import { Toaster } from 'react-hot-toast'
 
@@ -16,10 +17,10 @@ export default function Home() {
       <main>
         <Hero />
         <Empty title='experience' />
-        <Empty title='projects' />
+        {/* <Empty title='projects' /> */}
         <Empty title='education' />
         {/* <Experience /> */}
-        {/* <Projects /> */}
+        <Projects />
         {/* <Education /> */}
         <Contact />
       </main>

@@ -1,5 +1,4 @@
 
-import { dummyProjects } from '@/app/types/project'
 import { ProjectList } from '@/components/admin/project/ProjectList'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -21,7 +20,7 @@ function Page() {
         </Button>
       </Link>
 
-      <ProjectList projectList={dummyProjects} />
+      <ProjectList />
 
     </div>
   )

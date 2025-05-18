@@ -22,3 +22,16 @@ export const dummyProjects: ProjectItem[] = [
     tags: ["React", "Firebase"],
   },
 ];
+
+export type ProjectData = {
+  _id: string;
+  title: string;
+  description: string[];
+  image?: {
+    data: string; // base64 string instead of Buffer
+    contentType: string;
+  };
+  link?: string;
+  github?: string;
+  tags: string[];
+};
