@@ -17,7 +17,7 @@ export default function AdminLogin() {
     const searchParams = useSearchParams();
     const session = useSession();
     const router = useRouter();
-    const callbackUrl = searchParams.get('callbackUrl') || '/admin/cms';
+    const callbackUrl = searchParams.get('callbackUrl') || '/admin/dashboard';
 
     useEffect(() => {
         if (session?.status === "authenticated") {
