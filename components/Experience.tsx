@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, Code } from 'lucide-react';
+import { Calendar, MapPin, Code, Building2Icon, Link } from 'lucide-react';
 
 interface ExperienceItem {
   id: number;
@@ -16,7 +16,6 @@ interface ProjectsProps {
   description: string[];
   link?: string;
 }
-
 const experienceData: ExperienceItem[] = [
   {
     id: 1,
@@ -29,33 +28,37 @@ const experienceData: ExperienceItem[] = [
         title: 'Fittr Hart',
         technologies: ['Flutter', 'Dart', 'Matrix SDK', 'Bloc', 'Realm', 'Firebase', 'Git'],
         description: [
-          'Developed modern, responsive UI using Flutter.',
-          'Integrated Realm Database for local storage and offline functionality.',
-          'Developed a full-featured chat module with essential messaging features.',
-          'Integrated Matrix SDK for real-time messaging.'
-        ]
+          'Built responsive mobile UIs using Flutter and Bloc architecture.',
+          'Integrated Realm for local data storage and offline features.',
+          'Created a full-featured chat module using Matrix SDK.',
+          'Implemented messaging with read receipts and media support.',
+          'Handled authentication, push notifications, and deep linking.'
+        ],
+        link: "https://play.google.com/store/apps/details?id=com.squats.fittr_hart&pcampaignid=web_share",
       },
       {
         title: 'Gram Parivartan (Dalmia Bharat)',
         technologies: ['Flutter', 'Provider', 'Hive', 'REST APIs', 'Git', 'Spring Boot', 'MySQL'],
         description: [
-          'Created multiple responsive UI screens using Flutter.',
-          'Integrated REST APIs for data retrieval and synchronization.',
-          'Set up Hive Database for offline data storage and implemented sync functionality.',
-          'Used Provider for efficient state management.',
-          'Designed and developed RESTful APIs using Spring Boot and MySQL to support mobile app features.'
-        ]
+          'Created mobile app screens with Flutter and Provider state management.',
+          'Integrated RESTful APIs for secure, real-time data interaction.',
+          'Used Hive for local storage and managed syncing logic.',
+          'Built backend APIs with Spring Boot and MySQL database.',
+          'Implemented role-based access and user-centric workflows.'
+        ],
+        link: "https://play.google.com/store/apps/details?id=com.dalmiabharatfoundation.csr&pcampaignid=web_share",
       },
       {
         title: 'Kubocare',
         technologies: ['Flask', 'React Native', 'MQTT', 'Kafka', 'PostgreSQL', 'Docker', 'Socket.IO', 'Redis'],
         description: [
-          'Developed modern UI using React Native.',
-          'Developed Flask-based backend with PostgreSQL for data handling.',
-          'Set up and managed Kafka and Mosquitto servers using Docker on AWS EC2 for handling MQTT device communication.',
-          'Used Socket.IO for real-time concurrent connections.',
-          'Configured Redis for temporary data storage and caching.'
-        ]
+          'Built cross-platform mobile UI using React Native components.',
+          'Designed Flask APIs and managed PostgreSQL data handling.',
+          'Used Docker to deploy Kafka and Mosquitto on EC2 servers.',
+          'Implemented real-time communication via MQTT and Socket.IO.',
+          'Cached and queued live data efficiently using Redis service.'
+        ],
+        link: "https://kubocare.com/",
       }
     ]
   },
@@ -70,28 +73,33 @@ const experienceData: ExperienceItem[] = [
         title: 'Drone Feed Analysis',
         technologies: ['Flutter', 'Dart', 'Python', 'OpenCV', 'MySql', 'Elastic Search', 'MTCNN'],
         description: [
-          "Developed a Flutter desktop application for drone feed analysis using computer vision.",
-          "Implemented real-time object detection and tracking using OpenCV and MTCNN.",
-          "Integrated MySQL database for data storage and user management.",
-          "Utilized Elastic Search for efficient data retrieval and search capabilities."
+          'Created a Flutter desktop app for drone video analysis tasks.',
+          'Used OpenCV and MTCNN for object detection and tracking.',
+          'Stored real-time event data using MySQL relational schema.',
+          'Enabled fast filtering and query using Elastic Search tool.',
+          'Built custom UI/UX for navigating drone-based detection.'
         ],
       },
       {
         title: 'Perimeter Security System',
         technologies: ['Flutter', 'Dart', 'Python', 'OpenCV', 'MySql', 'FaceNet', 'YOLOv8'],
         description: [
-          "Developeed flutter desktop application for perimeter security system using face recognition and object detection.",
-          "Implemented real-time face recognition and object detection using YOLOv8 and FaceNet.",
-          "Integrated MySQL database for user management and data storage.",
+          'Built a desktop app with face and object recognition in Flutter.',
+          'Used YOLOv8 and FaceNet for high-accuracy surveillance.',
+          'Managed user data and logs in a MySQL relational database.',
+          'Enabled real-time alerts and access control via detection.',
+          'Designed interfaces for administrators to view live feed.'
         ],
       },
       {
         title: 'Affirmity Corp Website',
         technologies: ['React', 'Node.js', 'Express', 'MySql', 'Tailwind', 'Framer Motion', 'GSAP'],
         description: [
-          "Developed a responsive and interactive website for Affirmity Corp using React and Tailwind CSS.",
-          "Implemented smooth animations and transitions using Framer Motion and GSAP.",
-          "Integrated backend services with Node.js and Express, connecting to MySQL for data management.",
+          'Developed responsive website UI using React and Tailwind CSS.',
+          'Added dynamic animations with GSAP and Framer Motion APIs.',
+          'Implemented backend using Express and Node.js services.',
+          'Managed contact forms and CMS data using MySQL backend.',
+          'Optimized web performance and SEO using modern practices.'
         ],
         link: 'https://affirmity.in/',
       }
@@ -112,12 +120,15 @@ const Experience: React.FC = () => {
 
         <div className="space-y-16  mx-auto">
           {experienceData.map((job) => (
-            <div key={job.id} className="relative bg-white dark:bg-gray-900 p-6">
+            <div key={job.id} className="relative p-6">
               {/* Company Header */}
 
               <div className="flex flex-col gap-1 mb-8">
-                <h3 className="text-2xl font-bold text-black dark:text-white">{job.company}</h3>
-                <h4 className="text-lg font-medium text-gray-600 dark:text-gray-400">{job.title}</h4>
+                <div className='flex justify-start items-start gap-x-2'>
+                  <Building2Icon className='md:w-8 md:h-8 w-6 h-6' />
+                  <h3 className="text-xl md:text-2xl font-bold text-black dark:text-white">{job.company}</h3>
+                </div>
+                <h4 className="md:text-lg font-medium text-gray-600 dark:text-gray-400">{job.title}</h4>
                 <div className="flex gap-6  text-gray-600 dark:text-gray-400">
                   <div className="flex items-center gap-2">
                     <Calendar size={18} />
@@ -137,7 +148,7 @@ const Experience: React.FC = () => {
                 {job.description.map((project, idx) => (
                   <div
                     key={idx}
-                    className="p-6 bg-gray-50 dark:bg-gray-800"
+                    className="p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700"
                   >
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-10 h-10 flex items-center justify-center">
@@ -168,29 +179,17 @@ const Experience: React.FC = () => {
                     </ul>
 
                     {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-black dark:text-white hover:underline
+                      <div className='flex justify-end items-end'>
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-black dark:text-white hover:underline
                                  text-sm font-medium group"
-                      >
-                        View Project
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M14 5l7 7m0 0l-7 7m7-7H3"
-                          />
-                        </svg>
-                      </a>
+                          <Link className='text-blue-950 hover:text-blue-900 transition-colors' size={24} />
+                        </a>
+                      </div>
                     )}
                   </div>
                 ))}
