@@ -142,7 +142,7 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="md:p-10 md:w-2/3 bg-white dark:bg-gray-800  p-4 border-gray-200 dark:border-gray-700">
+          <div className="md:p-10 md:w-2/3 p-4 border-gray-200 dark:border-gray-700">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
@@ -155,7 +155,7 @@ const Contact: React.FC = () => {
                     maxLength={10}
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
                     placeholder="Your name"
                     required
                   />
@@ -169,7 +169,7 @@ const Contact: React.FC = () => {
                     id="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
                     placeholder="Your email"
                     required
                   />
@@ -186,7 +186,7 @@ const Contact: React.FC = () => {
                   maxLength={10}
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
                   placeholder="Phone number"
                   required
                 />
@@ -201,7 +201,7 @@ const Contact: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white"
                   placeholder="Your message"
                   required
                 ></textarea>

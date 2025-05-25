@@ -2,6 +2,7 @@
 import React from 'react';
 import { Github, Linkedin, Mail, FileText } from 'lucide-react';
 import Image from 'next/image';
+import Typewriter from 'typewriter-effect';
 
 const Hero: React.FC = () => {
   return (
@@ -15,7 +16,16 @@ const Hero: React.FC = () => {
             </h1>
 
             <h2 className="text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-400">
-              Software Development Engineer
+              <Typewriter
+                options={{
+                  strings: [' Software Development Engineer', 'Full Stack Developer', 'Tech Enthusiast',],
+                  autoStart: true,
+                  loop: true,
+                  delay: 100,
+                  deleteSpeed: 80,
+
+                }}
+              />
             </h2>
 
             <p className="text-gray-700 dark:text-gray-300 max-w-2xl leading-relaxed">
