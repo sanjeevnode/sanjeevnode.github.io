@@ -36,7 +36,7 @@ export async function createProject(formData: FormData) {
 
 export async function getProjects(): Promise<ProjectData[]> {
   await connectToDatabase();
-  const projects = await Project.find();
+  const projects = await Project.find({}).sort({ createdAt: -1 });
 
   return projects.map((project) => ({
     _id: project._id.toString(),

@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { ExternalLink, Github, Settings } from 'lucide-react';
 import Image from 'next/image';
 import { ProjectData } from '@/app/types/project';
@@ -10,11 +10,29 @@ const Projects: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [filter, setFilter] = useState<string>('all');
 
-  const allTags = ['all', ...Array.from(new Set(projectData.flatMap(project => project.tags)))];
+  // Memoized computation of all unique tags (case-insensitive)
+  const allTags = useMemo(() => {
+    const uniqueTags = new Set<string>();
 
-  const filteredProjects = filter === 'all'
-    ? projectData
-    : projectData.filter(project => project.tags.includes(filter));
+    projectData.forEach(project => {
+      project.tags.forEach(tag => {
+        uniqueTags.add(tag.toLowerCase());
+      });
+    });
+
+    return ['all', ...Array.from(uniqueTags).sort()];
+  }, [projectData]);
+
+  // Memoized filtered projects with case-insensitive matching
+  const filteredProjects = useMemo(() => {
+    if (filter === 'all') {
+      return projectData;
+    }
+
+    return projectData.filter(project =>
+      project.tags.some(tag => tag.toLowerCase() === filter.toLowerCase())
+    );
+  }, [projectData, filter]);
 
   async function getProjectsData() {
     try {
@@ -29,6 +47,10 @@ const Projects: React.FC = () => {
   useEffect(() => {
     getProjectsData();
   }, []);
+
+  const handleFilterChange = (tag: string) => {
+    setFilter(tag);
+  };
 
   return (
     <section id="projects" className="py-20 bg-white dark:bg-gray-900">
@@ -55,8 +77,8 @@ const Projects: React.FC = () => {
               {allTags.map(tag => (
                 <button
                   key={tag}
-                  onClick={() => setFilter(tag)}
-                  className={`px-4 py-1.5 text-sm capitalize transition-colors ${filter === tag
+                  onClick={() => handleFilterChange(tag)}
+                  className={`px-4 py-1.5 text-sm capitalize transition-colors ${filter.toLowerCase() === tag.toLowerCase()
                     ? 'bg-black dark:bg-white text-white dark:text-black'
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                     }`}
@@ -120,9 +142,9 @@ const Projects: React.FC = () => {
                     <p className="text-gray-700 dark:text-gray-300 mb-5">{project.description}</p>
 
                     <div className="flex flex-wrap gap-2">
-                      {project.tags.map(tag => (
+                      {project.tags.map((tag, index) => (
                         <span
-                          key={tag}
+                          key={`${tag}-${index}`}
                           className="px-2.5 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
                         >
                           {tag}
