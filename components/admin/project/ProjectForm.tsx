@@ -5,13 +5,15 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { X, Plus } from "lucide-react"
+import { X, Plus, DeleteIcon } from "lucide-react"
 import Image from "next/image"
 import { ProjectData } from "@/app/types/project"
-import { createProject, updateProject } from "@/app/actions/project.action"
+import { createProject, deleteProject, updateProject } from "@/app/actions/project.action"
 import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
 
-export default function ProjectForm({ projectItem, isEdit }: { projectItem?: ProjectData, isEdit?: boolean }) {
+export default function ProjectForm({ projectItem, isEdit }: { projectItem?: ProjectData, isEdit?: boolean }) { 
+    const router = useRouter();
     const [title, setTitle] = useState("")
     const [descriptions, setDescriptions] = useState<string[]>([])
     const [newDescription, setNewDescription] = useState("")
@@ -108,11 +110,27 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
         }
     }
 
+    const handleDelete = async () => {
+        if (!isEdit || !projectItem) return;
+        try {
+            await deleteProject(projectItem._id);
+            toast.success("Project deleted successfully");
+            router.replace('/admin/dashboard/project');
+        } catch (error: unknown) {
+            console.error("Error deleting project:", error);
+            toast.error("Error deleting project");
+        }
+    };
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl p-4 w-full border rounded-md">
             <div>
-                <span className="text-2xl font-bold mb-4">{isEdit ? 'Edit' : 'Add'} Project</span>
+               <div className="flex justify-between items-center">
+                    <span className="text-2xl font-bold mb-4">{isEdit ? 'Edit' : 'Add'} Project</span>
+                    {isEdit && (
+                        <DeleteIcon onClick={handleDelete} className="cursor-pointer text-red-500"  />
+                    )}
+               </div>
                 <p className="text-sm text-gray-500">
                     Fill in the details of your project below.
                 </p>

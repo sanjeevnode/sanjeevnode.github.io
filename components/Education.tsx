@@ -55,10 +55,14 @@ const skillsData: SkillGroup[] = [
     category: 'Tools',
     skills: ['Git', 'Docker', 'AWS', 'Figma', 'Postman']
   },
+    {
+      category: 'AI/ML and Data Science',
+      skills: ['Python', 'PyTorch', 'TensorFlow', 'OpenCV', 'Scikit-learn', 'Pandas', 'NumPy', 'FFmpeg']
+    },
   {
     category: 'Methodologies',
     skills: ['Agile/Scrum', 'Test-Driven Development', 'CI/CD', 'Responsive Design', 'SEO']
-  }
+  },
 ];
 
 const Education: React.FC = () => {

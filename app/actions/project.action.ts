@@ -107,3 +107,9 @@ export async function updateProject(id: string, formData: FormData) {
     image: imageData,
   });
 }
+
+
+export async function deleteProject(id: string) {
+  await connectToDatabase();
+  await Project.findByIdAndDelete(id);
+}
