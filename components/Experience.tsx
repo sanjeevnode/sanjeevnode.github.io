@@ -23,7 +23,29 @@ const experienceData: ExperienceItem[] = [
     company: 'AlignTogether Solutions Pvt. Ltd.',
     location: 'Bhopal, M.P, India',
     period: 'Oct 2024 – Present',
-    description: [
+    description: [{
+      title: 'Flutter Application',
+      technologies: ['Flutter', 'Dart', 'Socket.IO', 'Twilio SDK', 'Clean Architecture', 'Android', 'iOS'],
+      description: [
+        'Integrated Socket.IO chat module for real-time messaging.',
+        'Built live chat system with multi-user support and role-based access.',
+        'Implemented Twilio video call in native for Android and iOS platforms.',
+        'Integrated Twilio SDK for seamless video calling experience.',
+        'Followed Clean Architecture principles for maintainable codebase.'
+      ],
+      link: "",
+    }, {
+        title: 'AI/ML and Data Science',
+        technologies: ['Python', 'PyTorch', 'OpenCV', 'FFmpeg', 'NumPy', 'Pandas', 'Scikit-learn'],
+        description: [
+          'Created automated scripts for training AI/ML models and pipelines.',
+          'Developed computer vision solutions using OpenCV and PyTorch.',
+          'Built data preprocessing pipelines for image and video datasets.',
+          'Implemented video processing workflows using FFmpeg library.',
+          'Optimized model training and inference for production deployment.'
+        ],
+        link: "",
+      },
       {
         title: 'Flutter Chat Application',
         technologies: ['Flutter', 'Dart', 'Matrix SDK', 'Bloc', 'Realm', 'Firebase', 'Git'],
@@ -33,6 +55,18 @@ const experienceData: ExperienceItem[] = [
           'Created a full-featured chat module using Matrix SDK.',
           'Implemented messaging with read receipts and media support.',
           'Handled authentication, push notifications, and deep linking.'
+        ],
+        link: "",
+      },
+      {
+        title: 'Node.js Backend and Automations',
+        technologies: ['Node.js', 'Python', 'PostgreSQL', 'AWS Lambda', 'SQS', 'SES', 'EventBridge'],
+        description: [
+          'Migrated 30+ workflows from Airtable to PostgreSQL and built AWS Lambda automations for scalable, event-driven data processing.',
+          'Implemented SQS-based message queuing and integrated SES for automated email notifications.',
+          'Utilized EventBridge for time-based automation and orchestration of workflows.',
+          'Developed a Node.js backend to manage APIs, data pipelines, and automation logic.',
+          'Designed serverless architecture for cost-effective and scalable operations.'
         ],
         link: "",
       },
@@ -47,7 +81,7 @@ const experienceData: ExperienceItem[] = [
           'Implemented role-based access and user-centric workflows.'
         ],
         link: "",
-      },
+      }, 
       {
         title: 'Web Application for IoT Healthcare',
         technologies: ['Flask', 'React Native', 'MQTT', 'Kafka', 'PostgreSQL', 'Docker', 'Socket.IO', 'Redis'],
@@ -59,7 +93,9 @@ const experienceData: ExperienceItem[] = [
           'Cached and queued live data efficiently using Redis service.'
         ],
         link: "",
-      }
+      },
+     
+     
     ]
   },
   {
