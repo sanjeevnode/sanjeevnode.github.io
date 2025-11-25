@@ -19,47 +19,47 @@ interface ProjectsProps {
 const experienceData: ExperienceItem[] = [
   {
     id: 1,
-    title: 'Software Development Engineer - I',
+    title: 'Software Development Engineer - II',
     company: 'AlignTogether Solutions Pvt. Ltd.',
     location: 'Bhopal, M.P, India',
     period: 'Oct 2024 – Present',
     description: [
-      // {
-      //   title: 'Fittr Hart',
-      //   technologies: ['Flutter', 'Dart', 'Matrix SDK', 'Bloc', 'Realm', 'Firebase', 'Git'],
-      //   description: [
-      //     'Built responsive mobile UIs using Flutter and Bloc architecture.',
-      //     'Integrated Realm for local data storage and offline features.',
-      //     'Created a full-featured chat module using Matrix SDK.',
-      //     'Implemented messaging with read receipts and media support.',
-      //     'Handled authentication, push notifications, and deep linking.'
-      //   ],
-      //   link: "https://play.google.com/store/apps/details?id=com.squats.fittr_hart&pcampaignid=web_share",
-      // },
-      // {
-      //   title: 'Gram Parivartan (Dalmia Bharat)',
-      //   technologies: ['Flutter', 'Provider', 'Hive', 'REST APIs', 'Git', 'Spring Boot', 'MySQL'],
-      //   description: [
-      //     'Created mobile app screens with Flutter and Provider state management.',
-      //     'Integrated RESTful APIs for secure, real-time data interaction.',
-      //     'Used Hive for local storage and managed syncing logic.',
-      //     'Built backend APIs with Spring Boot and MySQL database.',
-      //     'Implemented role-based access and user-centric workflows.'
-      //   ],
-      //   link: "https://play.google.com/store/apps/details?id=com.dalmiabharatfoundation.csr&pcampaignid=web_share",
-      // },
-      // {
-      //   title: 'Kubocare',
-      //   technologies: ['Flask', 'React Native', 'MQTT', 'Kafka', 'PostgreSQL', 'Docker', 'Socket.IO', 'Redis'],
-      //   description: [
-      //     'Built cross-platform mobile UI using React Native components.',
-      //     'Designed Flask APIs and managed PostgreSQL data handling.',
-      //     'Used Docker to deploy Kafka and Mosquitto on EC2 servers.',
-      //     'Implemented real-time communication via MQTT and Socket.IO.',
-      //     'Cached and queued live data efficiently using Redis service.'
-      //   ],
-      //   link: "https://kubocare.com/",
-      // }
+      {
+        title: 'Flutter Chat Application',
+        technologies: ['Flutter', 'Dart', 'Matrix SDK', 'Bloc', 'Realm', 'Firebase', 'Git'],
+        description: [
+          'Built responsive mobile UIs using Flutter and Bloc architecture.',
+          'Integrated Realm for local data storage and offline features.',
+          'Created a full-featured chat module using Matrix SDK.',
+          'Implemented messaging with read receipts and media support.',
+          'Handled authentication, push notifications, and deep linking.'
+        ],
+        link: "",
+      },
+      {
+        title: 'Flutter Management App',
+        technologies: ['Flutter', 'Provider', 'Hive', 'REST APIs', 'Git', 'Spring Boot', 'MySQL'],
+        description: [
+          'Created mobile app screens with Flutter and Provider state management.',
+          'Integrated RESTful APIs for secure, real-time data interaction.',
+          'Used Hive for local storage and managed syncing logic.',
+          'Built backend APIs with Spring Boot and MySQL database.',
+          'Implemented role-based access and user-centric workflows.'
+        ],
+        link: "",
+      },
+      {
+        title: 'Web Application for IoT Healthcare',
+        technologies: ['Flask', 'React Native', 'MQTT', 'Kafka', 'PostgreSQL', 'Docker', 'Socket.IO', 'Redis'],
+        description: [
+          'Built cross-platform mobile UI using React Native components.',
+          'Designed Flask APIs and managed PostgreSQL data handling.',
+          'Used Docker to deploy Kafka and Mosquitto on EC2 servers.',
+          'Implemented real-time communication via MQTT and Socket.IO.',
+          'Cached and queued live data efficiently using Redis service.'
+        ],
+        link: "",
+      }
     ]
   },
   {
