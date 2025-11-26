@@ -80,7 +80,7 @@ const experienceData: ExperienceItem[] = [
     title: 'Software Development Engineer Intern',
     company: 'Affirmity Corp',
     location: 'Bhopal MP, India',
-    period: 'Dec 2023 - May 2024',
+    period: 'Dec 2023 - Sep 2024',
     description: [
       {
         title: 'Drone Feed Analysis',
