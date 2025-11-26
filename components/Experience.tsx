@@ -23,79 +23,56 @@ const experienceData: ExperienceItem[] = [
     company: 'AlignTogether Solutions Pvt. Ltd.',
     location: 'Bhopal, M.P, India',
     period: 'Oct 2024 – Present',
-    description: [{
-      title: 'Flutter Application',
-      technologies: ['Flutter', 'Dart', 'Socket.IO', 'Twilio SDK', 'Clean Architecture', 'Android', 'iOS'],
-      description: [
-        'Integrated Socket.IO chat module for real-time messaging.',
-        'Built live chat system with multi-user support and role-based access.',
-        'Implemented Twilio video call in native for Android and iOS platforms.',
-        'Integrated Twilio SDK for seamless video calling experience.',
-        'Followed Clean Architecture principles for maintainable codebase.'
-      ],
-      link: "",
-    }, {
-        title: 'AI/ML and Data Science',
-        technologies: ['Python', 'PyTorch', 'OpenCV', 'FFmpeg', 'NumPy', 'Pandas', 'Scikit-learn'],
-        description: [
-          'Created automated scripts for training AI/ML models and pipelines.',
-          'Developed computer vision solutions using OpenCV and PyTorch.',
-          'Built data preprocessing pipelines for image and video datasets.',
-          'Implemented video processing workflows using FFmpeg library.',
-          'Optimized model training and inference for production deployment.'
-        ],
-        link: "",
-      },
+    description: [
       {
-        title: 'Flutter Chat Application',
-        technologies: ['Flutter', 'Dart', 'Matrix SDK', 'Bloc', 'Realm', 'Firebase', 'Git'],
-        description: [
-          'Built responsive mobile UIs using Flutter and Bloc architecture.',
-          'Integrated Realm for local data storage and offline features.',
-          'Created a full-featured chat module using Matrix SDK.',
-          'Implemented messaging with read receipts and media support.',
-          'Handled authentication, push notifications, and deep linking.'
+        "title": "Frontend & Mobile Development",
+        "technologies": [
+          "Flutter", "Dart", "Bloc", "Provider",
+          "Socket.IO", "Matrix SDK", "Realm", "Firebase",
+          "Twilio SDK", "Android", "iOS", "Hive"
         ],
-        link: "",
+        "description": [
+          "Built scalable cross-platform mobile applications using Flutter with clean and modular architecture.",
+          "Developed complete real-time chat systems using Socket.IO and Matrix SDK with media, receipts, and roles.",
+          "Integrated native Twilio video calling for Android and iOS with smooth Flutter UI integration.",
+          "Implemented offline-first storage using Realm and Hive with advanced local syncing logic.",
+          "Developed secure authentication flows, push notifications, and dynamic deep linking.",
+          "Created responsive and accessible UI designs following best UX and state management practices (Bloc/Provider)."
+        ]
       },
+
       {
-        title: 'Node.js Backend and Automations',
-        technologies: ['Node.js', 'Python', 'PostgreSQL', 'AWS Lambda', 'SQS', 'SES', 'EventBridge'],
-        description: [
-          'Migrated 30+ workflows from Airtable to PostgreSQL and built AWS Lambda automations for scalable, event-driven data processing.',
-          'Implemented SQS-based message queuing and integrated SES for automated email notifications.',
-          'Utilized EventBridge for time-based automation and orchestration of workflows.',
-          'Developed a Node.js backend to manage APIs, data pipelines, and automation logic.',
-          'Designed serverless architecture for cost-effective and scalable operations.'
+        "title": "Backend & Cloud Engineering",
+        "technologies": [
+          "Node.js", "Python", "PostgreSQL", "MySQL",
+          "AWS Lambda", "SQS", "SES", "EventBridge",
+          "Docker", "Redis", "Kafka", "MQTT", "Flask"
         ],
-        link: "",
+        "description": [
+          "Built backend APIs in Node.js and Python (Flask) with secure routing, validation, and database layers.",
+          "Migrated 30+ workflows to a serverless AWS architecture using Lambda, EventBridge, SQS, and SES.",
+          "Designed scalable database schemas and optimized queries for PostgreSQL and MySQL.",
+          "Implemented event-driven pipelines for automation, notifications, and asynchronous processing.",
+          "Deployed Kafka, MQTT brokers, and Redis caching layers using Docker on AWS EC2.",
+          "Developed real-time communication services and IoT data pipelines with efficient message handling."
+        ]
       },
+
       {
-        title: 'Flutter Management App',
-        technologies: ['Flutter', 'Provider', 'Hive', 'REST APIs', 'Git', 'Spring Boot', 'MySQL'],
-        description: [
-          'Created mobile app screens with Flutter and Provider state management.',
-          'Integrated RESTful APIs for secure, real-time data interaction.',
-          'Used Hive for local storage and managed syncing logic.',
-          'Built backend APIs with Spring Boot and MySQL database.',
-          'Implemented role-based access and user-centric workflows.'
+        "title": "AI/ML & Data Science",
+        "technologies": [
+          "Python", "PyTorch", "OpenCV", "NumPy",
+          "FFmpeg", "Scikit-learn", "Pandas","SageMaker"
         ],
-        link: "",
-      }, 
-      {
-        title: 'Web Application for IoT Healthcare',
-        technologies: ['Flask', 'React Native', 'MQTT', 'Kafka', 'PostgreSQL', 'Docker', 'Socket.IO', 'Redis'],
-        description: [
-          'Built cross-platform mobile UI using React Native components.',
-          'Designed Flask APIs and managed PostgreSQL data handling.',
-          'Used Docker to deploy Kafka and Mosquitto on EC2 servers.',
-          'Implemented real-time communication via MQTT and Socket.IO.',
-          'Cached and queued live data efficiently using Redis service.'
-        ],
-        link: "",
-      },
-     
-     
+        "description": [
+          "Developed end-to-end ML pipelines for training, evaluation, and deployment of AI models.",
+          "Built computer vision modules for image/video processing using OpenCV and PyTorch.",
+          "Created automated preprocessing workflows for cleaning, augmenting, and transforming datasets.",
+          "Implemented efficient video processing and extraction using FFmpeg for analytics workflows.",
+          "Optimized model inference, data loading, and training loops for GPU/CPU environments.",
+          "Designed reproducible experiments, logging systems, and evaluation metrics for ML research."
+        ]
+      }
     ]
   },
   {
