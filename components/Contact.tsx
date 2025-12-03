@@ -17,6 +17,7 @@ const Contact: React.FC = () => {
   const captchaRef = React.useRef<ReCAPTCHA>(null);
 
   const PUBLIC_KEY: string = NEXT_PUBLIC_CAPTCHA_PUBLIC_KEY;
+  console.log("Captcha Key:", PUBLIC_KEY);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
