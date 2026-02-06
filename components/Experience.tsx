@@ -161,7 +161,7 @@ const Experience: React.FC = () => {
                 {job.description.map((project, idx) => (
                   <div
                     key={idx}
-                    className="p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700"
+                    className="p-6 bg-white dark:bg-gray-900 border border-black dark:border-white"
                   >
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-10 h-10 flex items-center justify-center">

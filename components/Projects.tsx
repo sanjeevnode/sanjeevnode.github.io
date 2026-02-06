@@ -92,7 +92,7 @@ const Projects: React.FC = () => {
               {filteredProjects.map(project => (
                 <div
                   key={project._id}
-                  className="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-md dark:hover:shadow-gray-700"
+                  className="group bg-white dark:bg-gray-800 border border-black dark:border-white overflow-hidden transition-all duration-300 hover:shadow-md dark:hover:shadow-gray-700"
                 >
                   <div className="aspect-video relative overflow-hidden m-2">
                     {project.image?.data && project.image?.contentType ? (

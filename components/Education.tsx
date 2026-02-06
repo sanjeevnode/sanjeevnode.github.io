@@ -81,7 +81,7 @@ const Education: React.FC = () => {
 
             <div className="space-y-10">
               {educationData.map(item => (
-                <div key={item.id} className="relative pl-10 border-l border-gray-200 dark:border-gray-600">
+                <div key={item.id} className="relative pl-10 border-l border-black dark:border-white">
                   <div className="absolute top-0 left-0 w-6 h-6 -translate-x-1/2 rounded-full bg-black dark:bg-white flex items-center justify-center">
                     <GraduationCap size={14} className="text-white dark:text-black" />
                   </div>
@@ -116,7 +116,7 @@ const Education: React.FC = () => {
                     {group.skills.map((skill, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 text-sm"
+                        className="px-3 py-1.5 bg-white dark:bg-gray-900 border border-black dark:border-white text-gray-800 dark:text-gray-200 text-sm"
                       >
                         {skill}
                       </span>
