@@ -82,7 +82,7 @@ const Hero: React.FC = () => {
                 src="/sanjeev-bg.png"
                 alt="Profile"
                 fill
-                className="absolute inset-0 w-full h-full object-contain dark:invert"
+                className="absolute inset-0 w-full h-full object-contain"
                 priority
               />
             </div>
