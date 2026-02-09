@@ -6,6 +6,40 @@ import {
   SENDER_EMAIL,
 } from "@/constants/Constants";
 import { MailtrapClient } from "mailtrap";
+import { google } from "googleapis";
+
+
+
+
+export async function sendToSheet(
+  name: string,
+  email: string,
+  phone: string,
+  message: string,
+): Promise<void> {
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_CLIENT_EMAIL as string,
+      private_key: (process.env.GOOGLE_PRIVATE_KEY as string).replace(
+        /\\n/g,
+        "\n",
+      ),
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: process.env.SHEET_ID as string,
+    range: "Sheet1!A:E",
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[name, email, phone, message, new Date().toLocaleString()]],
+    },
+  });
+}
+
 
 export async function sendMailAction(formData: {
   name: string;
@@ -59,15 +93,6 @@ export async function sendMailAction(formData: {
       throw new Error("reCAPTCHA verification failed.");
     }
 
-    // Prepare email content
-    const htmlMessage = `
-      <h2>New Contact Form Submission</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Message:</strong><br>${message.replace(/\n/g, "<br>")}</p>
-    `;
-
     // Initialize Mailtrap client
     console.log("Initializing Mailtrap client...");
     const client = new MailtrapClient({ token: MAILTRAP_TOKEN });
@@ -77,24 +102,6 @@ export async function sendMailAction(formData: {
       name: "sanjeevnode.in",
     };
 
-    const recipients = [
-      {
-        email: RECIVER_EMAIL,
-      }
-    ];
-
-    // Send notification email to yourself
-    const adminResponse = await client.send({
-      from: sender,
-      to: recipients,
-      subject: "Contact Form Submission",
-      text: `${name} (${email}, ${phone}): ${message}`,
-      html: htmlMessage,
-      category: "Contact Form",
-    });
-
-    // Send template email to the user who submitted the form
-    console.log("Sending template email to user...");
     const userRecipients = [
       {
         email: email, // Send to the user who filled the form
@@ -114,8 +121,9 @@ export async function sendMailAction(formData: {
       }
     });
 
+    await sendToSheet(name, email, phone, message);
 
-    return { success: true, adminResponse, templateResponse };
+    return { success: true, templateResponse };
   } catch (error) {
     console.error("Error in sendMailAction:", error);
     

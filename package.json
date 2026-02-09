@@ -17,6 +17,7 @@
     "@radix-ui/react-tooltip": "^1.2.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "googleapis": "^171.4.0",
     "lucide-react": "^0.511.0",
     "mailtrap": "^4.1.0",
     "mongoose": "^8.15.0",
