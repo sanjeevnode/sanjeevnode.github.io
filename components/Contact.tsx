@@ -157,7 +157,6 @@ const Contact: React.FC = () => {
                   <input
                     type="text"
                     id="name"
-                    maxLength={10}
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-black dark:border-white"
@@ -204,6 +203,7 @@ const Contact: React.FC = () => {
                 <textarea
                   id="message"
                   value={formData.message}
+                  maxLength={1000}
                   onChange={handleChange}
                   rows={5}
                   className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-black dark:border-white"

@@ -74,7 +74,7 @@ export async function sendMailAction(formData: {
 
     const sender = {
       email: SENDER_EMAIL,
-      name: "Contact Form",
+      name: "sanjeevnode.in",
     };
 
     const recipients = [
@@ -83,8 +83,8 @@ export async function sendMailAction(formData: {
       }
     ];
 
-    console.log("Sending email via Mailtrap...");
-    const response = await client.send({
+    // Send notification email to yourself
+    const adminResponse = await client.send({
       from: sender,
       to: recipients,
       subject: "Contact Form Submission",
@@ -92,9 +92,30 @@ export async function sendMailAction(formData: {
       html: htmlMessage,
       category: "Contact Form",
     });
-    console.log("Email sent successfully:", response);
 
-    return { success: true, response };
+    // Send template email to the user who submitted the form
+    console.log("Sending template email to user...");
+    const userRecipients = [
+      {
+        email: email, // Send to the user who filled the form
+      }
+    ];
+
+    const templateResponse = await client.send({
+      from: sender,
+      to: userRecipients,
+      template_uuid: "61b25511-86a7-4f6b-ae1d-a7b7b1484a02",
+      template_variables: {
+        "user_name": name,
+        "user_message": message,
+        "next_step_link": "https://sanjeevnode.in",
+        "get_started_link": "https://sanjeevnode.in",
+        "onboarding_video_link": "https://sanjeevnode.in"
+      }
+    });
+
+
+    return { success: true, adminResponse, templateResponse };
   } catch (error) {
     console.error("Error in sendMailAction:", error);
     
