@@ -102,6 +102,12 @@ export async function sendMailAction(formData: {
       name: "sanjeevnode.in",
     };
 
+    const recipients = [
+      {
+        email: RECIVER_EMAIL, // Send to the site owner
+      }
+    ];
+
     const userRecipients = [
       {
         email: email, // Send to the user who filled the form
@@ -123,7 +129,23 @@ export async function sendMailAction(formData: {
 
     await sendToSheet(name, email, phone, message);
 
-    return { success: true, templateResponse };
+
+    const toReciver = await client.send({
+      from: sender,
+      to: recipients,
+      template_uuid: "b2042f38-0121-4dd6-be09-217350e2feac",
+      template_variables: {
+        user_name: name,
+        user_phone: phone,
+        user_email: email,
+        user_message: message,
+        next_step_link: "https://sanjeevnode.in",
+        get_started_link: "https://sanjeevnode.in",
+        onboarding_video_link: "https://sanjeevnode.in"
+      },
+    });
+
+    return { success: true, templateResponse, toReciver };
   } catch (error) {
     console.error("Error in sendMailAction:", error);
     
