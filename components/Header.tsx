@@ -64,7 +64,7 @@ const Header: React.FC = () => {
             scrollToTop();
           }}
         >
-          <span className="text-black dark:text-white">sanjeevnode</span>
+          <span className="text-black dark:text-white">sanjeevnode.in</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -74,7 +74,7 @@ const Header: React.FC = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-black dark:text-white hover:text-black dark:hover:text-white transition-colors capitalize"
+                className="text-black dark:text-white hover:text-black dark:hover:text-white transition-colors capitalize font-medium"
               >
                 {item}
               </button>
