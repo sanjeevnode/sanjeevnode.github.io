@@ -28,6 +28,7 @@ const Contact: React.FC = () => {
     setLoading(true);
 
     try {
+      console.log("Submitting form with data:", formData);
       const recaptchaToken = await captchaRef.current?.executeAsync();
       captchaRef.current?.reset();
 
@@ -36,17 +37,21 @@ const Contact: React.FC = () => {
         setLoading(false);
         return;
       }
-
-      await sendMailAction({
+      
+      console.log("reCAPTCHA token:", recaptchaToken);
+      
+      const result = await sendMailAction({
         ...formData,
         recaptchaToken,
       });
 
+      console.log("Send mail result:", result);
       toast.success('Message sent successfully!');
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (err: unknown) {
-      console.error(err);
-      toast.error('Failed to send message.');
+      console.error("Send mail error:", err);
+      const errorMessage = err instanceof Error ? err.message : 'Failed to send message. Please try again.';
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

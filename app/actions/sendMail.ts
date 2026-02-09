@@ -14,45 +14,94 @@ export async function sendMailAction(formData: {
   message: string;
   recaptchaToken: string;
 }) {
-  const { name, email, phone, message, recaptchaToken } = formData;
+  try {
+    const { name, email, phone, message, recaptchaToken } = formData;
 
-  if (!name || !email || !phone || !message || !recaptchaToken) {
-    throw new Error("All fields and reCAPTCHA token are required.");
-  }
+    // Validate input fields
+    if (!name || !email || !phone || !message || !recaptchaToken) {
+      console.error("Missing required fields");
+      throw new Error("All fields and reCAPTCHA token are required.");
+    }
 
-  // Verify reCAPTCHA
-  const captchaRes = await fetch(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.CAPTCHA_SECRET}&response=${recaptchaToken}`,
-    { method: "POST" }
-  );
-  const captchaJson = await captchaRes.json();
+    // Validate environment variables
+    if (!process.env.CAPTCHA_SECRET) {
+      console.error("CAPTCHA_SECRET is not configured");
+      throw new Error("Server configuration error: CAPTCHA_SECRET missing");
+    }
 
-  if (!captchaJson.success) {
-    throw new Error("reCAPTCHA verification failed.");
-  }
+    if (!MAILTRAP_TOKEN || !SENDER_EMAIL || !RECIVER_EMAIL) {
+      console.error("Mailtrap configuration missing:", {
+        hasToken: !!MAILTRAP_TOKEN,
+        hasSender: !!SENDER_EMAIL,
+        hasReceiver: !!RECIVER_EMAIL,
+      });
+      throw new Error("Server configuration error: Email service not configured");
+    }
 
-  const htmlMessage = `
-    <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phone}</p>
-    <p><strong>Message:</strong><br>${message.replace(/\n/g, "<br>")}</p>
-  `;
+    // Verify reCAPTCHA
+    console.log("Verifying reCAPTCHA...");
+    const captchaRes = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `secret=${process.env.CAPTCHA_SECRET}&response=${recaptchaToken}`,
+      }
+    );
 
-  const mailtrap = new MailtrapClient({ token: MAILTRAP_TOKEN });
+    const captchaJson = await captchaRes.json();
+    console.log("reCAPTCHA verification result:", captchaJson);
 
-  const mailData = {
-    from: {
-      name: "Contact Form",
+    if (!captchaJson.success) {
+      console.error("reCAPTCHA verification failed:", captchaJson);
+      throw new Error("reCAPTCHA verification failed.");
+    }
+
+    // Prepare email content
+    const htmlMessage = `
+      <h2>New Contact Form Submission</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Message:</strong><br>${message.replace(/\n/g, "<br>")}</p>
+    `;
+
+    // Initialize Mailtrap client
+    console.log("Initializing Mailtrap client...");
+    const client = new MailtrapClient({ token: MAILTRAP_TOKEN });
+
+    const sender = {
       email: SENDER_EMAIL,
-    },
-    to: [{ email: RECIVER_EMAIL }],
-    subject: "Contact Form Submission",
-    text: `${name} (${email}, ${phone}): ${message}`,
-    html: htmlMessage,
-  };
+      name: "Contact Form",
+    };
 
-  const response = await mailtrap.send(mailData);
+    const recipients = [
+      {
+        email: RECIVER_EMAIL,
+      }
+    ];
 
-  return { success: true, response };
+    console.log("Sending email via Mailtrap...");
+    const response = await client.send({
+      from: sender,
+      to: recipients,
+      subject: "Contact Form Submission",
+      text: `${name} (${email}, ${phone}): ${message}`,
+      html: htmlMessage,
+      category: "Contact Form",
+    });
+    console.log("Email sent successfully:", response);
+
+    return { success: true, response };
+  } catch (error) {
+    console.error("Error in sendMailAction:", error);
+    
+    // Return a user-friendly error message
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("Failed to send email. Please try again later.");
+  }
 }
