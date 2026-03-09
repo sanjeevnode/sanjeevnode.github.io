@@ -85,8 +85,8 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="ml-6">
                   <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-1">Email</h4>
-                  <a href="mailto:contact@sanjeevnode.in" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-                    contact@sanjeevnode.in
+                  <a href="mailto:me.sanjeevks@gmail.com" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                    me.sanjeevks@gmail.com
                   </a>
                 </div>
               </div>
@@ -136,7 +136,7 @@ const Contact: React.FC = () => {
                   <Linkedin size={22} />
                 </a>
                 <a
-                  href="mailto:contact@sanjeevnode.in"
+                  href="mailto:me.sanjeevks@gmail.com"
                   className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
                   aria-label="Email"
                 >
