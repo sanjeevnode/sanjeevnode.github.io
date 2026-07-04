@@ -38,6 +38,8 @@ const Header: React.FC = () => {
         top: section.offsetTop - 80,
         behavior: 'smooth'
       });
+    } else {
+      window.location.href = `/#${sectionId}`;
     }
     setIsMenuOpen(false);
   };
@@ -57,11 +59,13 @@ const Header: React.FC = () => {
       }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a
-          href="#"
+          href="/"
           className="text-xl md:text-2xl font-bold tracking-tight transition-colors"
           onClick={(e) => {
-            e.preventDefault();
-            scrollToTop();
+            if (window.location.pathname === '/') {
+              e.preventDefault();
+              scrollToTop();
+            }
           }}
         >
           <span className="text-black dark:text-white">sanjeevnode.in</span>

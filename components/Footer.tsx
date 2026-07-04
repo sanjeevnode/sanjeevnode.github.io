@@ -15,20 +15,29 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <nav className="flex gap-6">
+            <nav className="flex flex-wrap gap-6">
               {['about', 'experience', 'projects', 'education', 'contact'].map((item) => (
                 <a
                   key={item}
-                  href={`#${item}`}
+                  href={`/#${item}`}
                   className="text-sm text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors capitalize"
                   onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById(item)?.scrollIntoView({ behavior: 'smooth' });
+                    const el = document.getElementById(item);
+                    if (el) {
+                      e.preventDefault();
+                      el.scrollIntoView({ behavior: 'smooth' });
+                    }
                   }}
                 >
                   {item}
                 </a>
               ))}
+              <a
+                href="/privacy-and-policy"
+                className="text-sm text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </a>
             </nav>
           </div>
         </div>
