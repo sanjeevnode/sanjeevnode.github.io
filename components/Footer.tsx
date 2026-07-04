@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-10 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+    <footer className="py-10 bg-gray-50 dark:bg-gray-800 border-t  border-black dark:border-white">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
@@ -15,20 +15,29 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <nav className="flex gap-6">
+            <nav className="flex flex-wrap gap-6">
               {['about', 'experience', 'projects', 'education', 'contact'].map((item) => (
                 <a
                   key={item}
-                  href={`#${item}`}
+                  href={`/#${item}`}
                   className="text-sm text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors capitalize"
                   onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById(item)?.scrollIntoView({ behavior: 'smooth' });
+                    const el = document.getElementById(item);
+                    if (el) {
+                      e.preventDefault();
+                      el.scrollIntoView({ behavior: 'smooth' });
+                    }
                   }}
                 >
                   {item}
                 </a>
               ))}
+              <a
+                href="/privacy-and-policy"
+                className="text-sm text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </a>
             </nav>
           </div>
         </div>

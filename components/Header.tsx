@@ -38,6 +38,8 @@ const Header: React.FC = () => {
         top: section.offsetTop - 80,
         behavior: 'smooth'
       });
+    } else {
+      window.location.href = `/#${sectionId}`;
     }
     setIsMenuOpen(false);
   };
@@ -52,19 +54,21 @@ const Header: React.FC = () => {
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrollPosition > 50
-      ? 'bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800 py-3'
+      ? 'bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800 py-3 border-b border-black dark:border-white'
       : 'bg-transparent py-5'
       }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a
-          href="#"
+          href="/"
           className="text-xl md:text-2xl font-bold tracking-tight transition-colors"
           onClick={(e) => {
-            e.preventDefault();
-            scrollToTop();
+            if (window.location.pathname === '/') {
+              e.preventDefault();
+              scrollToTop();
+            }
           }}
         >
-          <span className="text-black dark:text-white">sanjeevnode</span>
+          <span className="text-black dark:text-white">sanjeevnode.in</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -74,7 +78,7 @@ const Header: React.FC = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors capitalize"
+                className="text-black dark:text-white hover:text-black dark:hover:text-white transition-colors capitalize font-medium"
               >
                 {item}
               </button>
@@ -83,7 +87,7 @@ const Header: React.FC = () => {
 
           <button
             onClick={toggleDarkMode}
-            className="p-2 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+            className="p-2 text-black dark:text-white hover:text-black dark:hover:text-white transition-colors"
             aria-label="Toggle dark mode"
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
