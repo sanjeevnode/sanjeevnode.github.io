@@ -59,7 +59,7 @@ const Header: React.FC = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="group text-sm text-pf-dim hover:text-pf-text transition-colors capitalize"
+                className="group link-underline text-sm text-pf-dim hover:text-pf-text transition-colors capitalize"
               >
                 <span className="font-mono text-pf-accent mr-1.5">0{i + 1}.</span>
                 {item}

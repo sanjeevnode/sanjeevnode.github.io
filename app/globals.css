@@ -121,3 +121,33 @@ html.lenis, html.lenis body { height: auto; }
    bottom padding keeps descenders (J, g, y) from being clipped */
 .mask-line { overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
 .mask-line > * { transform: translateY(115%); will-change: transform; }
+
+/* infinite marquee strip */
+@keyframes pf-marquee {
+  to { transform: translateX(-50%); }
+}
+.pf-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: pf-marquee 28s linear infinite;
+}
+.pf-marquee-track:hover { animation-play-state: paused; }
+
+/* animated link underline */
+.link-underline { position: relative; }
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: rgb(var(--pf-accent));
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}

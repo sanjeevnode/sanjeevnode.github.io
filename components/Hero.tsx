@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, FileText, ArrowDown } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
 import gsap from 'gsap';
+import Magnetic from './fx/Magnetic';
 
 const Hero: React.FC = () => {
   const rootRef = useRef<HTMLElement>(null);
@@ -59,36 +60,40 @@ const Hero: React.FC = () => {
         {/* right: tagline, intro, actions */}
         <div className="lg:col-span-5 lg:pl-10 lg:border-l border-pf-line/10">
           <p className="hero-fade font-display text-2xl md:text-3xl font-medium leading-snug text-pf-text">
-            You have an idea<span className="text-pf-accent">.</span><br />
-            I engineer it to production<span className="text-pf-accent">.</span>
+            Software that ships<span className="text-pf-accent">,</span><br />
+            scales<span className="text-pf-accent">,</span> and lasts<span className="text-pf-accent">.</span>
           </p>
 
           <p className="hero-fade mt-6 text-pf-dim leading-relaxed">
-            I build exceptional digital experiences with a focus on clean design and intuitive
-            interactions. Passionate about creating beautiful, functional interfaces that solve
-            real problems for users.
+            I&apos;m a software engineer who takes products from first commit to production —
+            real-time chat platforms, serverless cloud backends, and ML-powered pipelines.
+            Fast, reliable, and finished to the last detail.
           </p>
 
           <div className="hero-fade mt-8 flex flex-wrap gap-4">
-            <a
-              href="/sanjeev_resume.pdf"
-              download
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-pf-accent text-pf-bg font-semibold transition-transform duration-300 hover:-translate-y-1"
-            >
-              <FileText size={18} />
-              Download CV
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-pf-line/20 text-pf-text font-semibold transition-all duration-300 hover:-translate-y-1 hover:border-pf-accent hover:text-pf-accent"
-            >
-              <Mail size={18} />
-              Contact Me
-            </a>
+            <Magnetic>
+              <a
+                href="/sanjeev_resume.pdf"
+                download
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-pf-accent text-pf-bg font-semibold transition-opacity duration-300 hover:opacity-90"
+              >
+                <FileText size={18} />
+                Download CV
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-pf-line/20 text-pf-text font-semibold transition-colors duration-300 hover:border-pf-accent hover:text-pf-accent"
+              >
+                <Mail size={18} />
+                Contact Me
+              </a>
+            </Magnetic>
           </div>
 
           <div className="hero-fade mt-8 flex items-center gap-5">

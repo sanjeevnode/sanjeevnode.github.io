@@ -25,7 +25,7 @@ const Education = async () => {
           {educationData.map((item, index) => (
             <div
               key={index}
-              className="group relative border border-pf-line/10 bg-pf-card/[0.03] p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-pf-accent/40"
+              className="group relative border border-pf-line/10 bg-pf-card/[0.03] p-7 transition-colors duration-300 hover:border-pf-accent/40"
             >
               {/* accent line draws across the card top */}
               <DrawLine className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-pf-accent to-pf-accent2" delay={0.15 * index} />

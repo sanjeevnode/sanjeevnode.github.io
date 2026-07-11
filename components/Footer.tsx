@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
               <a
                 key={item}
                 href={`/#${item}`}
-                className="text-sm text-pf-dim hover:text-pf-accent transition-colors capitalize"
+                className="link-underline text-sm text-pf-dim hover:text-pf-accent transition-colors capitalize"
                 onClick={(e) => {
                   const el = document.getElementById(item);
                   if (el) {
