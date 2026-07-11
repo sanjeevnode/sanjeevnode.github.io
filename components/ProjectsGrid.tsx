@@ -4,9 +4,6 @@ import { ExternalLink, Github } from 'lucide-react';
 import Image from 'next/image';
 import { ProjectData } from '@/app/types/project';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
   const [filter, setFilter] = useState<string>('all');
@@ -27,7 +24,7 @@ const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
     );
   }, [projects, filter]);
 
-  // reveal (IntersectionObserver) + image parallax (ScrollTrigger scrub) per panel
+  // reveal per panel (IntersectionObserver)
   useEffect(() => {
     const el = listRef.current;
     if (!el) return;
@@ -44,21 +41,7 @@ const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
     }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
     panels.forEach((p) => io.observe(p));
 
-    const ctx = gsap.context(() => {
-      panels.forEach((panel) => {
-        const img = panel.querySelector('.proj-img');
-        if (img) {
-          gsap.fromTo(img, { yPercent: -8 }, {
-            yPercent: 8,
-            ease: 'none',
-            scrollTrigger: { trigger: panel, start: 'top bottom', end: 'bottom top', scrub: true },
-          });
-        }
-      });
-      ScrollTrigger.refresh();
-    }, el);
-
-    return () => { io.disconnect(); ctx.revert(); };
+    return () => io.disconnect();
   }, [filteredProjects]);
 
   return (
@@ -68,7 +51,7 @@ const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
           <button
             key={tag}
             onClick={() => setFilter(tag)}
-            className={`px-4 py-1.5 text-xs font-mono capitalize rounded-full border transition-colors ${filter.toLowerCase() === tag.toLowerCase()
+            className={`px-4 py-1.5 text-xs font-mono capitalize border transition-colors ${filter.toLowerCase() === tag.toLowerCase()
               ? 'bg-pf-accent text-pf-bg border-pf-accent'
               : 'border-pf-line/15 text-pf-dim hover:border-pf-accent/50 hover:text-pf-accent'
               }`}
@@ -86,21 +69,22 @@ const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
           >
             {/* image */}
             <div className="lg:col-span-7 [direction:ltr]">
-              <div className="group relative aspect-video overflow-hidden rounded-2xl border border-pf-line/10 bg-pf-soft">
+              <div className="group relative aspect-video overflow-hidden border border-pf-line/10 bg-gradient-to-br from-pf-soft to-pf-accent2/10 p-4 md:p-6">
                 {project.image ? (
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="proj-img object-cover object-center scale-110 transition-transform duration-700 group-hover:scale-[1.15]"
-                  />
+                  <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-[1.02]">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                      className="object-contain object-center drop-shadow-2xl"
+                    />
+                  </div>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center font-mono text-sm text-pf-dim">
                     no image yet
                   </div>
                 )}
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-pf-bg/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
             </div>
 
@@ -122,7 +106,7 @@ const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
                 {project.tags.map((tag, index) => (
                   <span
                     key={`${tag}-${index}`}
-                    className="font-mono text-[11px] text-pf-accent bg-pf-accent/10 border border-pf-accent/20 px-2.5 py-0.5 rounded-full"
+                    className="font-mono text-[11px] text-pf-accent bg-pf-accent/10 border border-pf-accent/20 px-2.5 py-0.5"
                   >
                     {tag}
                   </span>

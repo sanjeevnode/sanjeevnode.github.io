@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import Projects from '@/components/Projects'
+import Skills from '@/components/Skills'
 import SectionSkeleton from '@/components/SectionSkeleton'
 import Preloader from '@/components/fx/Preloader'
 import SmoothScroll from '@/components/fx/SmoothScroll'
@@ -31,6 +32,9 @@ export default function Home() {
         </Suspense>
         <Suspense fallback={<SectionSkeleton title="Projects" />}>
           <Projects />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton title="Skills" />}>
+          <Skills />
         </Suspense>
         <Suspense fallback={<SectionSkeleton title="Education" />}>
           <Education />

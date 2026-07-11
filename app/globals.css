@@ -117,6 +117,7 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
 
-/* masked line reveal: lines start hidden below their clip box */
-.mask-line { overflow: hidden; }
-.mask-line > * { transform: translateY(110%); will-change: transform; }
+/* masked line reveal: lines start hidden below their clip box.
+   bottom padding keeps descenders (J, g, y) from being clipped */
+.mask-line { overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.mask-line > * { transform: translateY(115%); will-change: transform; }

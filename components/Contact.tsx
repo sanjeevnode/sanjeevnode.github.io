@@ -54,11 +54,11 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-pf-soft">
+    <section id="contact" className="py-24 bg-pf-bg">
       <div className="container mx-auto px-6">
         <div className="mb-14">
           <div className="flex items-center gap-4">
-            <span className="font-mono text-pf-accent text-lg">05.</span>
+            <span className="font-mono text-pf-accent text-lg">06.</span>
             <h2 className="font-display font-semibold uppercase tracking-tight text-3xl md:text-5xl text-pf-text whitespace-nowrap">Get In Touch</h2>
             <div className="h-px flex-1 bg-gradient-to-r from-pf-line/20 to-transparent" />
           </div>
@@ -158,7 +158,7 @@ const Contact: React.FC = () => {
                     id="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 rounded-md focus:border-pf-accent focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 focus:border-pf-accent focus:outline-none transition-colors"
                     placeholder="Your name"
                     required
                   />
@@ -172,7 +172,7 @@ const Contact: React.FC = () => {
                     id="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 rounded-md focus:border-pf-accent focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 focus:border-pf-accent focus:outline-none transition-colors"
                     placeholder="Your email"
                     required
                   />
@@ -189,7 +189,7 @@ const Contact: React.FC = () => {
                   maxLength={10}
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 rounded-md focus:border-pf-accent focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 focus:border-pf-accent focus:outline-none transition-colors"
                   placeholder="Phone number"
                   required
                 />
@@ -205,7 +205,7 @@ const Contact: React.FC = () => {
                   maxLength={1000}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 rounded-md focus:border-pf-accent focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 focus:border-pf-accent focus:outline-none transition-colors"
                   placeholder="Your message"
                   required
                 ></textarea>
@@ -217,7 +217,7 @@ const Contact: React.FC = () => {
               />
               <button
                 type="submit"
-                className="px-6 py-4 bg-pf-accent text-pf-bg font-semibold rounded-md transition-transform duration-300 hover:-translate-y-1 disabled:opacity-60"
+                className="px-6 py-4 bg-pf-accent text-pf-bg font-semibold transition-transform duration-300 hover:-translate-y-1 disabled:opacity-60"
                 disabled={loading}
               >
                 {loading ? 'Sending...' : 'Send Message'}

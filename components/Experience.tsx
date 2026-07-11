@@ -4,6 +4,7 @@ import { getExperiences } from '@/app/actions/experience.action';
 import { defaultExperience, ExperienceInput } from '@/app/types/experience';
 import SectionHead from './SectionHead';
 import Reveal from './fx/Reveal';
+import DrawLine from './fx/DrawLine';
 
 const Experience = async () => {
   // Fall back to the built-in content until the DB collection is seeded
@@ -22,7 +23,7 @@ const Experience = async () => {
 
         {/* timeline */}
         <div className="relative pl-8 md:pl-10">
-          <div aria-hidden className="absolute left-1.5 md:left-2 top-2 bottom-2 w-px bg-gradient-to-b from-pf-accent via-pf-accent2 to-transparent opacity-40" />
+          <DrawLine axis="y" className="absolute left-1.5 md:left-2 top-2 bottom-2 w-px bg-gradient-to-b from-pf-accent via-pf-accent2 to-transparent opacity-40" />
 
           <div className="space-y-20">
             {experienceData.map((job, jobIdx) => (
@@ -46,7 +47,7 @@ const Experience = async () => {
                   {job.projects.map((project, idx) => (
                     <div
                       key={idx}
-                      className="group rounded-2xl border border-pf-line/10 bg-pf-card/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-pf-accent/40 hover:shadow-[0_18px_40px_rgb(0_0_0/0.35)]"
+                      className="group border border-pf-line/10 bg-pf-card/[0.03] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-pf-accent/40 hover:shadow-[0_18px_40px_rgb(0_0_0/0.35)]"
                     >
                       <div className="flex items-center gap-3 mb-4">
                         <Code size={18} className="text-pf-accent" />
@@ -57,7 +58,7 @@ const Experience = async () => {
                         {project.technologies.map((tech, techIdx) => (
                           <span
                             key={techIdx}
-                            className="font-mono text-[11px] text-pf-accent bg-pf-accent/10 border border-pf-accent/20 px-2.5 py-0.5 rounded-full"
+                            className="font-mono text-[11px] text-pf-accent bg-pf-accent/10 border border-pf-accent/20 px-2.5 py-0.5"
                           >
                             {tech}
                           </span>

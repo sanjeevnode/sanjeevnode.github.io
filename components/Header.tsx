@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 
-const NAV = ['about', 'experience', 'projects', 'education', 'contact'];
+const NAV = ['about', 'experience', 'projects', 'skills', 'education', 'contact'];
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

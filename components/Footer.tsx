@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
           </p>
 
           <nav className="flex flex-wrap gap-6">
-            {['about', 'experience', 'projects', 'education', 'contact'].map((item) => (
+            {['about', 'experience', 'projects', 'skills', 'education', 'contact'].map((item) => (
               <a
                 key={item}
                 href={`/#${item}`}
