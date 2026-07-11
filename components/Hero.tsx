@@ -60,8 +60,8 @@ const Hero: React.FC = () => {
         {/* right: tagline, intro, actions */}
         <div className="lg:col-span-5 lg:pl-10 lg:border-l border-pf-line/10">
           <p className="hero-fade font-display text-2xl md:text-3xl font-medium leading-snug text-pf-text">
-            Software that ships<span className="text-pf-accent">,</span><br />
-            scales<span className="text-pf-accent">,</span> and lasts<span className="text-pf-accent">.</span>
+            You have an idea<span className="text-pf-accent">.</span><br />
+            I engineer it to production<span className="text-pf-accent">.</span>
           </p>
 
           <p className="hero-fade mt-6 text-pf-dim leading-relaxed">

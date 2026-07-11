@@ -49,11 +49,11 @@ const Experience = async () => {
                     <DrawLine className="absolute top-0 left-0 h-px w-full bg-pf-line/10" delay={0.06 * idx} />
 
                     <div className="md:col-span-3 md:col-start-1">
-                      <span className="font-mono text-xs text-pf-dim">{String(idx + 1).padStart(2, '0')}</span>
+                      <span className="font-mono text-sm text-pf-dim">{String(idx + 1).padStart(2, '0')}</span>
                     </div>
 
-                    <div className="md:col-span-4 md:col-start-4 md:-mt-0.5">
-                      <h4 className="font-display text-xl font-semibold text-pf-text transition-colors duration-300 group-hover:text-pf-accent flex items-start gap-2">
+                    <div className="md:col-span-4 md:col-start-4 md:-mt-1">
+                      <h4 className="font-display text-2xl md:text-3xl font-semibold text-pf-text transition-colors duration-300 group-hover:text-pf-accent flex items-start gap-2">
                         {project.title}
                         {project.link && (
                           <a
@@ -67,11 +67,11 @@ const Experience = async () => {
                           </a>
                         )}
                       </h4>
-                      <div className="mt-3 flex flex-wrap gap-1.5">
+                      <div className="mt-4 flex flex-wrap gap-2">
                         {project.technologies.map((tech, techIdx) => (
                           <span
                             key={techIdx}
-                            className="font-mono text-[11px] text-pf-dim border border-pf-line/15 px-2.5 py-0.5 transition-colors group-hover:border-pf-accent/30"
+                            className="font-mono text-sm text-pf-dim border border-pf-line/15 px-3.5 py-1.5 transition-colors group-hover:border-pf-accent/30"
                           >
                             {tech}
                           </span>
@@ -79,7 +79,7 @@ const Experience = async () => {
                       </div>
                     </div>
 
-                    <ul className="md:col-span-5 md:col-start-8 space-y-2 text-pf-dim text-sm leading-relaxed">
+                    <ul className="md:col-span-5 md:col-start-8 space-y-2.5 text-pf-dim text-base leading-relaxed">
                       {project.description.map((point, pointIdx) => (
                         <li key={pointIdx} className="flex items-start">
                           <span className="mr-2 text-pf-accent mt-0.5">▹</span>
