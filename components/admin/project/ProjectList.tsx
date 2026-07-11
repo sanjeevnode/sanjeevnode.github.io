@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import {
     Table,
@@ -13,28 +13,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { Edit } from "lucide-react"
 import { ProjectData } from "@/app/types/project"
-import { getProjects } from "@/app/actions/project.action"
 
-export function ProjectList() {
-
-    const [projectList, setProjectList] = useState<ProjectData[]>([]);
-
+export function ProjectList({ projects }: { projects: ProjectData[] }) {
     const [searchTerm, setSearchTerm] = useState("")
 
-    // Filtered list based on search input
-    const filteredItems = projectList.filter(item =>
+    const filteredItems = projects.filter(item =>
         item.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
-
-    async function getProjectsData() {
-        const projects = await getProjects()
-        setProjectList(projects)
-    }
-
-    // Fetch project list from the server
-    useEffect(() => {
-        getProjectsData()
-    }, [])
 
     return (
         <div className="space-y-4">

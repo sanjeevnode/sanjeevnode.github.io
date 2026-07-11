@@ -82,6 +82,7 @@ const Hero: React.FC = () => {
                 src="/sanjeev-bg.webp"
                 alt="Profile"
                 fill
+                sizes="(max-width: 768px) 100vw, 40vw"
                 className="absolute inset-0 w-full h-full object-contain"
                 priority
               />

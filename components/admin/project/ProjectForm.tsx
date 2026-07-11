@@ -5,14 +5,14 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { X, Plus, DeleteIcon } from "lucide-react"
+import { X, Plus, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { ProjectData } from "@/app/types/project"
 import { createProject, deleteProject, updateProject } from "@/app/actions/project.action"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 
-export default function ProjectForm({ projectItem, isEdit }: { projectItem?: ProjectData, isEdit?: boolean }) { 
+export default function ProjectForm({ projectItem, isEdit }: { projectItem?: ProjectData, isEdit?: boolean }) {
     const router = useRouter();
     const [title, setTitle] = useState("")
     const [descriptions, setDescriptions] = useState<string[]>([])
@@ -26,7 +26,7 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
 
     const [link, setLink] = useState("")
     const [github, setGithub] = useState("")
-
+    const [submitting, setSubmitting] = useState(false)
 
     // If projectItem is provided, populate the form with its data
     useEffect(() => {
@@ -36,15 +36,9 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
             setTags(projectItem.tags);
             setLink(projectItem.link || "");
             setGithub(projectItem.github || "");
-
-            if (projectItem.image?.data && projectItem.image?.contentType) {
-                // Create base64 preview URL
-                const base64Image = `data:${projectItem.image.contentType};base64,${projectItem.image.data}`;
-                setImagePreview(base64Image);
-            }
+            setImagePreview(projectItem.image || null);
         }
     }, [projectItem]);
-
 
     const handleAddDescription = () => {
         if (newDescription.trim()) {
@@ -78,8 +72,8 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        setSubmitting(true)
         try {
-
             const formData = new FormData();
             formData.append("title", title)
             formData.append("description", JSON.stringify(descriptions))
@@ -91,27 +85,36 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
             }
 
             if (isEdit && projectItem) {
-                formData.append("id", projectItem._id)
+                // existing image removed and no replacement chosen
+                if (projectItem.image && !imagePreview && !imageFile) {
+                    formData.append("removeImage", "true")
+                }
                 await updateProject(projectItem._id, formData);
+                toast.success("Project updated successfully");
+                router.push('/admin/dashboard/project');
             }
             else {
                 await createProject(formData);
+                toast.success("Project created successfully");
+                setTitle("")
+                setDescriptions([])
+                setTags([])
+                setLink("")
+                setGithub("")
+                setImageFile(null)
+                setImagePreview(null)
             }
-            setTitle("")
-            setDescriptions([])
-            setTags([])
-            setLink("")
-            setGithub("")
-            setImageFile(null)
-            setImagePreview(null)
         } catch (error: unknown) {
-            console.error("Error creating project:", error)
-            toast.error("Error creating project")
+            console.error("Error saving project:", error)
+            toast.error(isEdit ? "Error updating project" : "Error creating project")
+        } finally {
+            setSubmitting(false)
         }
     }
 
     const handleDelete = async () => {
         if (!isEdit || !projectItem) return;
+        if (!window.confirm(`Delete "${projectItem.title}"? This cannot be undone.`)) return;
         try {
             await deleteProject(projectItem._id);
             toast.success("Project deleted successfully");
@@ -128,7 +131,7 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
                <div className="flex justify-between items-center">
                     <span className="text-2xl font-bold mb-4">{isEdit ? 'Edit' : 'Add'} Project</span>
                     {isEdit && (
-                        <DeleteIcon onClick={handleDelete} className="cursor-pointer text-red-500"  />
+                        <Trash2 onClick={handleDelete} className="cursor-pointer text-red-500" />
                     )}
                </div>
                 <p className="text-sm text-gray-500">
@@ -234,7 +237,9 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
                 <Input value={link} onChange={(e) => setLink(e.target.value)} />
             </div>
 
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={submitting}>
+                {submitting ? "Saving..." : "Submit"}
+            </Button>
         </form>
     )
 }
