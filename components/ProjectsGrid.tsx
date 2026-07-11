@@ -45,14 +45,14 @@ const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
             key={project._id}
             className="group bg-white dark:bg-gray-800 border border-black dark:border-white overflow-hidden transition-all duration-300 hover:shadow-md dark:hover:shadow-gray-700"
           >
-            <div className="aspect-video relative overflow-hidden m-2">
+            <div className="aspect-video relative overflow-hidden">
               {project.image ? (
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-contain object-center transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
                 <div className='w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700'>
