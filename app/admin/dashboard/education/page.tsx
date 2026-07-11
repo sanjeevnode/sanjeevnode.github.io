@@ -1,5 +1,5 @@
-import { getExperiences, seedExperience } from '@/app/actions/experience.action'
-import { ExperienceData } from '@/app/types/experience'
+import { getEducations, seedEducation } from '@/app/actions/education.action'
+import { EducationData } from '@/app/types/education'
 import { Button } from '@/components/ui/button'
 import {
     Table,
@@ -16,30 +16,30 @@ import React from 'react'
 export const dynamic = 'force-dynamic'
 
 async function Page() {
-    let experiences: ExperienceData[] = []
+    let educations: EducationData[] = []
     let failed = false
     try {
-        experiences = await getExperiences()
+        educations = await getEducations()
     } catch (error) {
-        console.error('Failed to load experiences:', error)
+        console.error('Failed to load educations:', error)
         failed = true
     }
 
     return (
         <div className='w-full h-full flex flex-col p-4 md:p-10 items-start'>
             <span className='md:text-2xl font-semibold text-xl text-gray-900'>
-                Experience
+                Education
             </span>
             <p className='text-gray-500 mt-2 mb-6'>
-                Manage the work experience shown on the website.
+                Manage the education entries shown on the website.
             </p>
 
             <div className='flex gap-2 mb-4 md:mb-6'>
-                <Link href="/admin/dashboard/experience/add">
-                    <Button>Add Experience</Button>
+                <Link href="/admin/dashboard/education/add">
+                    <Button>Add Education</Button>
                 </Link>
-                {!failed && experiences.length === 0 && (
-                    <form action={seedExperience}>
+                {!failed && educations.length === 0 && (
+                    <form action={seedEducation}>
                         <Button variant="outline" type="submit">
                             Import current website content
                         </Button>
@@ -48,37 +48,35 @@ async function Page() {
             </div>
 
             {failed ? (
-                <p className='text-red-500'>Could not load experiences. Check the database connection and reload.</p>
+                <p className='text-red-500'>Could not load education entries. Check the database connection and reload.</p>
             ) : (
                 <div className="rounded-md border overflow-x-auto w-full max-w-4xl">
                     <Table>
                         <TableHeader>
                             <TableRow>
                                 <TableHead className="w-[50px]">Order</TableHead>
-                                <TableHead>Company</TableHead>
-                                <TableHead className="hidden md:table-cell">Role</TableHead>
+                                <TableHead>Degree</TableHead>
+                                <TableHead className="hidden md:table-cell">Institution</TableHead>
                                 <TableHead className="hidden md:table-cell">Period</TableHead>
-                                <TableHead className="hidden lg:table-cell">Projects</TableHead>
                                 <TableHead className="w-[70px]"></TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {experiences.length === 0 ? (
+                            {educations.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={6} className="text-center py-6">
-                                        No experience entries yet. Use &quot;Import current website content&quot; to start from what is live today.
+                                    <TableCell colSpan={5} className="text-center py-6">
+                                        No education entries yet. Use &quot;Import current website content&quot; to start from what is live today.
                                     </TableCell>
                                 </TableRow>
                             ) : (
-                                experiences.map((exp) => (
-                                    <TableRow key={exp._id}>
-                                        <TableCell>{exp.order}</TableCell>
-                                        <TableCell className="font-medium">{exp.company}</TableCell>
-                                        <TableCell className="hidden md:table-cell">{exp.title}</TableCell>
-                                        <TableCell className="hidden md:table-cell">{exp.period}</TableCell>
-                                        <TableCell className="hidden lg:table-cell">{exp.projects.length}</TableCell>
+                                educations.map((item) => (
+                                    <TableRow key={item._id}>
+                                        <TableCell>{item.order}</TableCell>
+                                        <TableCell className="font-medium">{item.degree}</TableCell>
+                                        <TableCell className="hidden md:table-cell">{item.institution}</TableCell>
+                                        <TableCell className="hidden md:table-cell">{item.period}</TableCell>
                                         <TableCell>
-                                            <Link href={`/admin/dashboard/experience/${exp._id}`}>
+                                            <Link href={`/admin/dashboard/education/${item._id}`}>
                                                 <Edit className="h-4 w-4" />
                                             </Link>
                                         </TableCell>

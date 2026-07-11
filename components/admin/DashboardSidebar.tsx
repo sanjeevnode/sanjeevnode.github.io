@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useRouter } from "next/navigation"
-import { Briefcase, Home, FolderKanban, LogOut } from "lucide-react"
+import { Briefcase, Home, FolderKanban, GraduationCap, Wrench, LogOut } from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
@@ -30,6 +30,16 @@ const menuItems = [
         label: "Projects",
         icon: <FolderKanban className="h-4 w-4" />,
         path: "/admin/dashboard/project",
+    },
+    {
+        label: "Education",
+        icon: <GraduationCap className="h-4 w-4" />,
+        path: "/admin/dashboard/education",
+    },
+    {
+        label: "Skills",
+        icon: <Wrench className="h-4 w-4" />,
+        path: "/admin/dashboard/skill",
     },
 ]
 

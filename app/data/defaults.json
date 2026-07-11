@@ -1,0 +1,158 @@
+{
+  "experience": [
+    {
+      "title": "Software Development Engineer - II",
+      "company": "AlignTogether Solutions Pvt. Ltd.",
+      "location": "Bhopal, M.P, India",
+      "period": "Oct 2024 – Present",
+      "order": 0,
+      "projects": [
+        {
+          "title": "Frontend & Mobile Development",
+          "technologies": [
+            "Flutter", "Dart", "Bloc", "Provider",
+            "Socket.IO", "Matrix SDK", "Realm", "Firebase",
+            "Twilio SDK", "Android", "iOS", "Hive"
+          ],
+          "description": [
+            "Built scalable cross-platform mobile applications using Flutter with clean and modular architecture.",
+            "Developed complete real-time chat systems using Socket.IO and Matrix SDK with media, receipts, and roles.",
+            "Integrated native Twilio video calling for Android and iOS with smooth Flutter UI integration.",
+            "Implemented offline-first storage using Realm and Hive with advanced local syncing logic.",
+            "Developed secure authentication flows, push notifications, and dynamic deep linking.",
+            "Created responsive and accessible UI designs following best UX and state management practices (Bloc/Provider)."
+          ]
+        },
+        {
+          "title": "Backend & Cloud Engineering",
+          "technologies": [
+            "Node.js", "Python", "PostgreSQL", "MySQL",
+            "AWS Lambda", "SQS", "SES", "EventBridge",
+            "Docker", "Redis", "Kafka", "MQTT", "Flask"
+          ],
+          "description": [
+            "Built backend APIs in Node.js and Python (Flask) with secure routing, validation, and database layers.",
+            "Migrated 30+ workflows to a serverless AWS architecture using Lambda, EventBridge, SQS, and SES.",
+            "Designed scalable database schemas and optimized queries for PostgreSQL and MySQL.",
+            "Implemented event-driven pipelines for automation, notifications, and asynchronous processing.",
+            "Deployed Kafka, MQTT brokers, and Redis caching layers using Docker on AWS EC2.",
+            "Developed real-time communication services and IoT data pipelines with efficient message handling."
+          ]
+        },
+        {
+          "title": "AI/ML & Data Science",
+          "technologies": [
+            "Python", "PyTorch", "OpenCV", "NumPy",
+            "FFmpeg", "Scikit-learn", "Pandas", "SageMaker"
+          ],
+          "description": [
+            "Developed end-to-end ML pipelines for training, evaluation, and deployment of AI models.",
+            "Built computer vision modules for image/video processing using OpenCV and PyTorch.",
+            "Created automated preprocessing workflows for cleaning, augmenting, and transforming datasets.",
+            "Implemented efficient video processing and extraction using FFmpeg for analytics workflows.",
+            "Optimized model inference, data loading, and training loops for GPU/CPU environments.",
+            "Designed reproducible experiments, logging systems, and evaluation metrics for ML research."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Software Development Engineer Intern",
+      "company": "Affirmity Corp",
+      "location": "Bhopal MP, India",
+      "period": "Dec 2023 - Sep 2024",
+      "order": 1,
+      "projects": [
+        {
+          "title": "Drone Feed Analysis",
+          "technologies": ["Flutter", "Dart", "Python", "OpenCV", "MySql", "Elastic Search", "MTCNN"],
+          "description": [
+            "Created a Flutter desktop app for drone video analysis tasks.",
+            "Used OpenCV and MTCNN for object detection and tracking.",
+            "Stored real-time event data using MySQL relational schema.",
+            "Enabled fast filtering and query using Elastic Search tool.",
+            "Built custom UI/UX for navigating drone-based detection."
+          ]
+        },
+        {
+          "title": "Perimeter Security System",
+          "technologies": ["Flutter", "Dart", "Python", "OpenCV", "MySql", "FaceNet", "YOLOv8"],
+          "description": [
+            "Built a desktop app with face and object recognition in Flutter.",
+            "Used YOLOv8 and FaceNet for high-accuracy surveillance.",
+            "Managed user data and logs in a MySQL relational database.",
+            "Enabled real-time alerts and access control via detection.",
+            "Designed interfaces for administrators to view live feed."
+          ]
+        },
+        {
+          "title": "Affirmity Corp Website",
+          "technologies": ["React", "Node.js", "Express", "MySql", "Tailwind", "Framer Motion", "GSAP"],
+          "description": [
+            "Developed responsive website UI using React and Tailwind CSS.",
+            "Added dynamic animations with GSAP and Framer Motion APIs.",
+            "Implemented backend using Express and Node.js services.",
+            "Managed contact forms and CMS data using MySQL backend.",
+            "Optimized web performance and SEO using modern practices."
+          ],
+          "link": "https://affirmity.in/"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Technology in Computer Science and Engineering",
+      "institution": "Sagar Institute of Science and Technology, Bhopal",
+      "period": "2020 - 2024",
+      "description": "Graduated with a CGPA of 8.5. Specialized in software development and data structures.Led a team project on building a full-stack web application.",
+      "order": 0
+    },
+    {
+      "degree": "Higher Secondary Certificate",
+      "institution": "O.P Jindal School, Jharkhand",
+      "period": "2019",
+      "description": "Completed with a focus on Physics, Chemistry, and Mathematics. Participated in various science fairs and competitions.",
+      "order": 1
+    },
+    {
+      "degree": "Secondary School Certificate",
+      "institution": "D.A.V Public School, Jharkhand",
+      "period": "2017",
+      "description": "Graduated with a focus on Science and Mathematics. Actively participated in extracurricular activities and sports.",
+      "order": 2
+    }
+  ],
+  "skillGroups": [
+    {
+      "category": "Frontend",
+      "skills": ["Flutter", "React", "Next.js", "HTML", "CSS", "JavaScript", "TypeScript", "Tailwind CSS"],
+      "order": 0
+    },
+    {
+      "category": "Backend",
+      "skills": ["Spring Boot", "Node.js", "flask", "Express.js", "RESTful APIs"],
+      "order": 1
+    },
+    {
+      "category": "Database",
+      "skills": ["MySQL", "Postgress", "MongoDB", "SQLite", "Realm", "Hive"],
+      "order": 2
+    },
+    {
+      "category": "Tools",
+      "skills": ["Git", "Docker", "AWS", "Figma", "Postman"],
+      "order": 3
+    },
+    {
+      "category": "AI/ML and Data Science",
+      "skills": ["Python", "PyTorch", "TensorFlow", "OpenCV", "Scikit-learn", "Pandas", "NumPy", "FFmpeg"],
+      "order": 4
+    },
+    {
+      "category": "Methodologies",
+      "skills": ["Agile/Scrum", "Test-Driven Development", "CI/CD", "Responsive Design", "SEO"],
+      "order": 5
+    }
+  ]
+}
