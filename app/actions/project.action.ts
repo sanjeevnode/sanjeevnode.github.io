@@ -3,6 +3,7 @@
 import { Project } from "@/lib/model/projectModel";
 import { connectToDatabase } from "@/lib/mongoose";
 import { deleteImage, uploadImage } from "@/lib/cloudinary";
+import { requireAdmin } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { ProjectData } from "../types/project";
 
@@ -25,6 +26,7 @@ function toProjectData(project: any): ProjectData {
     link: project.link,
     github: project.github,
     tags: project.tags,
+    active: project.active !== false, // docs created before the flag existed count as active
   };
 }
 
@@ -35,6 +37,7 @@ function getImageFile(formData: FormData): File | null {
 }
 
 export async function createProject(formData: FormData) {
+  await requireAdmin();
   await connectToDatabase();
 
   const imageFile = getImageFile(formData);
@@ -46,6 +49,7 @@ export async function createProject(formData: FormData) {
     tags: JSON.parse(formData.get("tags") as string),
     link: formData.get("link") as string,
     github: formData.get("github") as string,
+    active: formData.get("active") !== "false",
     imageUrl: image?.url,
     imagePublicId: image?.publicId,
   });
@@ -53,9 +57,10 @@ export async function createProject(formData: FormData) {
   revalidateProjectPages();
 }
 
-export async function getProjects(): Promise<ProjectData[]> {
+export async function getProjects(includeInactive = false): Promise<ProjectData[]> {
   await connectToDatabase();
-  const projects = await Project.find({}).sort({ createdAt: -1 });
+  const filter = includeInactive ? {} : { active: { $ne: false } };
+  const projects = await Project.find(filter).sort({ createdAt: -1 });
   return projects.map(toProjectData);
 }
 
@@ -69,6 +74,7 @@ export async function getProjectById(id: string): Promise<ProjectData> {
 }
 
 export async function updateProject(id: string, formData: FormData) {
+  await requireAdmin();
   await connectToDatabase();
 
   const existing = await Project.findById(id);
@@ -83,6 +89,7 @@ export async function updateProject(id: string, formData: FormData) {
     tags: JSON.parse(formData.get("tags") as string),
     link: formData.get("link") as string,
     github: formData.get("github") as string,
+    active: formData.get("active") !== "false",
   };
 
   const imageFile = getImageFile(formData);
@@ -107,6 +114,7 @@ export async function updateProject(id: string, formData: FormData) {
 }
 
 export async function deleteProject(id: string) {
+  await requireAdmin();
   await connectToDatabase();
   const project = await Project.findByIdAndDelete(id);
   await deleteImage(project?.imagePublicId);

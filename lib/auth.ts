@@ -4,7 +4,7 @@ import {
   getGithubSecret,
   NEXTAUTH_SECRET,
 } from "@/constants/Constants";
-import { AuthOptions } from "next-auth";
+import { AuthOptions, getServerSession } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
 export const authOptions: AuthOptions = {
@@ -36,3 +36,13 @@ export const authOptions: AuthOptions = {
   },
   secret: NEXTAUTH_SECRET,
 };
+
+// Server actions are publicly invokable endpoints - every mutation must check this.
+export async function requireAdmin() {
+  const session = await getServerSession(authOptions);
+  const email = session?.user?.email?.toLowerCase();
+  const allowed = ADMIN_GITHUB_EMAIL.split(",").map((e) => e.trim().toLowerCase());
+  if (!email || !allowed.includes(email)) {
+    throw new Error("Unauthorized");
+  }
+}

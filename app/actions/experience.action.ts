@@ -2,6 +2,7 @@
 
 import { Experience } from "@/lib/model/experienceModel";
 import { connectToDatabase } from "@/lib/mongoose";
+import { requireAdmin } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import {
   defaultExperience,
@@ -23,6 +24,7 @@ function toExperienceData(exp: any): ExperienceData {
     location: exp.location ?? "",
     period: exp.period ?? "",
     order: exp.order ?? 0,
+    active: exp.active !== false,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     projects: (exp.projects ?? []).map((p: any) => ({
       title: p.title,
@@ -33,9 +35,10 @@ function toExperienceData(exp: any): ExperienceData {
   };
 }
 
-export async function getExperiences(): Promise<ExperienceData[]> {
+export async function getExperiences(includeInactive = false): Promise<ExperienceData[]> {
   await connectToDatabase();
-  const experiences = await Experience.find({}).sort({ order: 1, createdAt: 1 });
+  const filter = includeInactive ? {} : { active: { $ne: false } };
+  const experiences = await Experience.find(filter).sort({ order: 1, createdAt: 1 });
   return experiences.map(toExperienceData);
 }
 
@@ -49,18 +52,21 @@ export async function getExperienceById(id: string): Promise<ExperienceData> {
 }
 
 export async function createExperience(data: ExperienceInput) {
+  await requireAdmin();
   await connectToDatabase();
   await Experience.create(data);
   revalidateExperiencePages();
 }
 
 export async function updateExperience(id: string, data: ExperienceInput) {
+  await requireAdmin();
   await connectToDatabase();
   await Experience.findByIdAndUpdate(id, data);
   revalidateExperiencePages();
 }
 
 export async function deleteExperience(id: string) {
+  await requireAdmin();
   await connectToDatabase();
   await Experience.findByIdAndDelete(id);
   revalidateExperiencePages();
@@ -68,6 +74,7 @@ export async function deleteExperience(id: string) {
 
 // Copies the original hardcoded content into the DB so it can be edited.
 export async function seedExperience() {
+  await requireAdmin();
   await connectToDatabase();
   const count = await Experience.countDocuments();
   if (count > 0) return;

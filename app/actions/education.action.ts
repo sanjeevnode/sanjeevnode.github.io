@@ -2,6 +2,7 @@
 
 import { Education } from "@/lib/model/educationModel";
 import { connectToDatabase } from "@/lib/mongoose";
+import { requireAdmin } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import {
   defaultEducation,
@@ -23,12 +24,14 @@ function toEducationData(item: any): EducationData {
     period: item.period ?? "",
     description: item.description ?? "",
     order: item.order ?? 0,
+    active: item.active !== false,
   };
 }
 
-export async function getEducations(): Promise<EducationData[]> {
+export async function getEducations(includeInactive = false): Promise<EducationData[]> {
   await connectToDatabase();
-  const items = await Education.find({}).sort({ order: 1, createdAt: 1 });
+  const filter = includeInactive ? {} : { active: { $ne: false } };
+  const items = await Education.find(filter).sort({ order: 1, createdAt: 1 });
   return items.map(toEducationData);
 }
 
@@ -42,18 +45,21 @@ export async function getEducationById(id: string): Promise<EducationData> {
 }
 
 export async function createEducation(data: EducationInput) {
+  await requireAdmin();
   await connectToDatabase();
   await Education.create(data);
   revalidateEducationPages();
 }
 
 export async function updateEducation(id: string, data: EducationInput) {
+  await requireAdmin();
   await connectToDatabase();
   await Education.findByIdAndUpdate(id, data);
   revalidateEducationPages();
 }
 
 export async function deleteEducation(id: string) {
+  await requireAdmin();
   await connectToDatabase();
   await Education.findByIdAndDelete(id);
   revalidateEducationPages();
@@ -61,6 +67,7 @@ export async function deleteEducation(id: string) {
 
 // Copies the original hardcoded content into the DB so it can be edited.
 export async function seedEducation() {
+  await requireAdmin();
   await connectToDatabase();
   const count = await Education.countDocuments();
   if (count > 0) return;
