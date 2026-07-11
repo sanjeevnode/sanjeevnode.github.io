@@ -33,7 +33,6 @@ const Projects = async () => {
   return (
     <div id="projects" className="bg-pf-soft">
       <HorizontalScroll
-        direction="ltr"
         header={
           <div className="container mx-auto px-6 pt-24 pb-4">
             <SectionHead num="03" title="Things I've Built" />

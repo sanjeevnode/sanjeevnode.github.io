@@ -59,12 +59,12 @@ const Hero: React.FC = () => {
 
         {/* right: tagline, intro, actions */}
         <div className="lg:col-span-5 lg:pl-10 lg:border-l border-pf-line/10">
-          <p className="hero-fade font-display text-2xl md:text-3xl font-medium leading-snug text-pf-text">
+          <p className="hero-fade font-display text-3xl md:text-4xl font-medium leading-snug text-pf-text">
             You have an idea<span className="text-pf-accent">.</span><br />
             I engineer it to production<span className="text-pf-accent">.</span>
           </p>
 
-          <p className="hero-fade mt-6 text-pf-dim leading-relaxed">
+          <p className="hero-fade mt-6 text-pf-dim text-lg leading-relaxed">
             I&apos;m a software engineer who takes products from first commit to production —
             real-time chat platforms, serverless cloud backends, and ML-powered pipelines.
             Fast, reliable, and finished to the last detail.

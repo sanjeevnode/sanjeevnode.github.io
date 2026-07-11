@@ -19,6 +19,7 @@ const Experience = async () => {
   return (
     <div id="experience" className="bg-pf-bg">
       <HorizontalScroll
+        direction="ltr"
         header={
           <div className="container mx-auto px-6 pt-24 pb-4">
             <SectionHead num="02" title="Where I've Worked" />

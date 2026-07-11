@@ -39,8 +39,8 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
-// runs before paint: saved choice wins, otherwise follow the system theme
-const themeInit = `try{var t=localStorage.getItem('theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d)}catch(e){document.documentElement.classList.add('dark')}`;
+// runs before paint: dark by default, honor a saved choice
+const themeInit = `try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t?t==='dark':true)}catch(e){document.documentElement.classList.add('dark')}`;
 
 export default function RootLayout({
   children,
