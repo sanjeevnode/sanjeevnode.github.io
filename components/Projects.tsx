@@ -43,8 +43,8 @@ const Projects = async () => {
           <div key={project._id} className="shrink-0 w-full lg:w-screen lg:h-full flex items-start lg:items-center pb-16 lg:pb-0 lg:border-l lg:border-pf-line/10">
             <div className="container mx-auto px-6 w-full">
               <Reveal className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center" stagger={0.15}>
-                {/* image */}
-                <div className="lg:col-span-7">
+                {/* image (right on desktop) */}
+                <div className="lg:col-span-7 lg:order-2">
                   <div className="group relative h-[42vh] lg:h-[62vh] overflow-hidden border border-pf-line/10 bg-gradient-to-br from-pf-bg/60 to-pf-accent2/10 p-4 md:p-8">
                     {project.image ? (
                       <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-[1.02]">
@@ -64,8 +64,8 @@ const Projects = async () => {
                   </div>
                 </div>
 
-                {/* meta */}
-                <div className="lg:col-span-5">
+                {/* meta (left on desktop) */}
+                <div className="lg:col-span-5 lg:order-1">
                   <h3 className="font-display text-4xl md:text-6xl font-semibold text-pf-text">{project.title}</h3>
 
                   <ul className="mt-7 space-y-3.5 text-pf-dim text-base md:text-lg leading-relaxed">

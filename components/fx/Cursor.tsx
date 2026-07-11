@@ -46,10 +46,11 @@ export default function Cursor() {
         }
     }, [])
 
+    // hidden by default; only displayed at all on fine-pointer devices
     return (
         <>
-            <div ref={dotRef} className="fixed top-0 left-0 z-[90] w-2 h-2 rounded-full bg-pf-accent pointer-events-none" />
-            <div ref={ringRef} className="fixed top-0 left-0 z-[90] w-9 h-9 rounded-full border border-pf-accent/50 pointer-events-none" />
+            <div ref={dotRef} className="hidden [@media(pointer:fine)]:block opacity-0 fixed top-0 left-0 z-[90] w-2 h-2 rounded-full bg-pf-accent pointer-events-none" />
+            <div ref={ringRef} className="hidden [@media(pointer:fine)]:block opacity-0 fixed top-0 left-0 z-[90] w-9 h-9 rounded-full border border-pf-accent/50 pointer-events-none" />
         </>
     )
 }
