@@ -26,6 +26,7 @@ export default function SkillForm({
     const [skills, setSkills] = useState<string[]>([])
     const [skillInput, setSkillInput] = useState("")
     const [order, setOrder] = useState(0)
+    const [active, setActive] = useState(true)
     const [submitting, setSubmitting] = useState(false)
 
     useEffect(() => {
@@ -33,6 +34,7 @@ export default function SkillForm({
             setCategory(skillItem.category)
             setSkills(skillItem.skills)
             setOrder(skillItem.order)
+            setActive(skillItem.active !== false)
         }
     }, [skillItem])
 
@@ -48,7 +50,7 @@ export default function SkillForm({
         e.preventDefault()
         setSubmitting(true)
         try {
-            const data = { category, skills, order }
+            const data = { category, skills, order, active }
             if (isEdit && skillItem) {
                 await updateSkillGroup(skillItem._id, data)
                 toast.success("Skill group updated successfully")
@@ -132,6 +134,16 @@ export default function SkillForm({
                     className="max-w-[120px]"
                 />
             </div>
+
+            <label className="flex items-center gap-2 text-sm cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={active}
+                    onChange={(e) => setActive(e.target.checked)}
+                    className="h-4 w-4"
+                />
+                Active (visible on the website)
+            </label>
 
             <Button type="submit" disabled={submitting}>
                 {submitting ? "Saving..." : "Submit"}

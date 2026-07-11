@@ -11,7 +11,7 @@ async function Page() {
   let projects: ProjectData[] = []
   let failed = false
   try {
-    projects = await getProjects()
+    projects = await getProjects(true)
   } catch (error) {
     console.error('Failed to load projects:', error)
     failed = true

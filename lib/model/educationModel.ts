@@ -7,6 +7,7 @@ const educationSchema = new Schema(
     period: String,
     description: String,
     order: { type: Number, default: 0 },
+    active: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

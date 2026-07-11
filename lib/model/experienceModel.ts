@@ -7,6 +7,7 @@ const experienceSchema = new Schema(
     location: String,
     period: String,
     order: { type: Number, default: 0 },
+    active: { type: Boolean, default: true },
     projects: [
       {
         title: { type: String, required: true },

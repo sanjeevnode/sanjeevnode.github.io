@@ -13,6 +13,7 @@ export type ExperienceInput = {
   location: string;
   period: string;
   order: number; // lower = shown first
+  active?: boolean; // hidden from the public site when false
   projects: ExperienceProject[];
 };
 

@@ -28,6 +28,7 @@ export default function EducationForm({
     const [period, setPeriod] = useState("")
     const [description, setDescription] = useState("")
     const [order, setOrder] = useState(0)
+    const [active, setActive] = useState(true)
     const [submitting, setSubmitting] = useState(false)
 
     useEffect(() => {
@@ -37,6 +38,7 @@ export default function EducationForm({
             setPeriod(educationItem.period)
             setDescription(educationItem.description)
             setOrder(educationItem.order)
+            setActive(educationItem.active !== false)
         }
     }, [educationItem])
 
@@ -44,7 +46,7 @@ export default function EducationForm({
         e.preventDefault()
         setSubmitting(true)
         try {
-            const data = { degree, institution, period, description, order }
+            const data = { degree, institution, period, description, order, active }
             if (isEdit && educationItem) {
                 await updateEducation(educationItem._id, data)
                 toast.success("Education updated successfully")
@@ -126,6 +128,16 @@ export default function EducationForm({
                     rows={4}
                 />
             </div>
+
+            <label className="flex items-center gap-2 text-sm cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={active}
+                    onChange={(e) => setActive(e.target.checked)}
+                    className="h-4 w-4"
+                />
+                Active (visible on the website)
+            </label>
 
             <Button type="submit" disabled={submitting}>
                 {submitting ? "Saving..." : "Submit"}

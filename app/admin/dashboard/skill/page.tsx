@@ -10,6 +10,7 @@ import {
     TableRow,
 } from '@/components/ui/table'
 import { Edit } from 'lucide-react'
+import StatusBadge from '@/components/admin/StatusBadge'
 import Link from 'next/link'
 import React from 'react'
 
@@ -19,7 +20,7 @@ async function Page() {
     let skillGroups: SkillGroupData[] = []
     let failed = false
     try {
-        skillGroups = await getSkillGroups()
+        skillGroups = await getSkillGroups(true)
     } catch (error) {
         console.error('Failed to load skill groups:', error)
         failed = true
@@ -57,13 +58,14 @@ async function Page() {
                                 <TableHead className="w-[50px]">Order</TableHead>
                                 <TableHead>Category</TableHead>
                                 <TableHead className="hidden md:table-cell">Skills</TableHead>
+                                <TableHead className="w-[90px]">Status</TableHead>
                                 <TableHead className="w-[70px]"></TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {skillGroups.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={4} className="text-center py-6">
+                                    <TableCell colSpan={5} className="text-center py-6">
                                         No skill groups yet. Use &quot;Import current website content&quot; to start from what is live today.
                                     </TableCell>
                                 </TableRow>
@@ -80,6 +82,9 @@ async function Page() {
                                                     </span>
                                                 ))}
                                             </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <StatusBadge active={group.active !== false} />
                                         </TableCell>
                                         <TableCell>
                                             <Link href={`/admin/dashboard/skill/${group._id}`}>

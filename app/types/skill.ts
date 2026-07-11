@@ -4,6 +4,7 @@ export type SkillGroupInput = {
   category: string;
   skills: string[];
   order: number; // lower = shown first
+  active?: boolean; // hidden from the public site when false
 };
 
 export type SkillGroupData = SkillGroupInput & { _id: string };

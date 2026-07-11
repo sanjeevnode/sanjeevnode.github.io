@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Edit } from "lucide-react"
 import { ProjectData } from "@/app/types/project"
+import StatusBadge from "@/components/admin/StatusBadge"
 
 export function ProjectList({ projects }: { projects: ProjectData[] }) {
     const [searchTerm, setSearchTerm] = useState("")
@@ -39,13 +40,14 @@ export function ProjectList({ projects }: { projects: ProjectData[] }) {
                             <TableHead className="md:w-[300px]">Title</TableHead>
                             <TableHead className="hidden lg:table-cell w-[400px]">Description</TableHead>
                             <TableHead className="hidden lg:table-cell w-[200px]">Tags</TableHead>
+                            <TableHead className="w-[90px]">Status</TableHead>
                             <TableHead className="w-[70px]"></TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {filteredItems.length === 0 ? (
                             <TableRow>
-                                <TableCell colSpan={5} className="text-center py-6">
+                                <TableCell colSpan={6} className="text-center py-6">
                                     No projects found.
                                 </TableCell>
                             </TableRow>
@@ -69,6 +71,9 @@ export function ProjectList({ projects }: { projects: ProjectData[] }) {
                                                 </span>
                                             ))}
                                         </div>
+                                    </TableCell>
+                                    <TableCell>
+                                        <StatusBadge active={item.active} />
                                     </TableCell>
                                     <TableCell>
                                         <Link href={`/admin/dashboard/project/${item._id}`}>

@@ -152,6 +152,7 @@ export default function ExperienceForm({
     const [period, setPeriod] = useState("")
     const [order, setOrder] = useState(0)
     const [projects, setProjects] = useState<ExperienceProject[]>([])
+    const [active, setActive] = useState(true)
     const [submitting, setSubmitting] = useState(false)
 
     useEffect(() => {
@@ -161,6 +162,7 @@ export default function ExperienceForm({
             setLocation(experienceItem.location)
             setPeriod(experienceItem.period)
             setOrder(experienceItem.order)
+            setActive(experienceItem.active !== false)
             setProjects(experienceItem.projects)
         }
     }, [experienceItem])
@@ -169,7 +171,7 @@ export default function ExperienceForm({
         e.preventDefault()
         setSubmitting(true)
         try {
-            const data = { company, title, location, period, order, projects }
+            const data = { company, title, location, period, order, active, projects }
             if (isEdit && experienceItem) {
                 await updateExperience(experienceItem._id, data)
                 toast.success("Experience updated successfully")
@@ -267,6 +269,16 @@ export default function ExperienceForm({
                     />
                 ))}
             </div>
+
+            <label className="flex items-center gap-2 text-sm cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={active}
+                    onChange={(e) => setActive(e.target.checked)}
+                    className="h-4 w-4"
+                />
+                Active (visible on the website)
+            </label>
 
             <Button type="submit" disabled={submitting}>
                 {submitting ? "Saving..." : "Submit"}

@@ -6,4 +6,5 @@ export type ProjectData = {
   link?: string;
   github?: string;
   tags: string[];
+  active: boolean;
 };

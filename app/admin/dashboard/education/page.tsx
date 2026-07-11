@@ -10,6 +10,7 @@ import {
     TableRow,
 } from '@/components/ui/table'
 import { Edit } from 'lucide-react'
+import StatusBadge from '@/components/admin/StatusBadge'
 import Link from 'next/link'
 import React from 'react'
 
@@ -19,7 +20,7 @@ async function Page() {
     let educations: EducationData[] = []
     let failed = false
     try {
-        educations = await getEducations()
+        educations = await getEducations(true)
     } catch (error) {
         console.error('Failed to load educations:', error)
         failed = true
@@ -58,13 +59,14 @@ async function Page() {
                                 <TableHead>Degree</TableHead>
                                 <TableHead className="hidden md:table-cell">Institution</TableHead>
                                 <TableHead className="hidden md:table-cell">Period</TableHead>
+                                <TableHead className="w-[90px]">Status</TableHead>
                                 <TableHead className="w-[70px]"></TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {educations.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={5} className="text-center py-6">
+                                    <TableCell colSpan={6} className="text-center py-6">
                                         No education entries yet. Use &quot;Import current website content&quot; to start from what is live today.
                                     </TableCell>
                                 </TableRow>
@@ -75,6 +77,9 @@ async function Page() {
                                         <TableCell className="font-medium">{item.degree}</TableCell>
                                         <TableCell className="hidden md:table-cell">{item.institution}</TableCell>
                                         <TableCell className="hidden md:table-cell">{item.period}</TableCell>
+                                        <TableCell>
+                                            <StatusBadge active={item.active !== false} />
+                                        </TableCell>
                                         <TableCell>
                                             <Link href={`/admin/dashboard/education/${item._id}`}>
                                                 <Edit className="h-4 w-4" />

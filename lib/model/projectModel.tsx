@@ -10,6 +10,7 @@ const projectSchema = new Schema({
     link: String,
     github: String,
     tags: [String],
+    active: { type: Boolean, default: true },
 }, { timestamps: true });
 
 export const Project = models.Project || mongoose.model('Project', projectSchema);

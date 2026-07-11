@@ -26,6 +26,7 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
 
     const [link, setLink] = useState("")
     const [github, setGithub] = useState("")
+    const [active, setActive] = useState(true)
     const [submitting, setSubmitting] = useState(false)
 
     // If projectItem is provided, populate the form with its data
@@ -36,6 +37,7 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
             setTags(projectItem.tags);
             setLink(projectItem.link || "");
             setGithub(projectItem.github || "");
+            setActive(projectItem.active);
             setImagePreview(projectItem.image || null);
         }
     }, [projectItem]);
@@ -80,6 +82,7 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
             formData.append("tags", JSON.stringify(tags))
             formData.append("link", link)
             formData.append("github", github)
+            formData.append("active", String(active))
             if (imageFile) {
                 formData.append("image", imageFile)
             }
@@ -236,6 +239,16 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
                 <Label>Live Link</Label>
                 <Input value={link} onChange={(e) => setLink(e.target.value)} />
             </div>
+
+            <label className="flex items-center gap-2 text-sm cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={active}
+                    onChange={(e) => setActive(e.target.checked)}
+                    className="h-4 w-4"
+                />
+                Active (visible on the website)
+            </label>
 
             <Button type="submit" disabled={submitting}>
                 {submitting ? "Saving..." : "Submit"}
