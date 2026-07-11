@@ -28,7 +28,6 @@ const Contact: React.FC = () => {
     setLoading(true);
 
     try {
-      console.log("Submitting form with data:", formData);
       const recaptchaToken = await captchaRef.current?.executeAsync();
       captchaRef.current?.reset();
 
@@ -37,15 +36,12 @@ const Contact: React.FC = () => {
         setLoading(false);
         return;
       }
-      
-      console.log("reCAPTCHA token:", recaptchaToken);
-      
-      const result = await sendMailAction({
+
+      await sendMailAction({
         ...formData,
         recaptchaToken,
       });
 
-      console.log("Send mail result:", result);
       toast.success('Message sent successfully!');
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (err: unknown) {
