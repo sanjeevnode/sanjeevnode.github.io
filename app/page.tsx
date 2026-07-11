@@ -8,6 +8,7 @@ import Marquee from '@/components/Marquee'
 import Projects from '@/components/Projects'
 import Skills from '@/components/Skills'
 import SectionSkeleton from '@/components/SectionSkeleton'
+import Cursor from '@/components/fx/Cursor'
 import Preloader from '@/components/fx/Preloader'
 import SmoothScroll from '@/components/fx/SmoothScroll'
 import { Suspense } from 'react'
@@ -25,6 +26,7 @@ export default function Home() {
       />
       <Preloader />
       <SmoothScroll />
+      <Cursor />
       <Header />
       <main>
         <Hero />

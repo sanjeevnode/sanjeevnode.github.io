@@ -133,6 +133,11 @@ html.lenis, html.lenis body { height: auto; }
 }
 .pf-marquee-track:hover { animation-play-state: paused; }
 
+/* custom cursor replaces the native one on fine pointers */
+@media (pointer: fine) {
+  .pf-cursor, .pf-cursor * { cursor: none !important; }
+}
+
 /* animated link underline */
 .link-underline { position: relative; }
 .link-underline::after {

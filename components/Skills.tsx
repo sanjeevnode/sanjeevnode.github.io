@@ -26,8 +26,7 @@ const Skills = async () => {
               className="group relative grid md:grid-cols-12 gap-3 md:gap-6 py-7 items-baseline transition-colors hover:bg-pf-card/[0.02]"
             >
               <DrawLine className="absolute bottom-0 left-0 h-px w-full bg-pf-line/10" delay={0.08 * index} />
-              <div className="md:col-span-4 flex items-baseline gap-4">
-                <span className="font-mono text-sm text-pf-accent">{String(index + 1).padStart(2, '0')}</span>
+              <div className="md:col-span-4">
                 <h3 className="font-display text-2xl md:text-3xl font-semibold text-pf-text transition-colors group-hover:text-pf-accent">
                   {group.category}
                 </h3>

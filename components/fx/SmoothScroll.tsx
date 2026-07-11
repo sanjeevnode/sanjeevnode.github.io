@@ -10,6 +10,8 @@ gsap.registerPlugin(ScrollTrigger)
 // Lenis smooth scrolling wired into GSAP's ticker so ScrollTrigger stays in sync
 export default function SmoothScroll() {
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (process.env.NODE_ENV === 'development') (window as any).ST = ScrollTrigger
         const lenis = new Lenis({ lerp: 0.12 })
         lenis.on('scroll', ScrollTrigger.update)
         const raf = (time: number) => lenis.raf(time * 1000)
