@@ -1,11 +1,16 @@
 'use client'
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import Image from 'next/image';
 import { ProjectData } from '@/app/types/project';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
   const [filter, setFilter] = useState<string>('all');
+  const listRef = useRef<HTMLDivElement>(null);
 
   const allTags = useMemo(() => {
     const uniqueTags = new Set<string>();
@@ -22,16 +27,50 @@ const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
     );
   }, [projects, filter]);
 
+  // reveal (IntersectionObserver) + image parallax (ScrollTrigger scrub) per panel
+  useEffect(() => {
+    const el = listRef.current;
+    if (!el) return;
+    const panels = el.querySelectorAll('.proj-panel');
+    gsap.set(panels, { y: 60, opacity: 0 });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          gsap.to(entry.target, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' });
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    panels.forEach((p) => io.observe(p));
+
+    const ctx = gsap.context(() => {
+      panels.forEach((panel) => {
+        const img = panel.querySelector('.proj-img');
+        if (img) {
+          gsap.fromTo(img, { yPercent: -8 }, {
+            yPercent: 8,
+            ease: 'none',
+            scrollTrigger: { trigger: panel, start: 'top bottom', end: 'bottom top', scrub: true },
+          });
+        }
+      });
+      ScrollTrigger.refresh();
+    }, el);
+
+    return () => { io.disconnect(); ctx.revert(); };
+  }, [filteredProjects]);
+
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-2 mb-12">
+      <div className="flex flex-wrap gap-2 mb-16">
         {allTags.map(tag => (
           <button
             key={tag}
             onClick={() => setFilter(tag)}
-            className={`px-4 py-1.5 text-sm capitalize transition-colors ${filter.toLowerCase() === tag.toLowerCase()
-              ? 'bg-black dark:bg-white text-white dark:text-black'
-              : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+            className={`px-4 py-1.5 text-xs font-mono capitalize rounded-full border transition-colors ${filter.toLowerCase() === tag.toLowerCase()
+              ? 'bg-pf-accent text-pf-bg border-pf-accent'
+              : 'border-pf-line/15 text-pf-dim hover:border-pf-accent/50 hover:text-pf-accent'
               }`}
           >
             {tag}
@@ -39,79 +78,83 @@ const ProjectsGrid: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredProjects.map(project => (
-          <div
+      <div ref={listRef} className="space-y-24">
+        {filteredProjects.map((project, i) => (
+          <article
             key={project._id}
-            className="group bg-white dark:bg-gray-800 border border-black dark:border-white overflow-hidden transition-all duration-300 hover:shadow-md dark:hover:shadow-gray-700"
+            className={`proj-panel grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${i % 2 ? 'lg:[direction:rtl]' : ''}`}
           >
-            <div className="aspect-video relative overflow-hidden">
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <div className='w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700'>
-                  <p className='text-gray-500 dark:text-gray-300'>No Image Available</p>
-                </div>
-              )}
+            {/* image */}
+            <div className="lg:col-span-7 [direction:ltr]">
+              <div className="group relative aspect-video overflow-hidden rounded-2xl border border-pf-line/10 bg-pf-soft">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    className="proj-img object-cover object-center scale-110 transition-transform duration-700 group-hover:scale-[1.15]"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center font-mono text-sm text-pf-dim">
+                    no image yet
+                  </div>
+                )}
+                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-pf-bg/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
             </div>
 
-            <div className="p-6">
-              <div className="mb-4 flex justify-between items-center">
-                <h3 className="text-xl font-bold text-black dark:text-white">{project.title}</h3>
+            {/* meta */}
+            <div className="lg:col-span-5 [direction:ltr]">
+              <p className="font-mono text-xs text-pf-accent mb-2">{String(i + 1).padStart(2, '0')} / project</p>
+              <h3 className="font-display text-3xl md:text-4xl font-semibold text-pf-text">{project.title}</h3>
 
-                <div className="flex gap-3">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
-                      aria-label="View GitHub repository"
-                    >
-                      <Github size={18} />
-                    </a>
-                  )}
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
-                      aria-label="View live site"
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              <ul className="space-y-2 text-gray-700 dark:text-gray-300 mb-5">
-                {project.description.map((line, i) => (
-                  <li key={i} className="flex items-start">
-                    <span className="mr-2 text-black dark:text-white mt-1">•</span>
+              <ul className="mt-5 space-y-2 text-pf-dim text-sm leading-relaxed">
+                {project.description.map((line, li) => (
+                  <li key={li} className="flex items-start">
+                    <span className="mr-2 text-pf-accent mt-0.5">▹</span>
                     <span>{line}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="mt-5 flex flex-wrap gap-1.5">
                 {project.tags.map((tag, index) => (
                   <span
                     key={`${tag}-${index}`}
-                    className="px-2.5 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                    className="font-mono text-[11px] text-pf-accent bg-pf-accent/10 border border-pf-accent/20 px-2.5 py-0.5 rounded-full"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
+
+              <div className="mt-6 flex gap-4">
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-pf-dim hover:text-pf-accent transition-colors"
+                    aria-label="View GitHub repository"
+                  >
+                    <Github size={17} /> Code
+                  </a>
+                )}
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-pf-dim hover:text-pf-accent transition-colors"
+                    aria-label="View live site"
+                  >
+                    <ExternalLink size={17} /> Live
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </>

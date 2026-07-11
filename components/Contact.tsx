@@ -54,12 +54,15 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white dark:bg-gray-900">
+    <section id="contact" className="py-24 bg-pf-soft">
       <div className="container mx-auto px-6">
-        <div className="mb-16 text-center">
-          <h2 className="text-4xl font-bold mb-6 text-black dark:text-white">Get In Touch</h2>
-          <div className="w-16 h-1 bg-black dark:bg-white mx-auto mb-6"></div>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <div className="mb-14">
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-pf-accent text-lg">05.</span>
+            <h2 className="font-display font-semibold uppercase tracking-tight text-3xl md:text-5xl text-pf-text whitespace-nowrap">Get In Touch</h2>
+            <div className="h-px flex-1 bg-gradient-to-r from-pf-line/20 to-transparent" />
+          </div>
+          <p className="mt-4 text-pf-dim max-w-2xl">
             Feel free to reach out if you&apos;re interested in working together or just want to connect.
           </p>
         </div>
@@ -68,44 +71,44 @@ const Contact: React.FC = () => {
           {/* Contact Information */}
           <div className="space-y-10 md:w-1/3">
             <div>
-              <h3 className="text-2xl font-bold mb-6 text-black dark:text-white">Contact Information</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-8">
+              <h3 className="font-display text-2xl font-semibold mb-6 text-pf-text">Contact Information</h3>
+              <p className="text-pf-dim mb-8">
                 I&apos;m currently available for freelance work or full-time positions.
               </p>
             </div>
 
             <div className="space-y-8">
               <div className="flex items-start">
-                <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
+                <div className="flex items-center justify-center text-pf-dim">
                   <Mail size={20} />
                 </div>
                 <div className="ml-6">
-                  <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-1">Email</h4>
-                  <a href="mailto:me.sanjeevks@gmail.com" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                  <h4 className="font-display text-lg font-medium text-pf-text mb-1">Email</h4>
+                  <a href="mailto:me.sanjeevks@gmail.com" className="text-pf-dim hover:text-pf-accent transition-colors">
                     me.sanjeevks@gmail.com
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
+                <div className="flex items-center justify-center text-pf-dim">
                   <Phone size={20} />
                 </div>
                 <div className="ml-6">
-                  <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-1">Phone</h4>
-                  <a href="tel:+917987914125" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
+                  <h4 className="font-display text-lg font-medium text-pf-text mb-1">Phone</h4>
+                  <a href="tel:+917987914125" className="text-pf-dim hover:text-pf-accent transition-colors">
                     +91 7987914125
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
+                <div className="flex items-center justify-center text-pf-dim">
                   <MapPin size={20} />
                 </div>
                 <div className="ml-6">
-                  <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-1">Location</h4>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <h4 className="font-display text-lg font-medium text-pf-text mb-1">Location</h4>
+                  <p className="text-pf-dim">
                     Bhopal, India
                   </p>
                 </div>
@@ -113,12 +116,12 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="pt-8">
-              <h3 className="text-2xl font-bold mb-6 text-black dark:text-white">Connect</h3>
+              <h3 className="font-display text-2xl font-semibold mb-6 text-pf-text">Connect</h3>
               <div className="flex space-x-6">
                 <a
                   href="https://github.com/sanjeevnode"
                   target="_blank"
-                  className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+                  className="text-pf-dim hover:text-pf-accent transition-colors"
                   aria-label="GitHub"
                 >
                   <Github size={22} />
@@ -126,14 +129,14 @@ const Contact: React.FC = () => {
                 <a
                   href="https://www.linkedin.com/in/sanjeevnode"
                   target="_blank"
-                  className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+                  className="text-pf-dim hover:text-pf-accent transition-colors"
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={22} />
                 </a>
                 <a
                   href="mailto:me.sanjeevks@gmail.com"
-                  className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+                  className="text-pf-dim hover:text-pf-accent transition-colors"
                   aria-label="Email"
                 >
                   <Mail size={22} />
@@ -143,11 +146,11 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="md:p-10 md:w-2/3 p-4 border-gray-200 dark:border-gray-700">
+          <div className="md:p-10 md:w-2/3 p-4 border-pf-line/10">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                  <label htmlFor="name" className="block mb-2 text-sm font-medium text-pf-text">
                     Name
                   </label>
                   <input
@@ -155,13 +158,13 @@ const Contact: React.FC = () => {
                     id="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-black dark:border-white"
+                    className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 rounded-md focus:border-pf-accent focus:outline-none transition-colors"
                     placeholder="Your name"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-pf-text">
                     Email
                   </label>
                   <input
@@ -169,7 +172,7 @@ const Contact: React.FC = () => {
                     id="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-black dark:border-white"
+                    className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 rounded-md focus:border-pf-accent focus:outline-none transition-colors"
                     placeholder="Your email"
                     required
                   />
@@ -177,7 +180,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                <label htmlFor="phone" className="block mb-2 text-sm font-medium text-pf-text">
                   Phone
                 </label>
                 <input
@@ -186,14 +189,14 @@ const Contact: React.FC = () => {
                   maxLength={10}
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-black dark:border-white"
+                  className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 rounded-md focus:border-pf-accent focus:outline-none transition-colors"
                   placeholder="Phone number"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                <label htmlFor="message" className="block mb-2 text-sm font-medium text-pf-text">
                   Message
                 </label>
                 <textarea
@@ -202,7 +205,7 @@ const Contact: React.FC = () => {
                   maxLength={1000}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-black dark:border-white"
+                  className="w-full px-4 py-3 bg-pf-bg text-pf-text border border-pf-line/15 rounded-md focus:border-pf-accent focus:outline-none transition-colors"
                   placeholder="Your message"
                   required
                 ></textarea>
@@ -214,7 +217,7 @@ const Contact: React.FC = () => {
               />
               <button
                 type="submit"
-                className="px-6 py-4 bg-black dark:bg-white text-white dark:text-black font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300"
+                className="px-6 py-4 bg-pf-accent text-pf-bg font-semibold rounded-md transition-transform duration-300 hover:-translate-y-1 disabled:opacity-60"
                 disabled={loading}
               >
                 {loading ? 'Sending...' : 'Send Message'}

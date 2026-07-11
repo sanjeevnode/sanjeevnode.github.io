@@ -5,41 +5,37 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-10 bg-gray-50 dark:bg-gray-800 border-t  border-black dark:border-white">
+    <footer className="py-10 bg-pf-bg border-t border-pf-line/10">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <p className="text-gray-600 dark:text-gray-300">
-              © {currentYear} sanjeevnode. All rights reserved.
-            </p>
-          </div>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="font-mono text-sm text-pf-dim">
+            designed &amp; engineered by <span className="text-pf-accent">sanjeevnode</span> · © {currentYear}
+          </p>
 
-          <div>
-            <nav className="flex flex-wrap gap-6">
-              {['about', 'experience', 'projects', 'education', 'contact'].map((item) => (
-                <a
-                  key={item}
-                  href={`/#${item}`}
-                  className="text-sm text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors capitalize"
-                  onClick={(e) => {
-                    const el = document.getElementById(item);
-                    if (el) {
-                      e.preventDefault();
-                      el.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  {item}
-                </a>
-              ))}
+          <nav className="flex flex-wrap gap-6">
+            {['about', 'experience', 'projects', 'education', 'contact'].map((item) => (
               <a
-                href="/privacy-and-policy"
-                className="text-sm text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+                key={item}
+                href={`/#${item}`}
+                className="text-sm text-pf-dim hover:text-pf-accent transition-colors capitalize"
+                onClick={(e) => {
+                  const el = document.getElementById(item);
+                  if (el) {
+                    e.preventDefault();
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
-                Privacy Policy
+                {item}
               </a>
-            </nav>
-          </div>
+            ))}
+            <a
+              href="/privacy-and-policy"
+              className="text-sm text-pf-dim hover:text-pf-accent transition-colors"
+            >
+              Privacy Policy
+            </a>
+          </nav>
         </div>
       </div>
     </footer>

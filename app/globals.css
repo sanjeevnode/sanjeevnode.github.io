@@ -82,3 +82,41 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ---- portfolio (public site) design tokens ---- */
+@layer base {
+  :root {
+    /* light theme */
+    --pf-bg: 244 246 251;
+    --pf-bg-soft: 235 238 246;
+    --pf-card: 255 255 255;
+    --pf-border: 15 23 42;
+    --pf-text: 15 23 42;
+    --pf-dim: 71 85 105;
+    --pf-accent: 13 148 136;
+    --pf-accent2: 79 70 229;
+  }
+  .dark {
+    --pf-bg: 10 14 26;
+    --pf-bg-soft: 15 21 38;
+    --pf-card: 255 255 255;
+    --pf-border: 255 255 255;
+    --pf-text: 226 232 240;
+    --pf-dim: 148 163 184;
+    --pf-accent: 94 234 212;
+    --pf-accent2: 129 140 248;
+  }
+}
+
+::selection {
+  background: rgb(var(--pf-accent) / 0.25);
+}
+
+/* Lenis recommended styles */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* masked line reveal: lines start hidden below their clip box */
+.mask-line { overflow: hidden; }
+.mask-line > * { transform: translateY(110%); will-change: transform; }

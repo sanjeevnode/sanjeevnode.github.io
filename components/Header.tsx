@@ -1,85 +1,67 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpCircle, Sun, Moon } from 'lucide-react';
-import { NavItems } from '@/app/types/navItems';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+
+const NAV = ['about', 'experience', 'projects', 'education', 'contact'];
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [isDark, setIsDark] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    if (document) {
-      setIsDark(document.documentElement.classList.contains('dark'));
-    }
-  }, []);
-  // Handle scroll events
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
+    setIsDark(document.documentElement.classList.contains('dark'));
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Toggle dark mode
   const toggleDarkMode = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
-    document.documentElement.classList.toggle('dark');
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
   };
 
-  // Scroll to section when nav link is clicked
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80,
-        behavior: 'smooth'
-      });
+      section.scrollIntoView({ behavior: 'smooth' });
     } else {
       window.location.href = `/#${sectionId}`;
     }
     setIsMenuOpen(false);
   };
 
-  // Scroll to top function
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrollPosition > 50
-      ? 'bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800 py-3 border-b border-black dark:border-white'
+    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled
+      ? 'bg-pf-bg/70 backdrop-blur-xl border-b border-pf-line/10 py-3'
       : 'bg-transparent py-5'
       }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a
           href="/"
-          className="text-xl md:text-2xl font-bold tracking-tight transition-colors"
+          className="font-mono text-base md:text-lg text-pf-text"
           onClick={(e) => {
             if (window.location.pathname === '/') {
               e.preventDefault();
-              scrollToTop();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }}
         >
-          <span className="text-black dark:text-white">sanjeevnode.in</span>
+          sanjeev<span className="text-pf-accent">@</span>node<span className="text-pf-dim">:~$</span>
         </a>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
-          <nav className="flex space-x-8">
-            {['about', 'experience', 'projects', 'education'].map((item) => (
+          <nav className="flex space-x-7">
+            {NAV.map((item, i) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-black dark:text-white hover:text-black dark:hover:text-white transition-colors capitalize font-medium"
+                className="group text-sm text-pf-dim hover:text-pf-text transition-colors capitalize"
               >
+                <span className="font-mono text-pf-accent mr-1.5">0{i + 1}.</span>
                 {item}
               </button>
             ))}
@@ -87,10 +69,10 @@ const Header: React.FC = () => {
 
           <button
             onClick={toggleDarkMode}
-            className="p-2 text-black dark:text-white hover:text-black dark:hover:text-white transition-colors"
+            className="p-2 text-pf-dim hover:text-pf-accent transition-colors"
             aria-label="Toggle dark mode"
           >
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
 
@@ -98,14 +80,14 @@ const Header: React.FC = () => {
         <div className="md:hidden flex items-center gap-4">
           <button
             onClick={toggleDarkMode}
-            className="p-2 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+            className="p-2 text-pf-dim hover:text-pf-accent transition-colors"
             aria-label="Toggle dark mode"
           >
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
           <button
-            className="text-gray-800 dark:text-gray-200"
+            className="text-pf-text"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
@@ -116,33 +98,23 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 absolute top-full left-0 w-full shadow-md dark:shadow-gray-800">
+        <div className="md:hidden bg-pf-bg/95 backdrop-blur-xl absolute top-full left-0 w-full border-b border-pf-line/10">
           <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
-            {Object.values(NavItems).map((item) => (
+            {NAV.map((item, i) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="py-2 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors capitalize"
+                className="py-2 text-left text-pf-dim hover:text-pf-text transition-colors capitalize"
               >
+                <span className="font-mono text-pf-accent mr-2">0{i + 1}.</span>
                 {item}
               </button>
             ))}
           </div>
         </div>
       )}
-
-      {/* Scroll to top button - show when scrolled down */}
-      {scrollPosition > 300 && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-6 right-6 p-2 bg-gray-100 dark:bg-gray-800 text-black dark:text-white rounded-full shadow-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
-          aria-label="Scroll to top"
-        >
-          <ArrowUpCircle size={24} />
-        </button>
-      )}
     </header>
   );
 };
 
-export default Header
+export default Header;
