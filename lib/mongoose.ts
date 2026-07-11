@@ -8,7 +8,8 @@ if (!MONGODB_URI) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const cached = (global as any).mongoose || { conn: null, promise: null };
+const globalAny = global as any;
+const cached = globalAny.mongoose || (globalAny.mongoose = { conn: null, promise: null });
 
 export async function connectToDatabase() {
   if (cached.conn) return cached.conn;
@@ -19,6 +20,11 @@ export async function connectToDatabase() {
     });
   }
 
-  cached.conn = await cached.promise;
+  try {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null; // don't cache a failed connection
+    throw e;
+  }
   return cached.conn;
 }

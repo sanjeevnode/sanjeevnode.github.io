@@ -1,71 +1,25 @@
 import React from 'react';
 import { GraduationCap, Calendar } from 'lucide-react';
+import { getEducations } from '@/app/actions/education.action';
+import { getSkillGroups } from '@/app/actions/skill.action';
+import { defaultEducation, EducationInput } from '@/app/types/education';
+import { defaultSkillGroups, SkillGroupInput } from '@/app/types/skill';
 
-interface EducationItem {
-  id: number;
-  degree: string;
-  institution: string;
-  period: string;
-  description: string;
-}
-
-const educationData: EducationItem[] = [
-  {
-    id: 1,
-    degree: 'Bachelor of Technology in Computer Science and Engineering',
-    institution: 'Sagar Institute of Science and Technology, Bhopal',
-    period: '2020 - 2024',
-    description: `Graduated with a CGPA of 8.5. Specialized in software development and data structures.Led a team project on building a full-stack web application.`
-  },
-  {
-    id: 2,
-    degree: 'Higher Secondary Certificate',
-    institution: 'O.P Jindal School, Jharkhand',
-    period: '2019',
-    description: `Completed with a focus on Physics, Chemistry, and Mathematics. Participated in various science fairs and competitions.`
-  },
-  {
-    id: 3,
-    degree: 'Secondary School Certificate',
-    institution: 'D.A.V Public School, Jharkhand',
-    period: '2017',
-    description: `Graduated with a focus on Science and Mathematics. Actively participated in extracurricular activities and sports.`
+const Education = async () => {
+  // Fall back to the built-in content until the DB collections are seeded
+  let educationData: EducationInput[] = defaultEducation;
+  let skillsData: SkillGroupInput[] = defaultSkillGroups;
+  try {
+    const [eduFromDb, skillsFromDb] = await Promise.all([
+      getEducations(),
+      getSkillGroups(),
+    ]);
+    if (eduFromDb.length > 0) educationData = eduFromDb;
+    if (skillsFromDb.length > 0) skillsData = skillsFromDb;
+  } catch (error) {
+    console.error('Failed to load education/skills, using defaults:', error);
   }
-];
 
-interface SkillGroup {
-  category: string;
-  skills: string[];
-}
-
-const skillsData: SkillGroup[] = [
-  {
-    category: 'Frontend',
-    skills: ['Flutter', 'React', 'Next.js', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'Tailwind CSS']
-  },
-  {
-    category: 'Backend',
-    skills: ['Spring Boot', 'Node.js', 'flask', 'Express.js', 'RESTful APIs']
-  },
-  {
-    category: 'Database',
-    skills: ['MySQL', 'Postgress', 'MongoDB', 'SQLite', 'Realm', 'Hive']
-  },
-  {
-    category: 'Tools',
-    skills: ['Git', 'Docker', 'AWS', 'Figma', 'Postman']
-  },
-    {
-      category: 'AI/ML and Data Science',
-      skills: ['Python', 'PyTorch', 'TensorFlow', 'OpenCV', 'Scikit-learn', 'Pandas', 'NumPy', 'FFmpeg']
-    },
-  {
-    category: 'Methodologies',
-    skills: ['Agile/Scrum', 'Test-Driven Development', 'CI/CD', 'Responsive Design', 'SEO']
-  },
-];
-
-const Education: React.FC = () => {
   return (
     <section id="education" className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto px-6">
@@ -80,8 +34,8 @@ const Education: React.FC = () => {
             </div>
 
             <div className="space-y-10">
-              {educationData.map(item => (
-                <div key={item.id} className="relative pl-10 border-l border-black dark:border-white">
+              {educationData.map((item, index) => (
+                <div key={index} className="relative pl-10 border-l border-black dark:border-white">
                   <div className="absolute top-0 left-0 w-6 h-6 -translate-x-1/2 rounded-full bg-black dark:bg-white flex items-center justify-center">
                     <GraduationCap size={14} className="text-white dark:text-black" />
                   </div>

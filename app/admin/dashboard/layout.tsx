@@ -3,12 +3,14 @@ import DashboardSidebar from '@/components/admin/DashboardSidebar'
 import MobileHeader from '@/components/admin/MobileHeader'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import React from 'react'
+import { Toaster } from 'react-hot-toast'
 
 function DashboardLayout({ children }: {
     children: React.ReactNode
 }) {
     return (
         <SidebarProvider>
+            <Toaster position='bottom-right' />
             <DashboardSidebar />
             <main className='flex-1 relative'>
                 <MobileHeader />

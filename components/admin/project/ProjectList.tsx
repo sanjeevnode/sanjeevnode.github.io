@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import {
     Table,
@@ -13,28 +13,14 @@ import {
 import { Input } from "@/components/ui/input"
 import { Edit } from "lucide-react"
 import { ProjectData } from "@/app/types/project"
-import { getProjects } from "@/app/actions/project.action"
+import StatusBadge from "@/components/admin/StatusBadge"
 
-export function ProjectList() {
-
-    const [projectList, setProjectList] = useState<ProjectData[]>([]);
-
+export function ProjectList({ projects }: { projects: ProjectData[] }) {
     const [searchTerm, setSearchTerm] = useState("")
 
-    // Filtered list based on search input
-    const filteredItems = projectList.filter(item =>
+    const filteredItems = projects.filter(item =>
         item.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
-
-    async function getProjectsData() {
-        const projects = await getProjects()
-        setProjectList(projects)
-    }
-
-    // Fetch project list from the server
-    useEffect(() => {
-        getProjectsData()
-    }, [])
 
     return (
         <div className="space-y-4">
@@ -54,13 +40,14 @@ export function ProjectList() {
                             <TableHead className="md:w-[300px]">Title</TableHead>
                             <TableHead className="hidden lg:table-cell w-[400px]">Description</TableHead>
                             <TableHead className="hidden lg:table-cell w-[200px]">Tags</TableHead>
+                            <TableHead className="w-[90px]">Status</TableHead>
                             <TableHead className="w-[70px]"></TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {filteredItems.length === 0 ? (
                             <TableRow>
-                                <TableCell colSpan={5} className="text-center py-6">
+                                <TableCell colSpan={6} className="text-center py-6">
                                     No projects found.
                                 </TableCell>
                             </TableRow>
@@ -84,6 +71,9 @@ export function ProjectList() {
                                                 </span>
                                             ))}
                                         </div>
+                                    </TableCell>
+                                    <TableCell>
+                                        <StatusBadge active={item.active} />
                                     </TableCell>
                                     <TableCell>
                                         <Link href={`/admin/dashboard/project/${item._id}`}>
