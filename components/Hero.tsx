@@ -1,94 +1,119 @@
 "use client";
-import React from 'react';
-import { Github, Linkedin, Mail, FileText } from 'lucide-react';
-import Image from 'next/image';
+import React, { useEffect, useRef } from 'react';
+import { Github, Linkedin, Mail, FileText, ArrowDown } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
+import gsap from 'gsap';
+import Magnetic from './fx/Magnetic';
 
 const Hero: React.FC = () => {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: sessionStorage.getItem('preloaded') ? 0.2 : 2.6 });
+      tl.to('.mask-line > *', {
+        y: 0,
+        duration: 1,
+        ease: 'power4.out',
+        stagger: 0.12,
+      })
+        .from('.hero-fade', {
+          y: 24,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          stagger: 0.1,
+        }, '-=0.5');
+    }, rootRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="about" className="min-h-screen flex items-center pt-20 pb-16 dark:bg-gray-900">
-      <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-5 gap-12 items-center">
-          <div className="md:col-span-3 space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black dark:text-white">
-              <span className="block">Hello, I&apos;m</span>
-              <span className="block mt-2">Sanjeev Singh</span>
-            </h1>
+    <section ref={rootRef} id="about" className="relative min-h-screen flex flex-col justify-center pt-24 pb-16 bg-pf-bg overflow-hidden">
+      {/* ambient glow */}
+      <div aria-hidden className="pointer-events-none absolute -top-40 -left-32 w-[600px] h-[600px] rounded-full bg-pf-accent/10 blur-[120px]" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-48 -right-32 w-[700px] h-[700px] rounded-full bg-pf-accent2/10 blur-[130px]" />
 
-            <h2 className="text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-400">
-              <Typewriter
-                options={{
-                  strings: [' Software Development Engineer', 'Full Stack Developer', 'Tech Enthusiast',],
-                  autoStart: true,
-                  loop: true,
-                  delay: 100,
-                  deleteSpeed: 80,
+      <div className="container mx-auto px-6 relative grid lg:grid-cols-12 gap-12 lg:gap-8 items-end">
+        {/* left: the big intro */}
+        <div className="lg:col-span-7">
+          <p className="hero-fade font-mono text-pf-accent text-sm md:text-base mb-6">Hi, I am</p>
 
-                }}
-              />
-            </h2>
+          <h1 className="font-display font-semibold uppercase leading-[0.95] tracking-tight text-pf-text text-[15vw] lg:text-[8.5vw]">
+            <span className="mask-line block"><span className="block">Sanjeev</span></span>
+            <span className="mask-line block"><span className="block">Singh<span className="text-pf-accent">.</span></span></span>
+          </h1>
 
-            <p className="text-gray-700 dark:text-gray-300 max-w-2xl leading-relaxed">
-              I build exceptional digital experiences with a focus on clean design and intuitive
-              interactions. Passionate about creating beautiful, functional interfaces that solve
-              real problems for users.
-            </p>
+          <div className="hero-fade mt-6 font-display text-xl md:text-3xl text-pf-dim font-light">
+            <Typewriter
+              options={{
+                strings: ['Software Development Engineer', 'Full Stack Developer', 'Tech Enthusiast'],
+                autoStart: true,
+                loop: true,
+                delay: 100,
+                deleteSpeed: 80,
+              }}
+            />
+          </div>
+        </div>
 
-            <div className="pt-4 flex flex-wrap gap-4">
+        {/* right: tagline, intro, actions */}
+        <div className="lg:col-span-5 lg:pl-10 lg:border-l border-pf-line/10">
+          <p className="hero-fade font-display text-3xl md:text-4xl font-medium leading-snug text-pf-text">
+            You have an idea<span className="text-pf-accent">.</span><br />
+            I engineer it to production<span className="text-pf-accent">.</span>
+          </p>
+
+          <p className="hero-fade mt-6 text-pf-dim text-lg leading-relaxed">
+            I&apos;m a software engineer who takes products from first commit to production —
+            real-time chat platforms, serverless cloud backends, and ML-powered pipelines.
+            Fast, reliable, and finished to the last detail.
+          </p>
+
+          <div className="hero-fade mt-8 flex flex-wrap gap-4">
+            <Magnetic>
               <a
                 href="/sanjeev_resume.pdf"
                 download
-                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-black dark:border-white text-black dark:text-white font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-pf-accent text-pf-bg font-semibold transition-opacity duration-300 hover:opacity-90"
               >
                 <FileText size={18} />
                 Download CV
               </a>
-
+            </Magnetic>
+            <Magnetic>
               <a
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-black dark:bg-white text-white dark:text-black font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-pf-line/20 text-pf-text font-semibold transition-colors duration-300 hover:border-pf-accent hover:text-pf-accent"
               >
                 <Mail size={18} />
                 Contact Me
               </a>
-            </div>
-
-            <div className="pt-6 flex gap-5">
-              <a href="https://github.com/sanjeevnode" target='_blank' className="text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="GitHub">
-                <Github size={22} />
-              </a>
-              <a href="https://www.linkedin.com/in/sanjeevnode" className="text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="LinkedIn">
-                <Linkedin size={22} />
-              </a>
-              <a href="mailto:me.sanjeevks@gmail.com" className="text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors" aria-label="Email">
-                <Mail size={22} />
-              </a>
-            </div>
+            </Magnetic>
           </div>
 
-          <div className="md:col-span-2 order-first md:order-last">
-            <div className="aspect-square relative overflow-hidden">
-              {/* Placeholder for profile image */}
-              {/* <img
-                src="/sanjeev-bg.png"
-                alt="Profile"
-                className="absolute inset-0 w-full h-full object-contain dark:invert"
-              /> */}
-              <Image
-                src="/sanjeev-bg.webp"
-                alt="Profile"
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="absolute inset-0 w-full h-full object-contain"
-                priority
-              />
-            </div>
+          <div className="hero-fade mt-8 flex items-center gap-5">
+            <span className="font-mono text-xs text-pf-dim">find me on</span>
+            <span aria-hidden className="h-px w-10 bg-pf-line/20" />
+            <a href="https://github.com/sanjeevnode" target="_blank" rel="noopener noreferrer" className="text-pf-dim hover:text-pf-accent transition-colors" aria-label="GitHub">
+              <Github size={20} />
+            </a>
+            <a href="https://www.linkedin.com/in/sanjeevnode" target="_blank" rel="noopener noreferrer" className="text-pf-dim hover:text-pf-accent transition-colors" aria-label="LinkedIn">
+              <Linkedin size={20} />
+            </a>
+            <a href="mailto:me.sanjeevks@gmail.com" className="text-pf-dim hover:text-pf-accent transition-colors" aria-label="Email">
+              <Mail size={20} />
+            </a>
           </div>
         </div>
+      </div>
+
+      <div className="hero-fade absolute bottom-8 left-1/2 -translate-x-1/2 text-pf-dim animate-bounce">
+        <ArrowDown size={20} />
       </div>
     </section>
   );

@@ -19,7 +19,7 @@ async function Page() {
 
   return (
     <div className='w-full h-full flex flex-col p-4 md:p-10  items-start '>
-      <span className='md:text-2xl font-semibold  text-xl text-gray-900'>
+      <span className='md:text-2xl font-semibold  text-xl text-gray-900 dark:text-gray-100'>
         Projects
       </span>
       <p className=' text-gray-500 mt-2 mb-6'>

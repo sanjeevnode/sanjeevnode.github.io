@@ -10,7 +10,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ["var(--font-display)", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
+      },
       colors: {
+        pf: {
+          bg: "rgb(var(--pf-bg) / <alpha-value>)",
+          soft: "rgb(var(--pf-bg-soft) / <alpha-value>)",
+          card: "rgb(var(--pf-card) / <alpha-value>)",
+          line: "rgb(var(--pf-border) / <alpha-value>)",
+          text: "rgb(var(--pf-text) / <alpha-value>)",
+          dim: "rgb(var(--pf-dim) / <alpha-value>)",
+          accent: "rgb(var(--pf-accent) / <alpha-value>)",
+          accent2: "rgb(var(--pf-accent2) / <alpha-value>)",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

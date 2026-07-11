@@ -6,9 +6,9 @@ import React from 'react'
 function AddProject() {
     return (
         <div className='w-full h-full flex flex-col p-4 md:p-10  items-start '>
-            <span className='md:text-2xl font-semibold  text-xl text-gray-900 flex items-center '>
+            <span className='md:text-2xl font-semibold  text-xl text-gray-900 dark:text-gray-100 flex items-center '>
                 <Link href="/admin/dashboard/project">
-                    <ArrowLeftCircle className='h-6 w-6 text-gray-900 mr-2' />
+                    <ArrowLeftCircle className='h-6 w-6 text-gray-900 dark:text-gray-100 mr-2' />
                 </Link>
                 Project
             </span>

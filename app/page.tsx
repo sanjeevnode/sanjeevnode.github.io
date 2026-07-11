@@ -4,8 +4,13 @@ import Experience from '@/components/Experience'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
+import Marquee from '@/components/Marquee'
 import Projects from '@/components/Projects'
+import Skills from '@/components/Skills'
 import SectionSkeleton from '@/components/SectionSkeleton'
+import Cursor from '@/components/fx/Cursor'
+import Preloader from '@/components/fx/Preloader'
+import SmoothScroll from '@/components/fx/SmoothScroll'
 import { Suspense } from 'react'
 
 import { Toaster } from 'react-hot-toast'
@@ -15,18 +20,25 @@ export const revalidate = 86400
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 font-sans">
+    <div className="min-h-screen bg-pf-bg font-sans">
       <Toaster
         position='bottom-right'
       />
+      <Preloader />
+      <SmoothScroll />
+      <Cursor />
       <Header />
       <main>
         <Hero />
+        <Marquee />
         <Suspense fallback={<SectionSkeleton title="Work Experience" />}>
           <Experience />
         </Suspense>
         <Suspense fallback={<SectionSkeleton title="Projects" />}>
           <Projects />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton title="Skills" />}>
+          <Skills />
         </Suspense>
         <Suspense fallback={<SectionSkeleton title="Education" />}>
           <Education />

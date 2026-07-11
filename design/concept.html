@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Concept — sanjeevnode.in v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --bg-card: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(94,234,212,0.4);
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --accent: #5eead4;
+  --accent2: #818cf8;
+  --glow: rgba(94,234,212,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+h1,h2,h3 { font-family:'Space Grotesk',sans-serif; }
+.mono { font-family:'JetBrains Mono',monospace; }
+
+/* ambient gradient glows */
+.glow-field { position:fixed; inset:0; pointer-events:none; z-index:0; }
+.glow-field::before {
+  content:''; position:absolute; width:600px; height:600px; border-radius:50%;
+  background: radial-gradient(circle, rgba(94,234,212,0.07), transparent 65%);
+  top:-150px; left:-100px; animation: drift 18s ease-in-out infinite alternate;
+}
+.glow-field::after {
+  content:''; position:absolute; width:700px; height:700px; border-radius:50%;
+  background: radial-gradient(circle, rgba(129,140,248,0.08), transparent 65%);
+  bottom:-200px; right:-150px; animation: drift 22s ease-in-out infinite alternate-reverse;
+}
+@keyframes drift { to { transform: translate(80px, 60px) scale(1.15); } }
+
+main { position:relative; z-index:1; max-width:1150px; margin:0 auto; padding:0 32px; }
+
+/* nav */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:10;
+  backdrop-filter: blur(14px); background:rgba(10,14,26,0.7);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner { max-width:1150px; margin:0 auto; padding:16px 32px; display:flex; justify-content:space-between; align-items:center; }
+.logo { font-family:'JetBrains Mono',monospace; font-weight:500; color:var(--accent); text-decoration:none; }
+.logo span { color:var(--text-dim); }
+nav ul { display:flex; gap:28px; list-style:none; }
+nav a { color:var(--text-dim); text-decoration:none; font-size:14px; transition:color .2s; }
+nav a:hover { color:var(--accent); }
+nav .num { color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:12px; margin-right:4px; }
+
+/* hero */
+.hero { min-height:92vh; display:flex; flex-direction:column; justify-content:center; padding-top:80px; }
+.hero .kicker { font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:15px; margin-bottom:18px; }
+.hero h1 {
+  font-size:clamp(42px,7vw,76px); font-weight:700; line-height:1.05; letter-spacing:-0.02em;
+  background: linear-gradient(120deg, #f8fafc 30%, var(--accent) 70%, var(--accent2));
+  background-size:200% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:#f8fafc;
+  animation: shine 6s linear infinite, rise .7s cubic-bezier(.2,.7,.2,1) .15s forwards;
+}
+@keyframes shine { to { background-position:200% center; } }
+.hero h2 { font-size:clamp(24px,4vw,40px); color:var(--text-dim); font-weight:500; margin-top:8px; }
+.hero h2 .caret { border-right:2px solid var(--accent); animation: blink 1s step-end infinite; padding-right:2px; }
+@keyframes blink { 50% { border-color:transparent; } }
+.hero p { max-width:560px; color:var(--text-dim); margin-top:22px; font-size:17px; }
+.hero .cta-row { margin-top:36px; display:flex; gap:16px; }
+.btn {
+  padding:13px 26px; border-radius:8px; font-size:15px; font-weight:600; text-decoration:none;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-primary { background:linear-gradient(120deg,var(--accent),#2dd4bf); color:#04211c; }
+.btn-primary:hover { transform:translateY(-3px); box-shadow:0 10px 30px var(--glow); }
+.btn-ghost { border:1px solid var(--border); color:var(--text); }
+.btn-ghost:hover { border-color:var(--border-hover); color:var(--accent); transform:translateY(-3px); }
+
+/* entrance stagger */
+.stagger > * { opacity:0; transform:translateY(24px); animation: rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
+.stagger > *:nth-child(1){animation-delay:.05s} .stagger > *:nth-child(2){animation-delay:.15s}
+.stagger > *:nth-child(3){animation-delay:.25s} .stagger > *:nth-child(4){animation-delay:.35s}
+.stagger > *:nth-child(5){animation-delay:.45s}
+@keyframes rise { to { opacity:1; transform:none; } }
+
+/* sections */
+section { padding:90px 0; }
+.sec-head { display:flex; align-items:center; gap:16px; margin-bottom:44px; }
+.sec-head .num { font-family:'JetBrains Mono',monospace; color:var(--accent); font-size:18px; }
+.sec-head h2 { font-size:30px; white-space:nowrap; }
+.sec-head .line { height:1px; flex:1; background:linear-gradient(90deg,var(--border),transparent); }
+
+/* scroll reveal */
+.reveal { opacity:0; transform:translateY(30px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity:1; transform:none; }
+
+/* experience timeline */
+.timeline { position:relative; padding-left:36px; }
+.timeline::before { content:''; position:absolute; left:8px; top:6px; bottom:6px; width:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2),transparent); opacity:.35; }
+.t-item { position:relative; margin-bottom:42px; }
+.t-item::before { content:''; position:absolute; left:-34px; top:8px; width:12px; height:12px; border-radius:50%;
+  background:var(--bg); border:2px solid var(--accent); box-shadow:0 0 12px var(--glow); }
+.t-item .period { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent); }
+.t-item h3 { font-size:21px; margin-top:4px; }
+.t-item .company { color:var(--accent2); font-weight:600; }
+.t-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:18px; }
+.card {
+  background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:22px;
+  transition: transform .25s, border-color .25s, box-shadow .25s; position:relative; overflow:hidden;
+}
+.card:hover { transform:translateY(-6px); border-color:var(--border-hover); box-shadow:0 18px 40px rgba(0,0,0,.45), 0 0 0 1px var(--glow); }
+.card h4 { font-size:16px; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.card h4 .dot { width:8px; height:8px; border-radius:2px; background:linear-gradient(120deg,var(--accent),var(--accent2)); display:inline-block; }
+.chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+.chip {
+  font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--accent);
+  background:rgba(94,234,212,0.08); border:1px solid rgba(94,234,212,0.18);
+  padding:3px 10px; border-radius:99px; transition: background .2s;
+}
+.chip:hover { background:rgba(94,234,212,0.18); }
+.card ul { list-style:none; color:var(--text-dim); font-size:14px; }
+.card li { padding-left:16px; position:relative; margin-bottom:6px; }
+.card li::before { content:'▹'; position:absolute; left:0; color:var(--accent); }
+
+/* projects */
+.proj-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:22px; }
+.proj { padding:0; }
+.proj .thumb { height:170px; background:linear-gradient(135deg,#101828,#1e1b4b);
+  display:flex; align-items:center; justify-content:center; color:var(--text-dim);
+  font-family:'JetBrains Mono',monospace; font-size:13px; position:relative; overflow:hidden; }
+.proj .thumb::after { content:''; position:absolute; inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(94,234,212,.08) 50%,transparent 70%);
+  transform:translateX(-100%); transition:transform .8s; }
+.proj:hover .thumb::after { transform:translateX(100%); }
+.proj .body { padding:22px; }
+.proj h3 { font-size:19px; margin-bottom:10px; }
+.proj p { color:var(--text-dim); font-size:14px; margin-bottom:14px; }
+.proj .links { display:flex; gap:14px; font-size:13px; }
+.proj .links a { color:var(--text-dim); text-decoration:none; transition:color .2s; }
+.proj .links a:hover { color:var(--accent); }
+
+/* skills marquee */
+.marquee { overflow:hidden; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:18px 0; }
+.marquee-track { display:flex; gap:14px; width:max-content; animation: scroll 30s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state:paused; }
+@keyframes scroll { to { transform:translateX(-50%); } }
+
+footer { text-align:center; padding:50px 0; color:var(--text-dim); font-size:13px; font-family:'JetBrains Mono',monospace; }
+footer .accent { color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="glow-field"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#">sanjeev<span>@</span>node<span>:~$</span></a>
+    <ul>
+      <li><a href="#"><span class="num">01.</span>About</a></li>
+      <li><a href="#exp"><span class="num">02.</span>Experience</a></li>
+      <li><a href="#proj"><span class="num">03.</span>Projects</a></li>
+      <li><a href="#"><span class="num">04.</span>Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="stagger">
+      <p class="kicker">Hi, my name is</p>
+      <h1>Sanjeev Singh.<br>I build things that scale.</h1>
+      <h2><span class="caret" id="type">Software Development Engineer</span></h2>
+      <p>I craft fast, reliable products across mobile, web, cloud and ML — currently engineering real-time systems at AlignTogether Solutions.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#proj">View my work</a>
+        <a class="btn btn-ghost" href="#">Download CV</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="exp">
+    <div class="sec-head reveal">
+      <span class="num">02.</span><h2>Where I've Worked</h2><div class="line"></div>
+    </div>
+    <div class="timeline">
+      <div class="t-item reveal">
+        <span class="period">Oct 2024 — Present</span>
+        <h3>SDE II · <span class="company">AlignTogether Solutions</span></h3>
+        <div class="t-cards">
+          <div class="card">
+            <h4><span class="dot"></span>Frontend & Mobile</h4>
+            <div class="chips"><span class="chip">Flutter</span><span class="chip">Socket.IO</span><span class="chip">Matrix SDK</span><span class="chip">Twilio</span></div>
+            <ul><li>Real-time chat systems with media, receipts & roles</li><li>Native video calling on Android and iOS</li></ul>
+          </div>
+          <div class="card">
+            <h4><span class="dot"></span>Backend & Cloud</h4>
+            <div class="chips"><span class="chip">Node.js</span><span class="chip">AWS Lambda</span><span class="chip">Kafka</span><span class="chip">Redis</span></div>
+            <ul><li>30+ workflows migrated to serverless AWS</li><li>Event-driven pipelines & IoT data streams</li></ul>
+          </div>
+          <div class="card">
+            <h4><span class="dot"></span>AI/ML & Data</h4>
+            <div class="chips"><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">SageMaker</span></div>
+            <ul><li>End-to-end ML pipelines to production</li><li>Computer-vision video processing at scale</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <span class="period">Dec 2023 — Sep 2024</span>
+        <h3>SDE Intern · <span class="company">Affirmity Corp</span></h3>
+        <div class="t-cards">
+          <div class="card">
+            <h4><span class="dot"></span>Drone Feed Analysis</h4>
+            <div class="chips"><span class="chip">OpenCV</span><span class="chip">MTCNN</span><span class="chip">Elastic</span></div>
+            <ul><li>Desktop app for drone video analysis & tracking</li></ul>
+          </div>
+          <div class="card">
+            <h4><span class="dot"></span>Perimeter Security</h4>
+            <div class="chips"><span class="chip">YOLOv8</span><span class="chip">FaceNet</span></div>
+            <ul><li>Face & object recognition surveillance suite</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proj">
+    <div class="sec-head reveal">
+      <span class="num">03.</span><h2>Things I've Built</h2><div class="line"></div>
+    </div>
+    <div class="proj-grid">
+      <div class="card proj reveal">
+        <div class="thumb">[ MyPassword screenshot ]</div>
+        <div class="body">
+          <h3>MyPassword</h3>
+          <div class="chips"><span class="chip">Next.js 15</span><span class="chip">AES-256</span><span class="chip">Firebase</span></div>
+          <p>Zero-knowledge password vault — all crypto runs in the browser with envelope encryption and Argon2id.</p>
+          <div class="links"><a href="#">GitHub ↗</a><a href="#">Live ↗</a></div>
+        </div>
+      </div>
+      <div class="card proj reveal">
+        <div class="thumb">[ BlogGen screenshot ]</div>
+        <div class="body">
+          <h3>BlogGen</h3>
+          <div class="chips"><span class="chip">Next.js</span><span class="chip">Firestore</span></div>
+          <p>Full-stack blogging platform with rule-enforced content access and Google auth.</p>
+          <div class="links"><a href="#">GitHub ↗</a><a href="#">Live ↗</a></div>
+        </div>
+      </div>
+      <div class="card proj reveal">
+        <div class="thumb">[ Win Rewrite screenshot ]</div>
+        <div class="body">
+          <h3>Win Rewrite</h3>
+          <div class="chips"><span class="chip">AutoHotkey</span><span class="chip">Gemini API</span></div>
+          <p>Hotkey-driven text rewriting in any app, powered by Gemini — Windows, macOS & Linux.</p>
+          <div class="links"><a href="#">GitHub ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head reveal">
+      <span class="num">04.</span><h2>Skills</h2><div class="line"></div>
+    </div>
+    <div class="marquee reveal">
+      <div class="marquee-track" id="track">
+        <span class="chip">Flutter</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">Kafka</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">Python</span><span class="chip">Redis</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>designed & engineered by <span class="accent">sanjeevnode</span> · © 2026</p>
+  </footer>
+</main>
+
+<script>
+// scroll reveal
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// typewriter
+const roles = ['Software Development Engineer', 'Full Stack Developer', 'Tech Enthusiast'];
+let ri = 0, ci = 0, del = false;
+const el = document.getElementById('type');
+(function tick() {
+  const word = roles[ri];
+  ci += del ? -1 : 1;
+  el.textContent = word.slice(0, ci);
+  if (!del && ci === word.length) { del = true; return setTimeout(tick, 1800); }
+  if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+  setTimeout(tick, del ? 40 : 90);
+})();
+
+// duplicate marquee content for seamless loop
+const track = document.getElementById('track');
+track.innerHTML += track.innerHTML;
+</script>
+</body>
+</html>

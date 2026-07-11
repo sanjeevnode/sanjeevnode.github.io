@@ -64,7 +64,7 @@ export default function DashboardSidebar() {
             <SidebarHeader className="border-b border-border">
                 <div className="flex items-center px-2 py-3">
                     <Link href="/">
-                        <span className="text-lg font-semibold text-black">sanjeevnode</span>
+                        <span className="text-lg font-semibold text-black dark:text-white">sanjeevnode</span>
                     </Link>
                 </div>
             </SidebarHeader>
