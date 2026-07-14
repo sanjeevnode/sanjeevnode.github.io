@@ -1,0 +1,25 @@
+# Sanjeev Singh — Software Development Engineer
+
+> Portfolio of Sanjeev Singh, a full-stack software engineer based in Bhopal, India.
+> He builds web and mobile products end to end: Next.js/React frontends, Flutter apps,
+> Node.js and Python backends, AWS serverless architectures, and ML/computer-vision pipelines.
+
+## About
+
+- Current role: Software Development Engineer II at AlignTogether Solutions Pvt. Ltd. (Oct 2024 - present)
+- Previously: SDE Intern at Affirmity Corp (Dec 2023 - Sep 2024)
+- Education: B.Tech in Computer Science and Engineering, Sagar Institute of Science and Technology, Bhopal (2020-2024)
+
+## Selected projects
+
+- MyPassword (https://mypassword.sanjeevnode.in): zero-knowledge password vault; AES-256-GCM envelope encryption, Argon2id, Next.js 15, Firebase
+- BlogGen (https://blog.sanjeevnode.in): full-stack blogging platform on Next.js and Firestore
+- Win Rewrite (https://github.com/sanjeevnode/win_rewrite_app): cross-platform hotkey text rewriter powered by the Gemini API
+- Trimly (https://trimly.sanjeevnode.in): URL shortener built with Next.js and MongoDB
+
+## Links
+
+- Website: https://www.sanjeevnode.in
+- GitHub: https://github.com/sanjeevnode
+- LinkedIn: https://www.linkedin.com/in/sanjeevnode
+- Email: me.sanjeevks@gmail.com
