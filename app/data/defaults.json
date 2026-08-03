@@ -8,50 +8,165 @@
       "order": 0,
       "projects": [
         {
-          "title": "Frontend & Mobile Development",
+          "title": "Radar Pose Estimation",
+          "featured": true,
           "technologies": [
-            "Flutter", "Dart", "Bloc", "Provider",
-            "Socket.IO", "Matrix SDK", "Realm", "Firebase",
-            "Twilio SDK", "Android", "iOS", "Hive"
+            "Python", "TensorFlow", "Keras", "MQTT",
+            "ExPose", "PyQt5", "FFmpeg", "NumPy", "Pandas"
           ],
           "description": [
-            "Built scalable cross-platform mobile applications using Flutter with clean and modular architecture.",
-            "Developed complete real-time chat systems using Socket.IO and Matrix SDK with media, receipts, and roles.",
-            "Integrated native Twilio video calling for Android and iOS with smooth Flutter UI integration.",
-            "Implemented offline-first storage using Realm and Hive with advanced local syncing logic.",
-            "Developed secure authentication flows, push notifications, and dynamic deep linking.",
-            "Created responsive and accessible UI designs following best UX and state management practices (Bloc/Provider)."
+            "Researched and implemented mmWave radar point cloud to human skeleton prediction for posture recognition.",
+            "Built a data processing pipeline generating a ~150K-sample dataset from raw radar recordings.",
+            "Trained a TensorFlow/Keras model predicting human skeletal joints from radar point cloud data.",
+            "Generated 3D human mesh and skeleton labels with ExPose for supervised model training.",
+            "Streamed live radar data over MQTT to visualise real-time skeletal motion from point clouds."
           ]
         },
         {
-          "title": "Backend & Cloud Engineering",
+          "title": "Conversational Voice AI",
+          "featured": true,
           "technologies": [
-            "Node.js", "Python", "PostgreSQL", "MySQL",
-            "AWS Lambda", "SQS", "SES", "EventBridge",
-            "Docker", "Redis", "Kafka", "MQTT", "Flask"
+            "Python", "FastAPI", "WebSockets", "Asyncio", "SQLite", "AWS EC2"
           ],
           "description": [
-            "Built backend APIs in Node.js and Python (Flask) with secure routing, validation, and database layers.",
-            "Migrated 30+ workflows to a serverless AWS architecture using Lambda, EventBridge, SQS, and SES.",
-            "Designed scalable database schemas and optimized queries for PostgreSQL and MySQL.",
-            "Implemented event-driven pipelines for automation, notifications, and asynchronous processing.",
-            "Deployed Kafka, MQTT brokers, and Redis caching layers using Docker on AWS EC2.",
-            "Developed real-time communication services and IoT data pipelines with efficient message handling."
+            "Built a service bridging live telephony call audio with a conversational AI provider over WebSockets.",
+            "Designed a concurrency-capped FIFO dispatch queue with request dedupe and in-place replacement.",
+            "Handled missed-call callbacks and working-hours-aware retry scheduling across timezones.",
+            "Mapped per-programme agent configuration and conversation variables from CRM lead fields.",
+            "Automated meeting scheduling through Google Meet and Calendar APIs."
           ]
         },
         {
-          "title": "AI/ML & Data Science",
+          "title": "Serverless Workflow Migration",
+          "featured": true,
           "technologies": [
-            "Python", "PyTorch", "OpenCV", "NumPy",
-            "FFmpeg", "Scikit-learn", "Pandas", "SageMaker"
+            "Node.js", "Python", "AWS Lambda", "EventBridge",
+            "SQS", "SES", "PostgreSQL", "Docker", "Redis"
           ],
           "description": [
-            "Developed end-to-end ML pipelines for training, evaluation, and deployment of AI models.",
-            "Built computer vision modules for image/video processing using OpenCV and PyTorch.",
-            "Created automated preprocessing workflows for cleaning, augmenting, and transforming datasets.",
-            "Implemented efficient video processing and extraction using FFmpeg for analytics workflows.",
-            "Optimized model inference, data loading, and training loops for GPU/CPU environments.",
-            "Designed reproducible experiments, logging systems, and evaluation metrics for ML research."
+            "Migrated 30+ business workflows from a no-code database to PostgreSQL.",
+            "Rebuilt them on an event-driven AWS serverless architecture using Lambda, EventBridge, SQS, and SES.",
+            "Implemented SQS-based message queuing and SES for automated email notifications.",
+            "Used EventBridge for time-based automation and orchestration of workflows.",
+            "Developed the Node.js backend managing APIs, data pipelines, and automation logic."
+          ]
+        },
+        {
+          "title": "Real-Time Chat & Calling App",
+          "featured": true,
+          "technologies": [
+            "Flutter", "Dart", "BLoC", "Socket.IO", "Matrix SDK",
+            "Twilio SDK", "Realm", "Hive", "Firebase", "Android", "iOS"
+          ],
+          "description": [
+            "Built cross-platform Flutter apps published to both the Play Store and the App Store.",
+            "Implemented real-time messaging over Socket.IO and Matrix SDK with media, receipts, and roles.",
+            "Integrated native Twilio audio and video calling for Android and iOS with stable call performance.",
+            "Integrated 100+ backend APIs covering chat, user management, and application features.",
+            "Added offline-first Realm and Hive storage with local sync, plus Firebase push notifications."
+          ]
+        },
+        {
+          "title": "Document Verification & ERP Sync",
+          "featured": true,
+          "technologies": [
+            "Python", "FastAPI", "PostgreSQL", "SQLAlchemy",
+            "Alembic", "AWS S3", "Webhooks"
+          ],
+          "description": [
+            "Owned a document-verification feature end to end across the data, business, and API layers.",
+            "Built two-way sync with a freight ERP, using version watermarking to avoid re-sending documents.",
+            "Implemented inbound webhooks for verification verdicts and operations-uploaded documents.",
+            "Enforced a state machine guarding document removal, approval, and entity-type transitions.",
+            "Hardened the flow with atomic transactions, scoped lookups, streamed uploads, and named error codes."
+          ]
+        },
+        {
+          "title": "Bulk Lead Importer",
+          "featured": true,
+          "technologies": ["Python", "PostgreSQL", "Raw SQL", "Odoo ORM"],
+          "description": [
+            "Replaced ORM-based import with direct transactional SQL, cutting multi-hour imports to seconds.",
+            "Added Postgres-native deduplication on phone and email at insert time.",
+            "Designed a two-phase flow that pre-resolves every relation before writing, aborting cleanly on mismatch.",
+            "Wrapped each row in a SAVEPOINT so a single bad row cannot fail the whole batch.",
+            "Supported dry-run imports with full rollback and grouped error reporting."
+          ]
+        },
+        {
+          "title": "Ad-Platform Event Sync",
+          "technologies": [
+            "Python", "FastAPI", "SQLite", "APScheduler", "SHA-256", "XML-RPC"
+          ],
+          "description": [
+            "Converted CRM lead stage changes into ad-platform conversion events, never sent inline.",
+            "Built a durable queue and background worker batching up to 1000 events per request.",
+            "Hashed personal data with SHA-256 before transmission.",
+            "Implemented exponential-backoff retry with dead-lettering and manual replay.",
+            "Made delivery restart-safe: queued before send and deduped by lead and stage."
+          ]
+        },
+        {
+          "title": "Telephony CDR Sync",
+          "technologies": [
+            "Python", "FastAPI", "SQLite", "APScheduler", "XML-RPC"
+          ],
+          "description": [
+            "Synced call detail records from a cloud telephony provider into CRM, replacing manual scripts.",
+            "Built watermark-based incremental fetch that automatically catches up after downtime.",
+            "Implemented a global throttle honouring a two-calls-per-minute upstream rate limit.",
+            "Made the sync idempotent by call UID and crash-safe with no unnecessary data retention.",
+            "Anchored the interval scheduler to the wall clock so missed runs coalesce instead of being skipped."
+          ]
+        },
+        {
+          "title": "Email Subscription & Notifications",
+          "technologies": [
+            "Python", "FastAPI", "PostgreSQL", "Alembic", "RFC 8058"
+          ],
+          "description": [
+            "Built subscription preference APIs for both public and internal consumers.",
+            "Enforced email preferences at queue time rather than at send time.",
+            "Added unsubscribe footers with RFC 8058 one-click headers.",
+            "Audit-logged preference changes together with the effective previous state.",
+            "Rendered air waybill numbers on shipment status emails via a snapshot column."
+          ]
+        },
+        {
+          "title": "CRM Platform Modules",
+          "technologies": [
+            "Odoo 19", "Python", "PostgreSQL", "OWL/JS", "XML"
+          ],
+          "description": [
+            "Built 10+ modules covering lead capture, routing, deduplication, and admissions reporting.",
+            "Implemented click-to-call that intercepts the native call flow with no duplicate UI.",
+            "Added SQL-view-backed dashboards for admissions and agent productivity.",
+            "Built strict round-robin and automatic reassignment engines for fair lead distribution.",
+            "Integrated ad-platform lead ads and WhatsApp templates as first-class lead sources."
+          ]
+        },
+        {
+          "title": "Field Survey Mobile App",
+          "technologies": ["Flutter", "Dart", "REST APIs", "MySQL"],
+          "description": [
+            "Built an offline-capable Flutter app for field household surveys and enrolment.",
+            "Shipped through a DEV/QA/production release flow across 60+ tagged versions.",
+            "Implemented draft saving, validation, and conditional multi-step form flows.",
+            "Integrated REST APIs for survey and household data synchronisation."
+          ]
+        },
+        {
+          "title": "Social Platform App & Backend",
+          "technologies": [
+            "Flutter", "Dart", "Node.js", "Express", "MongoDB",
+            "Azure Blob Storage", "Razorpay", "WebSockets"
+          ],
+          "description": [
+            "Built a Flutter social app published to both the Play Store and the App Store.",
+            "Implemented authentication with OTP verification and role-based registration.",
+            "Migrated backend file storage from AWS S3 to Azure Blob with a compression pipeline.",
+            "Added real-time WebSocket events and a notification polling service.",
+            "Built transactional account deletion with safety guards, plus Razorpay payments."
           ]
         }
       ]
@@ -86,8 +201,8 @@
           ]
         },
         {
-          "title": "Affirmity Corp Website",
-          "technologies": ["React", "Node.js", "Express", "MySql", "Tailwind", "Framer Motion", "GSAP"],
+          "title": "Corporate Marketing Website",
+          "technologies": ["React", "Node.js", "Express", "MySQL", "Tailwind", "Framer Motion", "GSAP"],
           "description": [
             "Developed responsive website UI using React and Tailwind CSS.",
             "Added dynamic animations with GSAP and Framer Motion APIs.",
@@ -125,34 +240,44 @@
   ],
   "skillGroups": [
     {
-      "category": "Frontend",
-      "skills": ["Flutter", "React", "Next.js", "HTML", "CSS", "JavaScript", "TypeScript", "Tailwind CSS"],
+      "category": "Languages",
+      "skills": ["Python", "TypeScript", "JavaScript", "Dart", "SQL"],
       "order": 0
     },
     {
-      "category": "Backend",
-      "skills": ["Spring Boot", "Node.js", "flask", "Express.js", "RESTful APIs"],
+      "category": "Python",
+      "skills": ["FastAPI", "Flask", "Odoo", "SQLAlchemy", "Pandas", "NumPy", "Asyncio"],
       "order": 1
     },
     {
-      "category": "Database",
-      "skills": ["MySQL", "Postgress", "MongoDB", "SQLite", "Realm", "Hive"],
+      "category": "AI/ML",
+      "skills": ["PyTorch", "TensorFlow", "Keras", "OpenCV", "YOLOv8", "Scikit-learn", "FFmpeg"],
       "order": 2
     },
     {
-      "category": "Tools",
-      "skills": ["Git", "Docker", "AWS", "Figma", "Postman"],
+      "category": "JavaScript & Web",
+      "skills": ["Next.js", "React", "Node.js", "Express.js", "Tailwind CSS", "REST APIs"],
       "order": 3
     },
     {
-      "category": "AI/ML and Data Science",
-      "skills": ["Python", "PyTorch", "TensorFlow", "OpenCV", "Scikit-learn", "Pandas", "NumPy", "FFmpeg"],
+      "category": "Mobile",
+      "skills": ["Flutter", "BLoC", "Realm", "Hive", "Firebase", "Android", "iOS"],
       "order": 4
     },
     {
-      "category": "Methodologies",
-      "skills": ["Agile/Scrum", "Test-Driven Development", "CI/CD", "Responsive Design", "SEO"],
+      "category": "Database",
+      "skills": ["PostgreSQL", "MySQL", "MongoDB", "SQLite", "Redis"],
       "order": 5
+    },
+    {
+      "category": "Cloud & Infra",
+      "skills": ["AWS Lambda", "SQS", "SES", "EventBridge", "S3", "EC2", "Docker", "Kafka", "MQTT"],
+      "order": 6
+    },
+    {
+      "category": "Tools",
+      "skills": ["Git", "Postman", "Figma", "Linux"],
+      "order": 7
     }
   ]
 }

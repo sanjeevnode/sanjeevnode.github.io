@@ -31,6 +31,7 @@ function toExperienceData(exp: any): ExperienceData {
       technologies: p.technologies ?? [],
       description: p.description ?? [],
       link: p.link || undefined,
+      featured: p.featured === true,
     })),
   };
 }

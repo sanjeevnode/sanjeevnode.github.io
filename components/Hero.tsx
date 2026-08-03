@@ -34,31 +34,39 @@ const Hero: React.FC = () => {
       <div aria-hidden className="pointer-events-none absolute -top-40 -left-32 w-[600px] h-[600px] rounded-full bg-pf-accent/10 blur-[120px]" />
       <div aria-hidden className="pointer-events-none absolute -bottom-48 -right-32 w-[700px] h-[700px] rounded-full bg-pf-accent2/10 blur-[130px]" />
 
-      <div className="container mx-auto px-6 relative grid lg:grid-cols-12 gap-12 lg:gap-8 items-end">
+      <div className="container mx-auto px-6 relative grid lg:grid-cols-12 gap-12 lg:gap-10 items-center">
         {/* left: the big intro */}
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-6">
           <p className="hero-fade font-mono text-pf-accent text-sm md:text-base mb-6">Hi, I am</p>
 
-          <h1 className="font-display font-semibold uppercase leading-[0.95] tracking-tight text-pf-text text-[15vw] lg:text-[8.5vw]">
+          <h1 className="font-display font-semibold uppercase leading-[0.95] tracking-tight text-pf-text text-[15vw] lg:text-[7.4vw]">
             <span className="mask-line block"><span className="block">Sanjeev</span></span>
             <span className="mask-line block"><span className="block">Singh<span className="text-pf-accent">.</span></span></span>
           </h1>
 
-          <div className="hero-fade mt-6 font-display text-xl md:text-3xl text-pf-dim font-light">
+          {/* min-height reserves the tallest line so typing can't shift the layout */}
+          <div className="hero-fade mt-6 min-h-[2.5rem] md:min-h-[2.75rem] font-display text-xl md:text-3xl text-pf-dim font-light">
             <Typewriter
               options={{
-                strings: ['Software Development Engineer', 'Full Stack Developer', 'Tech Enthusiast'],
+                strings: [
+                  'Full Stack Engineer',
+                  'Python & FastAPI Backends',
+                  'Flutter Mobile Apps',
+                  'Next.js & React',
+                  'AI/ML Pipelines',
+                  'AWS Serverless & Automation',
+                ],
                 autoStart: true,
                 loop: true,
-                delay: 100,
-                deleteSpeed: 80,
+                delay: 65,
+                deleteSpeed: 35,
               }}
             />
           </div>
         </div>
 
         {/* right: tagline, intro, actions */}
-        <div className="lg:col-span-5 lg:pl-10 lg:border-l border-pf-line/10">
+        <div className="lg:col-span-6 lg:pl-12 lg:border-l border-pf-line/10">
           <p className="hero-fade font-display text-3xl md:text-4xl font-medium leading-snug text-pf-text">
             You have an idea<span className="text-pf-accent">.</span><br />
             I engineer it to production<span className="text-pf-accent">.</span>
@@ -66,7 +74,7 @@ const Hero: React.FC = () => {
 
           <p className="hero-fade mt-6 text-pf-dim text-lg leading-relaxed">
             I&apos;m a software engineer who takes products from first commit to production —
-            real-time chat platforms, serverless cloud backends, and ML-powered pipelines.
+            real-time chat apps on the stores, serverless cloud backends, and ML-powered pipelines.
             Fast, reliable, and finished to the last detail.
           </p>
 

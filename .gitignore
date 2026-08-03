@@ -38,3 +38,6 @@ next-env.d.ts
 # local env files (no-dot variant was leaked once - keep ignored)
 env.local
 .vercel
+docs
+# DB backups (local only)
+backups/

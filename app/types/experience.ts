@@ -5,6 +5,7 @@ export type ExperienceProject = {
   technologies: string[];
   description: string[];
   link?: string;
+  featured?: boolean; // shown on the homepage; the rest stay in the DB only
 };
 
 export type ExperienceInput = {

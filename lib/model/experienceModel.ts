@@ -14,6 +14,7 @@ const experienceSchema = new Schema(
         technologies: [String],
         description: [String],
         link: String,
+        featured: { type: Boolean, default: false },
       },
     ],
   },

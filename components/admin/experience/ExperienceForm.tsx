@@ -53,9 +53,19 @@ function ProjectEditor({
     return (
         <div className="border rounded-md p-4 space-y-4 bg-gray-50">
             <div className="flex justify-between items-center">
-                <span className="font-semibold">Project / Work Area</span>
+                <span className="font-semibold">System / Work Area</span>
                 <Trash2 className="h-4 w-4 cursor-pointer text-red-500" onClick={onRemove} />
             </div>
+
+            <label className="flex items-center gap-2 text-sm cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={project.featured ?? false}
+                    onChange={(e) => onChange({ ...project, featured: e.target.checked })}
+                    className="h-4 w-4"
+                />
+                Featured (shown on the homepage)
+            </label>
 
             <div>
                 <Label>Title</Label>
