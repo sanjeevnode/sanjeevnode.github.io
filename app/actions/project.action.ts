@@ -27,6 +27,7 @@ function toProjectData(project: any): ProjectData {
     github: project.github,
     tags: project.tags,
     active: project.active !== false, // docs created before the flag existed count as active
+    featured: project.featured === true,
   };
 }
 
@@ -50,6 +51,7 @@ export async function createProject(formData: FormData) {
     link: formData.get("link") as string,
     github: formData.get("github") as string,
     active: formData.get("active") !== "false",
+    featured: formData.get("featured") === "true",
     imageUrl: image?.url,
     imagePublicId: image?.publicId,
   });
@@ -62,6 +64,14 @@ export async function getProjects(includeInactive = false): Promise<ProjectData[
   const filter = includeInactive ? {} : { active: { $ne: false } };
   const projects = await Project.find(filter).sort({ createdAt: -1 });
   return projects.map(toProjectData);
+}
+
+// Homepage selection. Nothing flagged yet -> fall back to the newest three so
+// the section is never empty.
+export async function getFeaturedProjects(limit = 3): Promise<ProjectData[]> {
+  const projects = await getProjects();
+  const flagged = projects.filter((p) => p.featured);
+  return (flagged.length > 0 ? flagged : projects).slice(0, limit);
 }
 
 export async function getProjectById(id: string): Promise<ProjectData> {
@@ -90,6 +100,7 @@ export async function updateProject(id: string, formData: FormData) {
     link: formData.get("link") as string,
     github: formData.get("github") as string,
     active: formData.get("active") !== "false",
+    featured: formData.get("featured") === "true",
   };
 
   const imageFile = getImageFile(formData);

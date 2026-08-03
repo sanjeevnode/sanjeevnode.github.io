@@ -27,6 +27,7 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
     const [link, setLink] = useState("")
     const [github, setGithub] = useState("")
     const [active, setActive] = useState(true)
+    const [featured, setFeatured] = useState(false)
     const [submitting, setSubmitting] = useState(false)
 
     // If projectItem is provided, populate the form with its data
@@ -38,6 +39,7 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
             setLink(projectItem.link || "");
             setGithub(projectItem.github || "");
             setActive(projectItem.active);
+            setFeatured(projectItem.featured);
             setImagePreview(projectItem.image || null);
         }
     }, [projectItem]);
@@ -83,6 +85,7 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
             formData.append("link", link)
             formData.append("github", github)
             formData.append("active", String(active))
+            formData.append("featured", String(featured))
             if (imageFile) {
                 formData.append("image", imageFile)
             }
@@ -248,6 +251,16 @@ export default function ProjectForm({ projectItem, isEdit }: { projectItem?: Pro
                     className="h-4 w-4"
                 />
                 Active (visible on the website)
+            </label>
+
+            <label className="flex items-center gap-2 text-sm cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={featured}
+                    onChange={(e) => setFeatured(e.target.checked)}
+                    className="h-4 w-4"
+                />
+                Featured (shown on the homepage)
             </label>
 
             <Button type="submit" disabled={submitting}>

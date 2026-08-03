@@ -11,6 +11,7 @@ const projectSchema = new Schema({
     github: String,
     tags: [String],
     active: { type: Boolean, default: true },
+    featured: { type: Boolean, default: false }, // shown on the homepage
 }, { timestamps: true });
 
 export const Project = models.Project || mongoose.model('Project', projectSchema);

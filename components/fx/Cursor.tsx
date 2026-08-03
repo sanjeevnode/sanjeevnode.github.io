@@ -3,6 +3,11 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
+// Only one cursor may bind listeners. During a client-side route change the
+// next page mounts before the old one unmounts, so without this a second
+// instance doubles the mousemove work and the cursor visibly lags.
+let bound = false
+
 // Custom cursor: accent dot + trailing ring. Ring grows over links/buttons.
 // Fine-pointer devices only; native cursor is hidden via the pf-cursor class.
 export default function Cursor() {
@@ -11,9 +16,11 @@ export default function Cursor() {
 
     useEffect(() => {
         if (!window.matchMedia('(pointer: fine)').matches) return
+        if (bound) return
         const dot = dotRef.current
         const ring = ringRef.current
         if (!dot || !ring) return
+        bound = true
 
         document.documentElement.classList.add('pf-cursor')
         gsap.set([dot, ring], { xPercent: -50, yPercent: -50, opacity: 0 })
@@ -39,6 +46,7 @@ export default function Cursor() {
         window.addEventListener('mouseover', onOver, { passive: true })
         document.documentElement.addEventListener('mouseleave', onLeave)
         return () => {
+            bound = false
             document.documentElement.classList.remove('pf-cursor')
             window.removeEventListener('mousemove', onMove)
             window.removeEventListener('mouseover', onOver)

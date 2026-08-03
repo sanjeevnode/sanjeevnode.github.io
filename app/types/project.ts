@@ -7,4 +7,5 @@ export type ProjectData = {
   github?: string;
   tags: string[];
   active: boolean;
+  featured: boolean; // shown on the homepage; all projects live at /projects
 };
