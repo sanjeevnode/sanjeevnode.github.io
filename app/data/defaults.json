@@ -220,7 +220,7 @@
       "degree": "Bachelor of Technology in Computer Science and Engineering",
       "institution": "Sagar Institute of Science and Technology, Bhopal",
       "period": "2020 - 2024",
-      "description": "Graduated with a CGPA of 8.5. Specialized in software development and data structures.Led a team project on building a full-stack web application.",
+      "description": "Graduated with a CGPA of 8.5, specialising in software engineering, data structures, and algorithms. Built full-stack web and machine learning projects through the degree, and started working professionally as a developer before graduating.",
       "order": 0
     },
     {
@@ -256,7 +256,7 @@
     },
     {
       "category": "JavaScript & Web",
-      "skills": ["Next.js", "React", "Node.js", "Express.js", "Tailwind CSS", "REST APIs"],
+      "skills": ["Next.js", "React", "Node.js", "Express.js", "HTML", "CSS", "Tailwind CSS", "REST APIs"],
       "order": 3
     },
     {
@@ -278,6 +278,14 @@
       "category": "Tools",
       "skills": ["Git", "Postman", "Figma", "Linux"],
       "order": 7
+    },
+    {
+      "category": "Practices",
+      "skills": [
+        "CI/CD", "Git Flow", "Code Review", "Testing",
+        "Event-Driven Design", "System Design", "Agile/Scrum"
+      ],
+      "order": 8
     }
   ]
 }
