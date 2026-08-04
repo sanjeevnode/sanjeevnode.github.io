@@ -81,12 +81,11 @@ const Hero: React.FC = () => {
           <div className="hero-fade mt-8 flex flex-wrap gap-4">
             <Magnetic>
               <a
-                href="/sanjeev_1_resume.pdf"
-                download
+                href="/resume"
                 className="inline-flex items-center gap-2 px-7 py-3.5 bg-pf-accent text-pf-bg font-semibold transition-opacity duration-300 hover:opacity-90"
               >
                 <FileText size={18} />
-                Download CV
+                View CV
               </a>
             </Magnetic>
             <Magnetic>
