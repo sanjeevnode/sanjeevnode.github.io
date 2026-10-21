@@ -12,6 +12,9 @@ export const authOptions: AuthOptions = {
     GithubProvider({
       clientId: getGithubId(),
       clientSecret: getGithubSecret(),
+      // GitHub now sends `iss` on the OAuth callback (RFC 9207); openid-client rejects it
+      // unless the provider declares the same issuer.
+      issuer: "https://github.com/login/oauth",
     }),
   ],
   callbacks: {
