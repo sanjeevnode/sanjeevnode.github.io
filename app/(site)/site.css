@@ -578,17 +578,16 @@ button.chip { cursor: pointer; }
 
 /* ---------- phone: one column, the wire runs down the left edge ---------- */
 @media (max-width: 767px) {
-  .fw, .row { grid-template-columns: minmax(0, 1fr); padding-inline: 2.25rem 1.5rem; }
+  /* phones keep both rails, one hugging each edge, so the wire still zig-zags between sections */
+  .fw, .row { grid-template-columns: minmax(0, 1fr); padding-inline: 2.25rem; }
   .fw > :not(.wire-pt, .wire), .row > details { grid-column: 1 / -1 !important; grid-row: auto !important; }
   .frame { padding-inline: 1.25rem; }
-  .wire-pt--l, .wire-pt--r, .wire-pt--edge-r { left: 12px; }
-  .wire-pt--edge { left: calc(100% - 10px); }
-  .contact__wire { right: auto; left: 12px; }
-  .wire-stop { left: 26px; translate: 0 -50%; }
+  .wire-pt--l { left: 12px; }
+  .wire-pt--r, .wire-pt--edge, .wire-pt--edge-r { left: calc(100% - 12px); }
+  .contact__wire { right: 11px; }
 
   .hero { min-height: 0; grid-template-rows: auto; padding-top: 7.5rem; }
   .hero__name { font-size: 14.2vw; }
-  .hero { padding-right: 2.5rem; }
   .hero__claim { max-width: 13ch; }
   .hero__roles { margin-top: 0.5rem; }
   .intro__text { font-size: clamp(1.45rem, 6.4vw, 2rem); }
@@ -610,7 +609,7 @@ button.chip { cursor: pointer; }
   .stack__group { grid-template-columns: minmax(0, 1fr); gap: 0.6rem; }
   /* the answer follows the thumb: lit systems stay docked at the bottom while the chips scroll */
   .stack__systems {
-    position: sticky; bottom: 0; z-index: 2; margin: 2rem -1.5rem 0 -2.25rem; padding: 0.9rem 1.5rem 1rem 2.25rem;
+    position: sticky; bottom: 0; z-index: 2; margin: 2rem -2.25rem 0; padding: 0.9rem 2.25rem 1rem;
     background: var(--c-bg); box-shadow: 0 -1px 0 var(--c-line), 0 -12px 24px -12px rgb(12 13 16 / 0.12);
   }
   .stack__caption { padding-bottom: 0.5rem; min-height: 0; }
@@ -630,7 +629,7 @@ button.chip { cursor: pointer; }
   .resume__sheet { display: none; }
   .resume { min-height: 72svh; }
   .prose section > .wire-pt, .prose section + section > .wire-pt { left: -24px; }
-  .lost { padding-inline: 2.25rem 1.5rem; }
+  .lost { padding-inline: 2.25rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

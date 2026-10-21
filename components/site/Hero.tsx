@@ -37,6 +37,7 @@ export default function Hero() {
       </section>
 
       <section className="intro fw" aria-label="About">
+        <span className="wire-pt wire-pt--r wire-pt--gap" data-wire="bend" />
         <span className="wire-pt wire-pt--r wire-pt--first" data-wire="node" />
         <p className="intro__text" data-split="lines">
           I&apos;m a software engineer who takes products from first commit to production: real-time chat apps on
