@@ -29,7 +29,7 @@ function splitTween(el: HTMLElement, isIntro: boolean) {
       if (s.done) return;
       const targets = type === 'lines' ? self.lines : type === 'words' ? self.words : self.chars;
       s.tween = gsap.from(targets, {
-        yPercent: 110,
+        yPercent: 125, // clears the mask's descender padding, so nothing peeks before the reveal
         duration: durations[type],
         stagger: staggers[type],
         ease: ease.out,

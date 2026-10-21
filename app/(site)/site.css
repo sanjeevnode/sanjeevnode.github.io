@@ -74,7 +74,9 @@ html.lenis, html.lenis body { height: auto; }
 .motion [data-split] { visibility: hidden; }
 .motion [data-reveal] { opacity: 0; }
 .motion [data-reveal]:focus-within { opacity: 1 !important; clip-path: none !important; translate: none; }
-.split-line { padding-bottom: 0.08em; margin-bottom: -0.08em; }
+/* SplitText clips each line with a cloned wrapper (.split-line-mask): the descender room has to live on
+   that wrapper, or the clip edge sits on the line box and cuts g, j, p, q, y */
+.split-line-mask { padding-bottom: 0.16em; margin-bottom: -0.16em; }
 
 /* the 12 column sheet; column 1 and 12 double as rails for the wire */
 .fw {
@@ -589,6 +591,10 @@ button.chip { cursor: pointer; }
   .hero { min-height: 0; grid-template-rows: auto; padding-top: 7.5rem; }
   .hero__name { font-size: 14.2vw; }
   .hero__claim { max-width: 13ch; }
+  .page-head, .legal { padding-top: 6.5rem; }
+  .wire-pt--head { top: calc(6.5rem + 2.6rem + var(--t-xl) * 0.42); }
+  .wire-pt--head-tight { top: calc(6.5rem + var(--t-xl) * 0.88 + 4.2rem); }
+  .resume { padding-top: 6.5rem; }
   .hero__roles { margin-top: 0.5rem; }
   .intro__text { font-size: clamp(1.45rem, 6.4vw, 2rem); }
   .intro__actions .btn { flex: 1 1 100%; }
