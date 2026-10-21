@@ -58,7 +58,7 @@ html body {
 :focus-visible { outline: 2px solid var(--c-signal); outline-offset: 3px; }
 #main:focus { outline: none; }
 .skip-link {
-  position: fixed; left: var(--gutter); top: var(--gutter); z-index: calc(var(--z-loader) + 1);
+  position: fixed; left: 50%; top: 0.75rem; translate: -50% 0; z-index: calc(var(--z-loader) + 1);
   padding: 0.7em 1em; background: var(--c-fg); color: var(--c-bg); font-weight: 500;
   transform: translateY(-300%);
 }
@@ -70,7 +70,10 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth iframe { pointer-events: none; }
 
 /* hidden until revealed, only when JS and motion are both on */
-.motion [data-split], .motion [data-reveal] { visibility: hidden; }
+/* blocks hide with opacity, never visibility, so links inside stay in the tab order; focus shows them */
+.motion [data-split] { visibility: hidden; }
+.motion [data-reveal] { opacity: 0; }
+.motion [data-reveal]:focus-within { opacity: 1 !important; clip-path: none !important; translate: none; }
 .split-line { padding-bottom: 0.08em; margin-bottom: -0.08em; }
 
 /* the 12 column sheet; column 1 and 12 double as rails for the wire */
@@ -96,6 +99,8 @@ html.lenis, html.lenis body { height: auto; }
 }
 .curtain__label { font-family: var(--f-mono); font-size: var(--t-m); display: inline-flex; align-items: center; gap: 0.8em; }
 .curtain__label::before { content: ''; width: 0.5em; height: 0.5em; background: var(--c-signal-ink); }
+.curtain__label { position: relative; z-index: 1; padding-block: 0.6em; background: var(--c-fg); padding-right: 0.8em; }
+.curtain__wire { position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--c-signal-ink); transform: scaleX(0); transform-origin: left; }
 
 #loader {
   position: fixed; inset: 0; z-index: var(--z-loader);
@@ -103,7 +108,7 @@ html.lenis, html.lenis body { height: auto; }
   background: var(--c-fg); color: var(--c-bg);
   clip-path: inset(0% 0% 0% 0%);
 }
-html:not(.js) #loader, #loader[hidden] { display: none; }
+html:not(.js) #loader, html:not(.enter-home) #loader, #loader[hidden] { display: none; }
 /* If JS is slow to boot (throttled phones), the panel routes off by itself at 2.2 s; the engine cancels this when it takes over in time. */
 #loader { animation: loader-bail 0.6s var(--e-route) 2.2s forwards; }
 @keyframes loader-bail { to { clip-path: inset(0% 0% 0% 100%); visibility: hidden; } }
@@ -219,15 +224,15 @@ html.frame-away .frame { translate: 0 -110%; }
 
 /* inline links keep an underline at rest; it rises into a signal band */
 .link {
-  background-image: linear-gradient(currentColor 0 0), linear-gradient(color-mix(in srgb, var(--c-signal) 26%, transparent) 0 0);
+  background-image: linear-gradient(currentColor 0 0), linear-gradient(var(--c-signal) 0 0);
   background-size: 100% 1px, 100% 0;
   background-position: left bottom, left bottom;
   background-repeat: no-repeat;
   padding-block: 0.2em 0.1em;
-  transition: background-size 0.4s var(--e-route);
+  transition: background-size 0.4s var(--e-route), color 0.3s;
 }
-@media (hover: hover) { .link:hover { background-size: 100% 1px, 100% 0.55em; } }
-.link:focus-visible { background-size: 100% 1px, 100% 0.55em; }
+@media (hover: hover) { .link:hover { background-size: 100% 1px, 100% 100%; color: var(--c-on-signal); } }
+.link:focus-visible { background-size: 100% 1px, 100% 100%; color: var(--c-on-signal); }
 
 /* ---------- the wire ---------- */
 .wire-host { position: relative; }
@@ -356,8 +361,9 @@ html.frame-away .frame { translate: 0 -110%; }
 .pair { position: relative; align-items: start; padding-block: clamp(2.5rem, 6vw, 5.5rem); --first: calc(clamp(2.5rem, 6vw, 5.5rem) + 0.9rem); }
 .pair__media { grid-column: 1 / span 7; grid-row: 1; }
 .pair__text { grid-column: 9 / span 3; grid-row: 1; padding-top: 0.2rem; }
-.pair--flip .pair__media { grid-column: 5 / span 7; }
-.pair--flip .pair__text { grid-column: 1 / span 3; }
+.pair--flip .pair__media { grid-column: 6 / span 7; }
+.pair--flip .pair__text { grid-column: 2 / span 3; }
+.wire-pt--gap-pair { top: calc(clamp(2.5rem, 6vw, 5.5rem) * 0.45); }
 .pair__media a { display: block; }
 .pair__frame { position: relative; aspect-ratio: 16 / 10; background: var(--c-panel); overflow: clip; }
 .pair__img { object-fit: contain; padding: 5%; transition: scale 1s var(--e-out); }
@@ -413,7 +419,7 @@ button.chip { cursor: pointer; }
   content: ''; position: absolute; left: -14px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px;
   background: var(--c-signal); scale: 0; transition: scale 0.3s var(--e-route);
 }
-.stack__systems li[data-on] { color: var(--c-fg); translate: 0.35rem 0; }
+.stack__systems li[data-on] { color: var(--c-fg); font-weight: 500; translate: 0.35rem 0; background: linear-gradient(90deg, rgb(43 43 255 / 0.1), transparent 70%); }
 .stack__systems li[data-on]::before { scale: 1; }
 .sys__where { font-family: var(--f-mono); font-size: 0.6875rem; padding-top: 0.2em; white-space: nowrap; }
 .stack__edges { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
@@ -507,7 +513,7 @@ button.chip { cursor: pointer; }
 .resume__actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .resume__sheet { margin-top: clamp(2rem, 4vw, 3rem); }
 .resume__sheet object { grid-column: 1 / -1; width: 100%; height: 88svh; border: 1px solid var(--c-line); background: var(--c-panel); }
-.resume__fallback { height: 100%; display: grid; place-content: center; gap: 1rem; text-align: center; padding: 2rem; }
+.resume__fallback { height: 100%; display: grid; place-content: center; justify-items: center; gap: 1rem; text-align: center; padding: 2rem; }
 
 .legal { padding-top: clamp(8rem, 18vh, 12rem); padding-bottom: var(--pad); row-gap: 3rem; }
 .legal__head { grid-column: 1 / -1; display: grid; gap: 1rem; }
@@ -588,7 +594,7 @@ button.chip { cursor: pointer; }
     background: var(--c-bg); box-shadow: 0 -1px 0 var(--c-line), 0 -12px 24px -12px rgb(12 13 16 / 0.12);
   }
   .stack__caption { padding-bottom: 0.5rem; min-height: 0; }
-  .stack__systems ul { max-height: 26svh; overflow-y: auto; border-top: 0; padding-right: 0.75rem; }
+  .stack__systems ul { height: 26svh; overflow-y: auto; border-top: 0; padding-right: 0.75rem; } /* fixed: the idle cycle must not move the page */
   .stack__systems li:not([data-on]) { display: none; }
   .stack__cat { padding-top: 0; }
 
@@ -601,7 +607,7 @@ button.chip { cursor: pointer; }
   .form__send .btn { width: 100%; }
   .footer__mark { font-size: 9.4vw; }
 
-  .resume__sheet object { height: 70svh; }
+  .resume__sheet { display: none; }
   .lost { padding-inline: 2.25rem 1.5rem; }
 }
 

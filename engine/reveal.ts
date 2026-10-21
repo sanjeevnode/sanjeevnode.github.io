@@ -48,15 +48,14 @@ function blockTween(el: HTMLElement, paused: boolean) {
   const kind = el.dataset.reveal || 'up';
   const delay = parseFloat(el.dataset.delay || '0');
   const from: gsap.TweenVars =
-    kind === 'fade' ? { autoAlpha: 0 }
-    : kind === 'clip' ? { clipPath: 'inset(0% 100% 0% 0%)', autoAlpha: 1 }
-    : { y: 40, autoAlpha: 0 };
+    kind === 'fade' ? { opacity: 0 }
+    : kind === 'clip' ? { clipPath: 'inset(0% 100% 0% 0%)', opacity: 1 }
+    : { y: 40, opacity: 0 };
   const to: gsap.TweenVars = kind === 'clip' ? { clipPath: 'inset(0% 0% 0% 0%)' } : {};
-  gsap.set(el, { visibility: 'visible' });
   return gsap.fromTo(el, from, {
     ...to,
     y: 0,
-    autoAlpha: 1,
+    opacity: 1,
     duration: kind === 'fade' ? 1 : 1.3,
     ease: kind === 'clip' ? ease.inOut : ease.out,
     delay,

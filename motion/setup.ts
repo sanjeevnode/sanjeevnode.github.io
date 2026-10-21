@@ -1,7 +1,7 @@
 // Global motion for the site: runs once on the client, before the first page initializes.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ease, onPage, onScroll, setLoaderExit, setTransition } from '@/engine';
+import { ease, onPage, onScroll, scrollToTarget, setLoaderExit, setTransition } from '@/engine';
 import { startWire } from './wire';
 
 export function setupMotion() {
@@ -12,9 +12,21 @@ export function setupMotion() {
 
   // Page transition: an ink band routes across left to right carrying the request, then leaves right.
   let dest = '/';
+  let holdFrame = 0; // until this time the header stays put (an anchor jump is not reading down)
   document.addEventListener('click', (e) => {
     const a = (e.target as Element).closest('a');
-    if (a) dest = new URL(a.href, location.href).pathname;
+    if (!a) return;
+    const url = new URL(a.href, location.href);
+    dest = url.pathname;
+    // Same-page anchors (/#work while on /) go through the smooth scroller. A native hash jump
+    // bypasses it, so nothing on the way (reveals, wire, header) would hear the scroll.
+    const target = url.pathname === location.pathname && url.hash.length > 1 && document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if (!target || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    history.pushState(null, '', url.hash);
+    holdFrame = performance.now() + 2000;
+    // a beat later, so an open phone menu has closed and released the scroll lock first
+    gsap.delayedCall(0.06, () => scrollToTarget(target));
   }, true);
   setTransition({
     leave: (c) => {
@@ -23,10 +35,12 @@ export function setupMotion() {
       return gsap.timeline()
         .set(c, { autoAlpha: 1 })
         .fromTo(c.querySelector('.curtain__panel'), { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.7, ease: ease.inOut })
-        .fromTo(label, { xPercent: -40, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.5, ease: ease.out }, 0.3);
+        .fromTo(label, { xPercent: -40, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.5, ease: ease.out }, 0.3)
+        .fromTo(c.querySelector('.curtain__wire'), { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: ease.inOut }, 0.35);
     },
     enter: (c) => gsap.timeline()
-      .to(c.querySelector('.curtain__label'), { xPercent: 40, autoAlpha: 0, duration: 0.35, ease: ease.inOut })
+      .add(() => { c.querySelector('.curtain__label')!.textContent = '200 OK'; })
+      .to(c.querySelector('.curtain__label'), { xPercent: 40, autoAlpha: 0, duration: 0.35, ease: ease.inOut }, 0.2)
       .to(c.querySelector('.curtain__panel'), { clipPath: 'inset(0% 0% 0% 100%)', duration: 0.8, ease: ease.inOut }, 0.1)
       .set(c, { autoAlpha: 0 }),
   });
@@ -36,7 +50,7 @@ export function setupMotion() {
   onScroll(({ y }) => {
     if (Math.abs(y - last) < 4) return;
     const h = document.documentElement.classList;
-    h.toggle('frame-away', y > 160 && y > last);
+    h.toggle('frame-away', y > 160 && y > last && performance.now() > holdFrame);
     h.toggle('frame-solid', y > 40);
     last = y;
   });

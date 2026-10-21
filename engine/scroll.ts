@@ -18,7 +18,7 @@ export function initScroll() {
     if (!lenis) addEventListener('scroll', nativeTick, { passive: true });
     return;
   }
-  lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1, touchMultiplier: 1.2, anchors: true });
+  lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1, touchMultiplier: 1.2 }); // anchors are routed in motion/setup.ts
   lenis.on('scroll', (l: Lenis) => {
     state.y = l.scroll;
     state.velocity = l.velocity;

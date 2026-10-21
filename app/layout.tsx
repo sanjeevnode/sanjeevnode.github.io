@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 
 // runs before paint: the admin's dark theme (honoring a saved choice), plus the motion flags the
 // public site gates its hidden-before-reveal styles on (content stays visible without JS or motion)
-const themeInit = `try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t?t==='dark':true)}catch(e){document.documentElement.classList.add('dark')}document.documentElement.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion')`;
+const themeInit = `try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t?t==='dark':true)}catch(e){document.documentElement.classList.add('dark')}document.documentElement.classList.add('js');if(location.pathname==='/')document.documentElement.classList.add('enter-home');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion')`;
 
 // identity schema for search engines and LLMs
 const personSchema = {

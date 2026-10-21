@@ -8,7 +8,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     <div className="site">
       <a className="skip-link" href="#main">Skip to content</a>
       <div id="curtain" aria-hidden="true">
-        <div className="curtain__panel"><span className="curtain__label" /></div>
+        <div className="curtain__panel"><span className="curtain__label" /><span className="curtain__wire" /></div>
       </div>
       <div id="loader" role="status" aria-label="Loading">
         <div className="loader__inner">

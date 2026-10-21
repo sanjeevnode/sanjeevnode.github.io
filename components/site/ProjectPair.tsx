@@ -28,7 +28,8 @@ export default function ProjectPair({ project, index, full = false, level: Title
 
   return (
     <article className={`pair fw${flip ? ' pair--flip' : ''}`}>
-      <span className="wire-pt wire-pt--r wire-pt--first" data-wire="node" />
+      <span className={`wire-pt wire-pt--${flip ? 'l' : 'r'} wire-pt--gap-pair`} data-wire="bend" />
+      <span className={`wire-pt wire-pt--${flip ? 'l' : 'r'} wire-pt--first`} data-wire="node" />
       <figure className="pair__media" data-reveal={lead ? undefined : 'clip'}>
         {href ? (
           <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title}`} tabIndex={-1}>

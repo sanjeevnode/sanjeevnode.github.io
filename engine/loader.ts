@@ -8,8 +8,8 @@ export const setLoaderFormat = (fn: (p: number) => string) => { format = fn; };
 let exit: ((root: HTMLElement) => gsap.core.Timeline) | null = null;
 export const setLoaderExit = (fn: (root: HTMLElement) => gsap.core.Timeline) => { exit = fn; };
 
-const MIN = 0.8; // seconds
-const MAX = 1.4; // seconds; with a ~0.8 s exit the whole loader stays under 2.6 s
+const MIN = 0.7; // seconds
+const MAX = 1.1; // seconds; with a ~0.8 s exit the whole loader stays under 2.6 s
 const SEEN = 'sn-loaded'; // the counter plays once per session; later hard loads just lift the panel
 
 function criticalAssets(): Promise<unknown>[] {
