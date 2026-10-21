@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Wire from '@/components/site/Wire';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Sanjeev Singh',
@@ -8,7 +9,9 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <article className="legal fw">
+    <article className="legal fw wire-host" data-wire-host>
+      <Wire />
+      <span className="wire-pt wire-pt--l wire-pt--head-tight" data-wire="node" />
       <header className="legal__head">
         <h1 className="page-head__title">Privacy policy</h1>
         <p className="legal__date" data-reveal="fade" data-intro>Last updated: July 4, 2026</p>
@@ -16,6 +19,7 @@ export default function PrivacyPolicy() {
 
       <div className="legal__body prose">
         <section>
+          <span className="wire-pt" data-wire="tick" />
           <h2>Introduction</h2>
           <p>
             Welcome to my portfolio website (<strong>sanjeevnode.in</strong>). I respect your privacy and am committed to
@@ -25,6 +29,7 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
+          <span className="wire-pt" data-wire="tick" />
           <h2>Information we collect</h2>
           <p>This website is structured to minimize data collection. The only circumstances under which personal data is collected are:</p>
           <ul>
@@ -42,6 +47,7 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
+          <span className="wire-pt" data-wire="tick" />
           <h2>How we use your information</h2>
           <p>The information collected is used in the following ways:</p>
           <ul>
@@ -52,6 +58,7 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
+          <span className="wire-pt" data-wire="tick" />
           <h2>Cookies and tracking</h2>
           <p>
             We may use basic cookies or local storage to preserve your preferences. These cookies do not track your
@@ -60,6 +67,7 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
+          <span className="wire-pt" data-wire="tick" />
           <h2>Third-party services and integrations</h2>
           <p>This website integrates certain third-party components to ensure safety and standard functionality:</p>
           <ul>
@@ -77,6 +85,7 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
+          <span className="wire-pt" data-wire="tick" />
           <h2>Security of data</h2>
           <p>
             Your data security is critical to me. We implement standard encryption (HTTPS) protocols for all data
@@ -86,6 +95,7 @@ export default function PrivacyPolicy() {
         </section>
 
         <section>
+          <span className="wire-pt" data-wire="tick" />
           <h2>Your rights and contact details</h2>
           <p>
             You can inquire about the personal details you submitted at any time. If you wish to review, update, or
@@ -94,6 +104,7 @@ export default function PrivacyPolicy() {
           </p>
         </section>
       </div>
+      <span className="wire-pt wire-pt--l wire-pt--end" data-wire="node" />
     </article>
   );
 }

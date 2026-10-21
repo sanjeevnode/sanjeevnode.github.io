@@ -4,7 +4,7 @@ import SectionHead from './SectionHead';
 export default function Education({ items }: { items: EducationInput[] }) {
   return (
     <section id="education" className="sec sec--last" aria-labelledby="education-title">
-      <SectionHead id="education" rail="r" title="Education" />
+      <SectionHead id="education" rail="r" stop={`${items.length} qualifications`} title="Education" />
       <ol className="edu">
         {items.map((e) => {
           const years = e.period.match(/\d{4}/g) ?? [e.period];

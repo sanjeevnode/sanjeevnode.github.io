@@ -25,6 +25,7 @@ export default function Stack({ groups, systems }: { groups: SkillGroupInput[]; 
       <SectionHead
         id="stack"
         rail="l"
+        stop={`${groups.reduce((n, g) => n + g.skills.length, 0)} technologies`}
         title="Stack, routed"
         note="Pick a technology to see every system on this page that runs on it."
       />

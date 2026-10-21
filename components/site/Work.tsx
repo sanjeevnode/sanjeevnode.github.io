@@ -6,7 +6,7 @@ import ProjectPair from './ProjectPair';
 export default function Work({ projects, total }: { projects: ProjectData[]; total: number }) {
   return (
     <section id="work" className="sec" data-spy aria-labelledby="work-title">
-      <SectionHead id="work" rail="r" title="Things I've built" note="Projects of my own, from idea to a working product." />
+      <SectionHead id="work" rail="r" stop={`${total} projects`} title="Things I've built" note="Projects of my own, from idea to a working product." />
       {projects.length === 0 ? (
         <p className="fw sec__empty">Projects are unavailable right now. Please check back later.</p>
       ) : (

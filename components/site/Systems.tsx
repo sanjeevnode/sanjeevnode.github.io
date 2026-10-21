@@ -13,6 +13,7 @@ export default function Systems({ jobs }: { jobs: ExperienceInput[] }) {
       <SectionHead
         id="systems"
         rail="l"
+        stop={`${jobs.reduce((n, j) => n + j.projects.length, 0)} systems shipped`}
         title="Systems in production"
         note="Each row is a system I built and shipped at work. Open one for what it does and how it was made."
       />

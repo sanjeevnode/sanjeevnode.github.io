@@ -247,6 +247,19 @@ html.frame-away .frame { translate: 0 -110%; }
 .wire__head { fill: var(--c-signal); }
 .wire.is-still .wire__packet, .wire.is-still .wire__head { display: none; }
 
+/* a stop sits on the crossing between two sections and names where the signal is going */
+.wire-stop {
+  position: absolute; top: calc(var(--pad) * 0.42); left: 50%; translate: -50% -50%; z-index: 2;
+  display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.45rem 0.8rem;
+  background: var(--c-bg); border: 1px solid var(--c-node); font-family: var(--f-mono);
+  font-size: var(--t-xs); line-height: 1; white-space: nowrap; color: var(--c-muted);
+  transition: border-color 0.4s, color 0.4s, background-color 0.4s;
+}
+.wire-stop__name { text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-fg); }
+.wire-stop::before { content: ''; width: 7px; height: 7px; border: 1.5px solid currentColor; transition: background-color 0.4s; }
+.sec.is-lit > .wire-stop { border-color: var(--c-signal); color: var(--c-signal); }
+.sec.is-lit > .wire-stop::before { background: var(--c-signal); }
+
 .wire-pt {
   --col: calc((100% - 2 * var(--gutter) - 11 * var(--gap)) / 12);
   position: absolute; width: 2px; height: 2px; margin: -1px 0 0 -1px; pointer-events: none;
@@ -366,7 +379,7 @@ html.frame-away .frame { translate: 0 -110%; }
 .wire-pt--gap-pair { top: calc(clamp(2.5rem, 6vw, 5.5rem) * 0.45); }
 .pair__media a { display: block; }
 .pair__frame { position: relative; aspect-ratio: 16 / 10; background: var(--c-panel); overflow: clip; }
-.pair__img { object-fit: contain; padding: 5%; transition: scale 1s var(--e-out); }
+.pair__img { object-fit: cover; object-position: top center; transition: scale 1s var(--e-out); }
 .pair__empty { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--f-mono); color: var(--c-muted); }
 .pair__open {
   position: absolute; right: 0; bottom: 0; padding: 0.7rem 1rem;
@@ -519,6 +532,12 @@ button.chip { cursor: pointer; }
 .legal__head { grid-column: 1 / -1; display: grid; gap: 1rem; }
 .legal__date { font-family: var(--f-mono); font-size: var(--t-s); color: var(--c-muted); }
 .legal__body { grid-column: 4 / span 7; }
+.prose section { position: relative; }
+.prose section > .wire-pt { left: -2.5rem; top: calc(var(--t-m) * 0.6); }
+.prose section + section > .wire-pt { top: calc(2.6rem + var(--t-m) * 0.6); }
+.wire-pt--top { top: 0; }
+.wire-pt--head-tight { top: calc(clamp(8rem, 18vh, 12rem) + var(--t-xl) * 0.88 + 4.2rem); }
+
 .prose section + section { margin-top: 2.6rem; padding-top: 2.6rem; border-top: 1px solid var(--c-line); }
 .prose h2 { font-size: var(--t-m); font-weight: 600; letter-spacing: -0.012em; margin-bottom: 0.8rem; }
 .prose p + p, .prose p + ul { margin-top: 0.8rem; }
@@ -560,13 +579,14 @@ button.chip { cursor: pointer; }
 /* ---------- phone: one column, the wire runs down the left edge ---------- */
 @media (max-width: 767px) {
   .fw, .row { grid-template-columns: minmax(0, 1fr); padding-inline: 2.25rem 1.5rem; }
-  .fw > :not(.wire-pt), .row > details { grid-column: 1 / -1 !important; grid-row: auto !important; }
+  .fw > :not(.wire-pt, .wire), .row > details { grid-column: 1 / -1 !important; grid-row: auto !important; }
   .frame { padding-inline: 1.25rem; }
   .wire-pt--l, .wire-pt--r, .wire-pt--edge-r { left: 12px; }
   .wire-pt--edge { left: calc(100% - 10px); }
   .contact__wire { right: auto; left: 12px; }
+  .wire-stop { left: 26px; translate: 0 -50%; }
 
-  .hero { grid-template-rows: 1fr auto auto auto; padding-top: 6.5rem; }
+  .hero { min-height: 0; grid-template-rows: auto; padding-top: 7.5rem; }
   .hero__name { font-size: 14.2vw; }
   .hero { padding-right: 2.5rem; }
   .hero__claim { max-width: 13ch; }
@@ -594,7 +614,7 @@ button.chip { cursor: pointer; }
     background: var(--c-bg); box-shadow: 0 -1px 0 var(--c-line), 0 -12px 24px -12px rgb(12 13 16 / 0.12);
   }
   .stack__caption { padding-bottom: 0.5rem; min-height: 0; }
-  .stack__systems ul { height: 26svh; overflow-y: auto; border-top: 0; padding-right: 0.75rem; } /* fixed: the idle cycle must not move the page */
+  .stack__systems ul { height: 7.6rem; overflow-y: auto; border-top: 0; padding-right: 0.75rem; } /* fixed: the idle cycle must not move the page */
   .stack__systems li:not([data-on]) { display: none; }
   .stack__cat { padding-top: 0; }
 
@@ -608,6 +628,8 @@ button.chip { cursor: pointer; }
   .footer__mark { font-size: 9.4vw; }
 
   .resume__sheet { display: none; }
+  .resume { min-height: 72svh; }
+  .prose section > .wire-pt, .prose section + section > .wire-pt { left: -24px; }
   .lost { padding-inline: 2.25rem 1.5rem; }
 }
 
