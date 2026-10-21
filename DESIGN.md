@@ -80,7 +80,7 @@ Radius 0 everywhere. Nodes are 9 px squares (packets), not circles.
 
 - Eases: `expo.out` entrances, `expo.inOut` curtains and routes, `power3.out` hover.
 - Page transition: an ink band routes across the screen left to right with the destination path printed on it, then leaves to the right.
-- Loader: the wordmark sanjeevnode.in and a counter, an all-hue line fills with real progress, then the panel routes off to the right. Home only, desktop only.
+- No loader (removed at the owner's request): the hero decode is the entrance. The name is held invisible on first paint until the script boots, at most 1.2 s.
 - Hero intro (decode): every letter of the name starts as a coloured bit and turns in 3D (mostly top to bottom, some left to right) through bits onto its glyph, in scattered order; the node arrives last and the wire launches from it. At rest a random letter flips to a bit and back every few seconds.
 - Hovers, one per role:
   - Nav links: a wire draws under the label and a node locks at its end.

@@ -1,5 +1,5 @@
 // Engine core: framework-agnostic page lifecycle. No DOM access at import time (SSR-safe).
-//   boot(setup)           once, on first load: setup -> loader -> page init -> intro
+//   boot(setup)           once, on first load: setup -> page init -> intro
 //   leave() -> cleanup()  before the route swaps
 //   enter()               after the new page is in the DOM: init -> enter animation -> intro
 // onPage(fn) runs fn on every page load inside a gsap.context, reverted on navigation.
@@ -7,13 +7,11 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initScroll, resetScroll, scrollToTarget, startScroll, stopScroll } from './scroll';
 import { initReveals } from './reveal';
-import { runLoader } from './loader';
 import { playEnter, playLeave } from './transition';
 import { prefersReducedMotion } from './env';
 
 export { onScroll, scrollState, scrollToTarget, stopScroll, startScroll } from './scroll';
 export { setTransition } from './transition';
-export { setLoaderFormat, setLoaderExit } from './loader';
 export { ease, isTouch, isMobile, prefersReducedMotion } from './env';
 
 export type PageFn = (page: { intro: gsap.core.Timeline; path: string }) => void | (() => void);
@@ -64,10 +62,8 @@ export async function boot(setup?: () => void) {
   syncFlags();
   initScroll();
   setup?.();
-  stopScroll();
   initPage();
-  await runLoader();
-  startScroll();
+  document.documentElement.classList.add('is-loaded');
   jumpToHash();
   intro?.play();
 }

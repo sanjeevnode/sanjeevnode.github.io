@@ -51,12 +51,11 @@ export function startDecode() {
     const dot = name.querySelector<HTMLElement>('.hero__dot');
     gsap.set(chars, { transformPerspective: 700, force3D: true });
 
-    // Decode on first load only when the loader hides the swap (desktop), or when the page booted fast
-    // enough that nobody has read the name yet; on a slow phone the name simply stays as rendered.
-    const loader = document.getElementById('loader');
-    const covered = !!loader && !loader.hidden && loader.getClientRects().length > 0;
-    const early = performance.now() < 1500 || document.documentElement.classList.contains('is-loaded');
-    if (covered || early) {
+    // On first load the name is held invisible by CSS until boot (at most 1.2 s, see site.css), so the
+    // bits replace a name nobody has seen yet. Booted later than that, the name is already showing and
+    // simply stays. After a page transition the curtain covers the swap.
+    const early = performance.now() < 1200 || document.documentElement.classList.contains('is-loaded');
+    if (early) {
       chars.forEach((c) => face(c, bit()));
       if (dot) gsap.set(dot, { scale: 0 });
       const order = gsap.utils.shuffle([...chars]);
