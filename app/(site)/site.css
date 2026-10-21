@@ -51,7 +51,7 @@
 .grad-text:has(.split-line) { background-image: none; } /* the split lines carry it; keep the text clip */
 
 /* ---------- foundation ---------- */
-html { background: var(--c-bg); color: var(--c-fg); -webkit-text-size-adjust: none; text-size-adjust: none; }
+html { background: var(--c-bg); color: var(--c-fg); }
 html body {
   background: var(--c-bg);
   color: var(--c-fg);

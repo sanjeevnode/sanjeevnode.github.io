@@ -9,6 +9,7 @@ import { ProjectData } from "../types/project";
 
 function revalidateProjectPages() {
   revalidatePath("/");
+  revalidatePath("/projects");
   revalidatePath("/admin/dashboard/project");
 }
 

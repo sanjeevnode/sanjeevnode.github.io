@@ -11,7 +11,7 @@ The site is built around one idea: a signal wire routed from the name to the inb
 - **Stack, routed.** Pick a technology and edges route to every system on the page that lists it, computed from the CMS data.
 - **Page transitions.** A gradient band carries `GET /path` across the screen and answers `200 OK` before lifting.
 - **Content from a CMS.** Experience, projects, skills and education live in MongoDB and are edited from an admin dashboard. The homepage is statically rendered and revalidated on edit.
-- **Accessible and fast.** Real text everywhere (no canvas or image headings), skip link, visible focus, full reduced-motion path, mobile LCP under 1 s on the homepage.
+- **Accessible and fast.** Real text everywhere (no canvas or image headings), skip link, visible focus, full reduced-motion path. On a throttled mobile profile (4x CPU, slow 4G), LCP measured about 0.8 to 1.0 s on the homepage and under 2 s on every page.
 
 ## Stack
 
