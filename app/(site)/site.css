@@ -35,7 +35,7 @@
 
   --z-header: 50;
   --z-curtain: 90;
-  --z-loader: 100;
+  --z-skip: 100;
 }
 
 /* ---------- hue families: every section is a channel with its own signal colour ---------- */
@@ -73,7 +73,7 @@ html body {
 :focus-visible { outline: 2px solid var(--c-signal); outline-offset: 3px; }
 #main:focus { outline: none; }
 .skip-link {
-  position: fixed; left: 50%; top: 0.75rem; translate: -50% 0; z-index: calc(var(--z-loader) + 1);
+  position: fixed; left: 50%; top: 0.75rem; translate: -50% 0; z-index: var(--z-skip);
   padding: 0.7em 1em; background: var(--c-fg); color: var(--c-bg); font-weight: 500;
   transform: translateY(-300%);
 }
@@ -108,7 +108,7 @@ html.lenis, html.lenis body { height: auto; }
   text-transform: uppercase;
 }
 
-/* ---------- curtain and loader ---------- */
+/* ---------- curtain ---------- */
 #curtain { position: fixed; inset: 0; z-index: var(--z-curtain); pointer-events: none; visibility: hidden; overflow: hidden; }
 .curtain__panel {
   position: absolute; inset: 0; background: linear-gradient(120deg, #9d95ff 10%, #f7bdf8 55%, #fec5fb); color: #0e100f;
@@ -119,27 +119,6 @@ html.lenis, html.lenis body { height: auto; }
 .curtain__label { position: relative; z-index: 1; translate: 0 -1.4em; }
 .curtain__wire { position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #0e100f; transform: scaleX(0); transform-origin: left; }
 
-#loader {
-  position: fixed; inset: 0; z-index: var(--z-loader);
-  display: grid; align-content: end; padding: var(--gutter);
-  background: #161816; color: var(--c-fg);
-  clip-path: inset(0% 0% 0% 0%);
-}
-html:not(.js) #loader, html:not(.enter-home) #loader, #loader[hidden] { display: none; }
-/* If JS is slow to boot (throttled phones), the panel routes off by itself at 2.2 s; the engine cancels this when it takes over in time. */
-#loader { animation: loader-bail 0.6s var(--e-route) 2.2s forwards; }
-@keyframes loader-bail { to { clip-path: inset(0% 0% 0% 100%); visibility: hidden; } }
-/* Phones get the page at once: on a slow connection a loader only adds waiting. */
-@media (max-width: 767px) { #loader { display: none; } }
-.loader__inner { display: flex; justify-content: space-between; align-items: end; overflow: clip; }
-.loader__name {
-  font-family: var(--f-display); font-weight: 800; font-variation-settings: 'wdth' 125;
-  text-transform: uppercase; font-size: var(--t-l); letter-spacing: -0.03em; line-height: 0.9;
-  display: inline-flex; align-items: baseline;
-}
-
-.loader__count { font-family: var(--f-mono); font-size: var(--t-l); line-height: 0.9; }
-.loader__bar { height: 3px; margin-top: 1rem; background: var(--grad-all); transform: scaleX(0); transform-origin: left; }
 
 /* ---------- header ---------- */
 .frame {
@@ -305,6 +284,10 @@ html.frame-away .frame { translate: 0 -110%; }
   align-content: center; /* spare height splits above and below, never one empty band on top */
   row-gap: clamp(1.5rem, 3.5vh, 2.5rem);
 }
+/* First paint holds the name invisible until the decode takes over (motion/decode.ts); if the script is
+   slow to boot, it shows anyway at 1.2 s and stays as rendered. */
+html.motion:not(.is-booted) .hero__name { visibility: hidden; animation: name-show 0s linear 1.2s forwards; }
+@keyframes name-show { to { visibility: visible; } }
 .hero__name {
   grid-column: 1 / -1; grid-row: 1; align-self: end;
   font-family: var(--f-display); font-weight: 800; font-variation-settings: 'wdth' 125;

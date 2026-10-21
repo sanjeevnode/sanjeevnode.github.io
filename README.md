@@ -31,7 +31,7 @@ The site is built around one idea: a signal wire routed from the name to the inb
 ```
 app/
   (site)/              public site: own layout, stylesheet and motion engine
-    layout.tsx         skip link, loader, page-transition curtain, header, footer
+    layout.tsx         skip link, page-transition curtain, header, footer
     site.css           tokens, hue families and every public component style
     page.tsx           homepage (loads CMS content, falls back to app/data/defaults.json)
     projects/          all projects
@@ -45,9 +45,9 @@ app/
 components/
   site/                public site components (Hero, Systems, Work, Stack, Education, Contact, ...)
   admin/, ui/          admin dashboard components
-engine/                motion engine: one GSAP clock, Lenis, reveals, loader, page lifecycle, Next adapter
+engine/                motion engine: one GSAP clock, Lenis, reveals, page lifecycle, Next adapter
 motion/
-  setup.ts             global motion: transition, loader exit, header, scroll-spy, anchor routing
+  setup.ts             global motion: transition, header, scroll-spy, anchor routing
   wire.ts              the wire driver (routing, drawing, hues, packets, nodes)
   decode.ts            the hero name intro and its idle flips
   route.ts             orthogonal routing with rounded corners, shared by the wire and the stack edges

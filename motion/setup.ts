@@ -1,16 +1,11 @@
 // Global motion for the site: runs once on the client, before the first page initializes.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ease, onPage, onScroll, scrollToTarget, setLoaderExit, setTransition } from '@/engine';
+import { ease, onPage, onScroll, scrollToTarget, setTransition } from '@/engine';
 import { startWire } from './wire';
 import { startDecode } from './decode';
 
 export function setupMotion() {
-  // Loader: name and counter lift away, then the panel routes off to the right.
-  setLoaderExit((root) => gsap.timeline()
-    .to(root.querySelectorAll('[data-loader-out]'), { yPercent: -110, duration: 0.45, ease: ease.inOut, stagger: 0.04 })
-    .to(root, { clipPath: 'inset(0% 0% 0% 100%)', duration: 0.75, ease: ease.inOut }, '-=0.15'));
-
   // Page transition: an ink band routes across left to right carrying the request, then leaves right.
   let dest = '/';
   let holdFrame = 0; // until this time the header stays put (an anchor jump is not reading down)
