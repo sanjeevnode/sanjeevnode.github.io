@@ -111,8 +111,10 @@ export function startWire() {
         from = best;
         const s = kind === 'tick' ? 6 : 10;
         const rect = document.createElementNS(NS, 'rect');
-        rect.setAttribute('x', String(p.x - s / 2));
-        rect.setAttribute('y', String(p.y - s / 2));
+        // sit on the drawn line, not the anchor: at a rounded corner the anchor is the corner's
+        // vertex, which lies outside the arc
+        rect.setAttribute('x', String(xs[best] - s / 2));
+        rect.setAttribute('y', String(ys[best] - s / 2));
         rect.setAttribute('width', String(s));
         rect.setAttribute('height', String(s));
         rect.setAttribute('class', `wire__node wire__node--${kind}`);

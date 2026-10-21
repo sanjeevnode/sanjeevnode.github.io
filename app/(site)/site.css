@@ -301,7 +301,8 @@ html.frame-away .frame { translate: 0 -110%; }
   min-height: 100svh;
   padding-top: clamp(6rem, 13vh, 9rem);
   padding-bottom: clamp(2rem, 5vh, 3.5rem);
-  grid-template-rows: 1fr auto auto;
+  grid-template-rows: auto auto auto;
+  align-content: center; /* spare height splits above and below, never one empty band on top */
   row-gap: clamp(1.5rem, 3.5vh, 2.5rem);
 }
 .hero__name {
@@ -498,7 +499,6 @@ button.chip { cursor: pointer; }
 }
 .contact__title { --grad: var(--grad-all); }
 .footer { background: var(--c-bg); color: var(--c-fg); --c-signal: #abff84; }
-.footer__mark { background: var(--grad-all); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 .contact { position: relative; padding-top: var(--pad); padding-bottom: clamp(4rem, 8vw, 7rem); }
 .contact__wire { position: absolute; top: 0; bottom: 0; right: var(--gutter); width: 2px; margin-right: -1px; background: linear-gradient(#ff8709, #fec5fb 35%, #9d95ff 65%, #0ae448); }
@@ -541,12 +541,8 @@ button.chip { cursor: pointer; }
 .footer__links a { min-height: 32px; min-width: 32px; justify-content: center; display: inline-flex; align-items: center; color: var(--c-fg); transition: color 0.3s; }
 @media (hover: hover) { .footer__links a:hover { color: var(--c-signal); text-decoration: underline; text-underline-offset: 0.25em; } }
 .footer__small { grid-column: 9 / span 4; justify-self: end; text-align: right; font-size: var(--t-xs); color: var(--c-muted); max-width: 36ch; }
-.footer__mark {
-  padding-inline: var(--gutter); margin-top: 1rem;
-  font-family: var(--f-display); font-weight: 800; font-variation-settings: 'wdth' 125; text-transform: uppercase;
-  font-size: 8.6vw; line-height: 0.8; letter-spacing: -0.05em; white-space: nowrap; margin-bottom: -0.02em;
-  display: flex; align-items: baseline;
-}
+.footer__mark { display: block; width: calc(100% - 2 * var(--gutter)); height: auto; margin: 1rem var(--gutter) 0; overflow: visible; }
+.footer__mark text { font-family: var(--f-display); font-weight: 800; font-variation-settings: 'wdth' 125; font-size: 91px; }
 
 
 /* ---------- inner pages ---------- */
@@ -667,7 +663,6 @@ button.chip { cursor: pointer; }
   .form__pair { grid-template-columns: minmax(0, 1fr); }
   .form__node { display: none; }
   .form__send .btn { width: 100%; }
-  .footer__mark { font-size: 7.8vw; }
 
   .resume__sheet { display: none; }
   .resume { min-height: 72svh; }
