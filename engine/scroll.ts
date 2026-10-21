@@ -43,8 +43,15 @@ export const onScroll = (fn: (s: ScrollState) => void) => {
   return () => { listeners.delete(fn); };
 };
 export const scrollState = () => state;
-export const stopScroll = () => lenis?.stop();
-export const startScroll = () => lenis?.start();
+// Without Lenis (reduced motion) lock native scrolling, so an open menu still holds the page still.
+export function stopScroll() {
+  if (lenis) lenis.stop();
+  else document.documentElement.style.overflow = 'hidden';
+}
+export function startScroll() {
+  if (lenis) lenis.start();
+  else document.documentElement.style.overflow = '';
+}
 export function resetScroll() {
   if (lenis) lenis.scrollTo(0, { immediate: true, force: true });
   else scrollTo(0, 0);

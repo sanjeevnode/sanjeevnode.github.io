@@ -33,7 +33,11 @@ export default async function ProjectsPage() {
         </p>
         <h1 className="page-head__title grad-text">Everything I&apos;ve built</h1>
         <p className="page-head__count tabular" data-reveal="fade" data-intro data-delay="0.3">
-          {failed ? 'Projects are unavailable right now. Please check back later.' : `${projects.length} projects, newest first`}
+          {failed
+            ? 'Projects are unavailable right now. Please check back later.'
+            : projects.length === 0
+              ? 'No projects to show yet. Check back soon.'
+              : `${projects.length} projects, newest first`}
         </p>
       </header>
       {projects.map((p, i) => <ProjectPair key={p._id} project={p} index={i} full level="h2" lead={i === 0} />)}
