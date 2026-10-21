@@ -41,3 +41,7 @@ env.local
 docs
 # DB backups (local only)
 backups/
+
+# awwwards QA artifacts
+.shots/
+.shots-log.txt
