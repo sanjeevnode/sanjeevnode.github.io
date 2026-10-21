@@ -15,7 +15,7 @@ export default function Footer() {
         </p>
       </div>
       <p className="footer__mark" aria-hidden="true">
-        sanjeev<span className="footer__node" />node
+        sanjeevnode<span className="footer__tld">.in</span>
       </p>
     </footer>
   );

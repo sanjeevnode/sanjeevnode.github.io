@@ -12,9 +12,9 @@ export default function NotFound() {
   return (
     <div className="site">
       <a className="skip-link" href="#main">Skip to content</a>
-      <main id="main" className="lost" tabIndex={-1}>
+      <main id="main" className="lost hue-pink" tabIndex={-1}>
         <a href="/" className="brand lost__brand">
-          sanjeev<span className="brand__node" aria-hidden="true" />node
+          sanjeevnode<span className="brand__tld">.in</span>
         </a>
         <div className="lost__wire" aria-hidden="true">
           <i className="lost__live" />
@@ -24,7 +24,7 @@ export default function NotFound() {
           <i className="lost__node" />
         </div>
         <p className="lost__code tabular">404</p>
-        <h1 className="lost__title">Dead-lettered.</h1>
+        <h1 className="lost__title grad-text">Dead-lettered.</h1>
         <p className="lost__text">
           This address was retried three times and never reached a page. Nothing is broken on your side; the link
           probably moved.

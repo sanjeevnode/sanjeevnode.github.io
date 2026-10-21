@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ease, onPage, onScroll, scrollToTarget, setLoaderExit, setTransition } from '@/engine';
 import { startWire } from './wire';
+import { startDecode } from './decode';
 
 export function setupMotion() {
   // Loader: name and counter lift away, then the panel routes off to the right.
@@ -81,5 +82,6 @@ export function setupMotion() {
     };
   });
 
+  startDecode();
   startWire();
 }

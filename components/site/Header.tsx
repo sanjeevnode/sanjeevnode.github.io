@@ -44,7 +44,7 @@ export default function Header() {
   return (
     <header className="frame">
       <a href="/" className="brand">
-        sanjeev<span className="brand__node" aria-hidden="true" />node
+        sanjeevnode<span className="brand__tld">.in</span>
       </a>
       <nav className="nav" aria-label="Primary">
         <ul>

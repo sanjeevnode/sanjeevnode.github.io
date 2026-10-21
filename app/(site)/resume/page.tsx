@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <div className="resume">
+    <div className="resume hue-orange">
       <header className="resume__head fw">
-        <h1 className="resume__title">Resume</h1>
+        <h1 className="resume__title grad-text">Resume</h1>
         <p className="resume__note" data-reveal="fade" data-intro>
           Software Development Engineer II at AlignTogether, Bhopal. Read it here or take the PDF with you.
         </p>

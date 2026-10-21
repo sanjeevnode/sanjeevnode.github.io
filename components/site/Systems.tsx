@@ -9,7 +9,7 @@ function featuredOf(systems: ExperienceProject[]): ExperienceProject[] {
 
 export default function Systems({ jobs }: { jobs: ExperienceInput[] }) {
   return (
-    <section id="systems" className="sec" data-spy aria-labelledby="systems-title">
+    <section id="systems" className="sec hue-green" data-spy aria-labelledby="systems-title">
       <SectionHead
         id="systems"
         rail="l"

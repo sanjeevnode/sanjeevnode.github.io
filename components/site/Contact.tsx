@@ -8,7 +8,7 @@ export default function Contact() {
     <section id="contact" className="contact" data-spy aria-labelledby="contact-title">
       <span className="contact__wire" aria-hidden="true" />
       <div className="fw contact__head">
-        <h2 id="contact-title" className="contact__title" data-split="lines">Let&apos;s build something great.</h2>
+        <h2 id="contact-title" className="contact__title grad-text" data-split="lines">Let&apos;s build something great.</h2>
         <p className="contact__lede" data-reveal="fade">
           Have a project in mind, a role to fill, or just want to say hi? My inbox is always open, and I reply
           as soon as I can.

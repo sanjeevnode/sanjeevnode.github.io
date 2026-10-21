@@ -2,6 +2,8 @@
 export default function Wire() {
   return (
     <svg className="wire" aria-hidden="true" focusable="false">
+      {/* stops are written by the driver: each section's hue over its own vertical span */}
+      <defs><linearGradient id="wire-hue" className="wire__hue" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1" /></defs>
       <path className="wire__trace" />
       <path className="wire__live" />
       <g className="wire__nodes" />

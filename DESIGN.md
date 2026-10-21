@@ -28,7 +28,7 @@ Metaphor:    A routed signal path on a schematic: rails, nodes, packets in fligh
 Signature:   The wire. An SVG path built from [data-wire] anchors, drawn by scroll, packets flowing along the drawn part at rest.
              Secondary use of the same rule: the stack "routing table" draws edges from a technology to the systems that used it.
 Emotion:     Precise and calm, with something always moving. An engineer's drawing that is switched on.
-Motion verb: Route. Things travel along a path, turn square corners, and lock at a node (expo.inOut, never bounce).
+Motion verb: Route. Things travel along a path, turn square corners, and lock at a node (expo.inOut).
 Screenshot:  The stack table with one technology lit and cobalt edges fanning out to six systems.
 ```
 
@@ -36,16 +36,27 @@ Screenshot:  The stack table with one technology lit and cobalt edges fanning ou
 
 ### Palette
 
-| Role | Hex | Use |
-|---|---|---|
-| ground | `#E9EBEE` | page (cool drafting sheet, not cream) |
-| ink | `#0C0D10` | text, curtain, contact field |
-| muted | `#555B64` | secondary text (6.0:1 on ground) |
-| line | `rgb(12 13 16 / 0.14)` | hairlines |
-| signal | `#2B2BFF` | the wire, nodes, lit states, focus (6.2:1 on ground) |
-| signal-on-ink | `#8A8AFF` | the wire and focus on the ink field (6.1:1 on ink) |
+Revised after review: a dark base with GSAP-style hue families (the owner asked for gsap.com's vibrancy).
 
-One committed light theme. The old dark/light toggle is dropped: an award site commits to one look. The admin keeps its own theme.
+| Role | Value | Use |
+|---|---|---|
+| ground | `#0E100F` | page (warm near-black) |
+| ink | `#FFFCE1` | text (cream) |
+| muted | `#BBBAA6` | secondary text (9.5:1 on ground) |
+| line | `rgb(255 252 225 / 0.14)` | hairlines |
+| on-signal | `#0E100F` | text on any hue |
+
+Every section is a channel with its own hue family (`.hue-*` sets `--c-signal` and `--c-signal-2`):
+
+| Section | Hue | Gradient |
+|---|---|---|
+| Hero, intro, privacy | violet | `#9D95FF` to `#F7BDF8` |
+| Systems | green | `#0AE448` to `#ABFF84` |
+| Work, /projects, 404 | pink | `#FEC5FB` to `#FF5CE1` |
+| Stack | cyan | `#00BAE2` to `#BEF3FE` |
+| Education, /resume | orange | `#FF8709` to `#FFD9B0` |
+
+Section titles are gradient type in their hue. The wire takes the hue of the section it routes through (an SVG gradient written by the driver), and its stops become highlighter chips in that hue. Contact uses the all-hue gradient for its headline, the footer wordmark too. Decode bits pick a random hue each flip.
 
 ### Type
 
@@ -69,7 +80,8 @@ Radius 0 everywhere. Nodes are 9 px squares (packets), not circles.
 
 - Eases: `expo.out` entrances, `expo.inOut` curtains and routes, `power3.out` hover.
 - Page transition: an ink band routes across the screen left to right with the destination path printed on it, then leaves to the right.
-- Loader: name and a counter, the wire fills across the bottom with real progress, then the panel routes off to the right (under 2.6 s).
+- Loader: the wordmark sanjeevnode.in and a counter, an all-hue line fills with real progress, then the panel routes off to the right. Home only, desktop only.
+- Hero intro (decode): every letter of the name starts as a coloured bit and turns in 3D (mostly top to bottom, some left to right) through bits onto its glyph, in scattered order; the node arrives last and the wire launches from it. At rest a random letter flips to a bit and back every few seconds.
 - Hovers, one per role:
   - Nav links: a wire draws under the label and a node locks at its end.
   - Primary buttons: ink floods in from the left like a signal filling a pipe; the arrow travels.

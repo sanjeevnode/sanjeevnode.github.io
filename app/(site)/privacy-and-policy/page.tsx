@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <article className="legal fw wire-host" data-wire-host>
+    <article className="legal fw wire-host hue-core" data-wire-host>
       <Wire />
       <span className="wire-pt wire-pt--l wire-pt--head-tight" data-wire="node" />
       <header className="legal__head">
-        <h1 className="page-head__title">Privacy policy</h1>
+        <h1 className="page-head__title grad-text">Privacy policy</h1>
         <p className="legal__date" data-reveal="fade" data-intro>Last updated: July 4, 2026</p>
       </header>
 

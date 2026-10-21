@@ -3,6 +3,8 @@
 // viewport); the idle input is time, which keeps packets flowing along the drawn part.
 // Anchors: data-wire="node" (lit square), "tick" (small square), "bend" (turn only).
 // data-route="h" on an anchor reaches it horizontally first.
+// Colour: each top-level block of the host carries a hue (--c-signal); the line, its nodes, the head and
+// the packets take the hue of the section they are passing through.
 import { gsap } from 'gsap';
 import { onPage, prefersReducedMotion } from '@/engine';
 import { roundedPath } from './route';
@@ -12,6 +14,7 @@ const STEP = 6; // px between samples of the length table
 const SPEED = 220; // px per second for packets in flight
 
 type Node = { rect: SVGRectElement; el: HTMLElement; l: number; lit: boolean };
+type Band = { top: number; bottom: number; c: string };
 
 export function startWire() {
   onPage(({ intro }) => {
@@ -23,6 +26,7 @@ export function startWire() {
     const head = svg.querySelector<SVGRectElement>('.wire__head')!;
     const packets = Array.from(svg.querySelectorAll<SVGRectElement>('.wire__packet'));
     const layer = svg.querySelector<SVGGElement>('.wire__nodes')!;
+    const hue = svg.querySelector<SVGLinearGradientElement>('.wire__hue');
     const still = prefersReducedMotion();
 
     let xs = new Float32Array(0);
@@ -30,7 +34,9 @@ export function startWire() {
     let total = 0;
     let hostTop = 0;
     let nodes: Node[] = [];
+    let bands: Band[] = [];
     let drawn = 0;
+    const colorAt = (y: number) => (bands.find((b) => y < b.bottom) ?? bands[bands.length - 1])?.c || '';
     let started = still;
 
     const at = (l: number) => {
@@ -58,6 +64,24 @@ export function startWire() {
           return { x: Math.round(r.left + r.width / 2 - hr.left), y: Math.round(r.top + r.height / 2 - hr.top), h: el.dataset.route === 'h', el };
         });
       if (pts.length < 2) return;
+
+      // Hue bands: one per top-level block, blended over 80 px at each boundary.
+      bands = Array.from(host!.children)
+        .filter((el): el is HTMLElement => el instanceof HTMLElement && !el.classList.contains('wire-pt'))
+        .map((el) => {
+          const r = el.getBoundingClientRect();
+          return { top: r.top - hr.top, bottom: r.bottom - hr.top, c: getComputedStyle(el).getPropertyValue('--c-signal').trim() };
+        })
+        .filter((b) => b.bottom > b.top && b.c);
+      if (hue && bands.length) {
+        hue.setAttribute('y2', String(hr.height));
+        hue.replaceChildren(...bands.flatMap((b) => [b.top + 40, b.bottom - 40].map((y) => {
+          const stop = document.createElementNS(NS, 'stop');
+          stop.setAttribute('offset', String(Math.min(1, Math.max(0, y / hr.height))));
+          stop.setAttribute('stop-color', b.c);
+          return stop;
+        })));
+      }
       const d = roundedPath(pts, 22);
       trace.setAttribute('d', d);
       live.setAttribute('d', d);
@@ -92,6 +116,7 @@ export function startWire() {
         rect.setAttribute('width', String(s));
         rect.setAttribute('height', String(s));
         rect.setAttribute('class', `wire__node wire__node--${kind}`);
+        rect.style.setProperty('--n', colorAt(p.y));
         layer.append(rect);
         nodes.push({ rect, el: p.el, l: best * STEP, lit: false });
       }
@@ -104,6 +129,8 @@ export function startWire() {
       live.style.strokeDashoffset = String(total - d);
       const [hx, hy] = at(d);
       head.setAttribute('transform', `translate(${hx} ${hy})`);
+      const hc = colorAt(hy);
+      if (head.getAttribute('fill') !== hc) head.setAttribute('fill', hc);
       for (const nd of nodes) {
         const on = d >= nd.l - 4;
         if (on === nd.lit) continue;
@@ -122,6 +149,7 @@ export function startWire() {
         if (span < 24) { p.style.opacity = '0'; return; }
         const [x, y] = at((t * SPEED + (i * span) / packets.length) % span);
         p.setAttribute('transform', `translate(${x} ${y})`);
+        p.setAttribute('stroke', colorAt(y));
         p.style.opacity = '1';
       });
     };
@@ -133,7 +161,7 @@ export function startWire() {
     ro.observe(host);
     svg.classList.toggle('is-still', still);
     if (!still) {
-      intro.add(() => { started = true; }, 0.5);
+      intro.add(() => { started = true; }, document.querySelector('.hero__name') ? 1.6 : 0.5);
       gsap.ticker.add(tick);
     }
 

@@ -26,7 +26,7 @@ export default function SectionHead({
       )}
       <header className={`sec__head fw sec__head--${rail}`}>
         <span className={`wire-pt wire-pt--${rail} wire-pt--mid`} data-wire="node" />
-        <h2 id={`${id}-title`} className="sec__title" data-split="lines">{title}</h2>
+        <h2 id={`${id}-title`} className="sec__title grad-text" data-split="lines">{title}</h2>
         {(note || children) && (
           <div className="sec__note" data-reveal="fade" data-delay="0.2">
             {note && <p>{note}</p>}

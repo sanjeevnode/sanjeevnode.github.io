@@ -3,7 +3,7 @@ import SectionHead from './SectionHead';
 
 export default function Education({ items }: { items: EducationInput[] }) {
   return (
-    <section id="education" className="sec sec--last" aria-labelledby="education-title">
+    <section id="education" className="sec sec--last hue-orange" aria-labelledby="education-title">
       <SectionHead id="education" rail="r" stop={`${items.length} qualifications`} title="Education" />
       <ol className="edu">
         {items.map((e) => {

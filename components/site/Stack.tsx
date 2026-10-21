@@ -21,7 +21,7 @@ export default function Stack({ groups, systems }: { groups: SkillGroupInput[]; 
   }
 
   return (
-    <section id="stack" className="sec" data-spy aria-labelledby="stack-title">
+    <section id="stack" className="sec hue-cyan" data-spy aria-labelledby="stack-title">
       <SectionHead
         id="stack"
         rail="l"

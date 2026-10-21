@@ -24,14 +24,14 @@ export default async function ProjectsPage() {
   }
 
   return (
-    <div className="wire-host" data-wire-host>
+    <div className="wire-host hue-pink" data-wire-host>
       <Wire />
       <header className="page-head fw">
         <span className="wire-pt wire-pt--r wire-pt--edge wire-pt--head" data-wire="node" />
         <p className="page-head__kicker" data-reveal="fade" data-intro>
           <a className="link" href="/#work">Back to the homepage</a>
         </p>
-        <h1 className="page-head__title">Everything I&apos;ve built</h1>
+        <h1 className="page-head__title grad-text">Everything I&apos;ve built</h1>
         <p className="page-head__count tabular" data-reveal="fade" data-intro data-delay="0.3">
           {failed ? 'Projects are unavailable right now. Please check back later.' : `${projects.length} projects, newest first`}
         </p>

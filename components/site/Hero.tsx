@@ -12,16 +12,16 @@ const ROLES = [
 export default function Hero() {
   return (
     <>
-      <section className="hero fw" aria-labelledby="hero-name">
+      <section className="hero fw hue-core" aria-labelledby="hero-name">
         <h1 id="hero-name" className="hero__name">
-          <span className="hero__line">Sanjeev</span>
+          <span className="hero__line">Sanjeev</span>{' '}
           <span className="hero__line">
             Singh<span className="hero__dot" data-wire="node" aria-hidden="true" />
           </span>
         </h1>
 
         <p className="hero__claim">
-          You have an idea. I engineer it to production.
+          You have an idea. I engineer it to <span className="grad-text">production.</span>
         </p>
 
         <ul className="hero__roles" aria-label="What I build">
@@ -36,13 +36,14 @@ export default function Hero() {
         <span className="wire-pt wire-pt--r wire-pt--edge wire-pt--bottom" data-wire="bend" data-route="h" />
       </section>
 
-      <section className="intro fw" aria-label="About">
+      <section className="intro fw hue-core" aria-label="About">
         <span className="wire-pt wire-pt--r wire-pt--gap" data-wire="bend" />
         <span className="wire-pt wire-pt--r wire-pt--first" data-wire="node" />
         <p className="intro__text" data-split="lines">
-          I&apos;m a software engineer who takes products from first commit to production: real-time chat apps on
-          the stores, serverless cloud backends, and ML-powered pipelines. Fast, reliable, and finished to the
-          last detail.
+          I&apos;m a software engineer who takes products from first commit to production:{' '}
+          <span className="ink-pink">real-time chat apps on the stores</span>,{' '}
+          <span className="ink-cyan">serverless cloud backends</span>, and{' '}
+          <span className="ink-green">ML-powered pipelines</span>. Fast, reliable, and finished to the last detail.
         </p>
         <div className="intro__actions" data-reveal="up">
           <a className="btn btn--solid" href="/resume">

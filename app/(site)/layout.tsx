@@ -12,7 +12,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       </div>
       <div id="loader" role="status" aria-label="Loading">
         <div className="loader__inner">
-          <span className="loader__name" data-loader-out>sanjeev<span className="brand__node" />node</span>
+          <span className="loader__name" data-loader-out>sanjeevnode<span className="brand__tld">.in</span></span>
           <span className="loader__count tabular" data-loader-out data-loader-count>000</span>
         </div>
         <div className="loader__bar" data-loader-bar />
