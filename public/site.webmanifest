@@ -1,5 +1,5 @@
 {
-  "name": "sanjeevnode.github.io",
+  "name": "sanjeevnode.in",
   "short_name": "sanjeevnode",
   "start_url": "/",
   "icons": [
@@ -16,7 +16,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#0e100f",
+  "background_color": "#0e100f",
   "display": "standalone"
 }

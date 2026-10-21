@@ -1,30 +1,27 @@
 import type { Metadata } from "next";
-import { Nunito, Jost, JetBrains_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import AuthContext from "./context/AuthContext";
 
-const nunito = Nunito({
-  variable: "--font-custom",
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-});
-
-const jost = Jost({
+// Archivo's width axis carries the display voice (expanded caps) and the text (normal width).
+const archivo = Archivo({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  axes: ["wdth"],
+  display: "swap",
 });
 
 const jetbrains = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400"],
+  display: "swap",
 });
 
 const SITE_URL = "https://www.sanjeevnode.in";
 const TITLE = "Sanjeev Singh | Full Stack Software Engineer & Builder";
 const DESCRIPTION =
-  "Sanjeev Singh is a software development engineer building full-stack web and mobile products — Next.js, Flutter, Node.js, AWS serverless, and ML-powered systems shipped to production.";
+  "Sanjeev Singh builds full-stack web and mobile products in Next.js, Flutter, Python and AWS serverless, and ships ML-powered systems to production.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -70,8 +67,9 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
-// runs before paint: dark by default, honor a saved choice
-const themeInit = `try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t?t==='dark':true)}catch(e){document.documentElement.classList.add('dark')}`;
+// runs before paint: the admin's dark theme (honoring a saved choice), plus the motion flags the
+// public site gates its hidden-before-reveal styles on (content stays visible without JS or motion)
+const themeInit = `try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t?t==='dark':true)}catch(e){document.documentElement.classList.add('dark')}document.documentElement.classList.add('js');if(location.pathname==='/')document.documentElement.classList.add('enter-home');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion')`;
 
 // identity schema for search engines and LLMs
 const personSchema = {
@@ -99,7 +97,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className={`dark ${archivo.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <script
@@ -107,7 +105,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
       </head>
-      <body className={`${nunito.variable} ${jost.variable} ${jetbrains.variable} antialiased font-sans`}>
+      <body className="antialiased font-sans">
         <AuthContext>
           {children}
         </AuthContext>

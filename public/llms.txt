@@ -12,6 +12,9 @@
 
 ## Selected projects
 
+- Kagazz: full-stack Notion clone with a block editor, nested pages and publish-to-web
+- PlanMyTrip: full-stack platform for group travel; itineraries, expense splitting, shared photo albums and payment collection
+- AuthForge: self-hosted identity platform with secure login and TOTP multi-factor authentication
 - MyPassword (https://mypassword.sanjeevnode.in): zero-knowledge password vault; AES-256-GCM envelope encryption, Argon2id, Next.js 15, Firebase
 - BlogGen (https://blog.sanjeevnode.in): full-stack blogging platform on Next.js and Firestore
 - Win Rewrite (https://github.com/sanjeevnode/win_rewrite_app): cross-platform hotkey text rewriter powered by the Gemini API
@@ -20,6 +23,8 @@
 ## Links
 
 - Website: https://www.sanjeevnode.in
+- All projects: https://www.sanjeevnode.in/projects
+- Resume: https://www.sanjeevnode.in/resume
 - GitHub: https://github.com/sanjeevnode
 - LinkedIn: https://www.linkedin.com/in/sanjeevnode
 - Email: me.sanjeevks@gmail.com
